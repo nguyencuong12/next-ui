@@ -12,6 +12,28 @@ function Home({ posts }: { posts: any }) {
     <Wrapper>
       <Button>TEST</Button>
       <Button>TEST</Button>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img> <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img> <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
+      <img src="./vercel.svg" style={{ width: "100px" }}></img>
       <Button>TEST</Button>
       <Button>TEST</Button>
       <Button>TEST</Button>
