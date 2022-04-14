@@ -4,7 +4,7 @@ import React from "react";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 const Loading = dynamic(() => import("../components/loading"));
-const Body = dynamic(() => import("../components/body"));
+const Body = dynamic(() => import("../components/body"), { ssr: false });
 const Navbar = dynamic(() => import("../components/navbar"), { ssr: false, loading: () => <Loading></Loading> });
 function MyApp({ Component, pageProps }: AppProps) {
   return (

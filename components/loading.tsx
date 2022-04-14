@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import Image from "next/image";
 const Wrapper = styled.div`
   height: 100vh;
   width: 100%;
@@ -10,15 +10,15 @@ const Wrapper = styled.div`
   align-items: center;
   background: #000;
   color: #fff;
-  img {
+  /* img {
     border-radius: 100px;
-  }
+  } */
 `;
 
 const Loading = () => {
   return (
     <Wrapper>
-      <img src="/loading.gif"></img>
+      <Image src="/loading.gif" height={500} width={800}></Image>
       <h2>Loading ...</h2>
     </Wrapper>
   );
