@@ -1,22 +1,21 @@
-import styled from "styled-components";
-import Image from "next/image";
-const Wrapper = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px; */
-`;
+import { useEffect } from "react";
 
-function Home({ posts }: { posts: any }) {
-  return <Wrapper>{/* <Image src="/vercel.svg" alt="Picture of the author" width={50} height={50} style={{ border: "1px solid black!important" }} /> */}</Wrapper>;
+import dynamic from "next/dynamic";
+function Home({ data }: any) {
+  // Render data...
+  useEffect(() => {
+    console.log("type", typeof window);
+  }, []);
+  return <div>CUONG</div>;
 }
-export async function getStaticProps() {
-  const posts = "HOME PAGE";
-  return {
-    props: {
-      posts,
-    },
-  };
+
+// This gets called on every request
+export async function getServerSideProps() {
+  // Fetch data from external API
+
+  const data = "CUONG";
+  // Pass data to the page via props
+  return { props: { data } };
 }
 
 export default Home;

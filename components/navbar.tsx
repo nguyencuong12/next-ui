@@ -74,6 +74,7 @@ const SearchStyle = styled.div`
 const Menu = styled.ul`
   ${FlexRow({})};
   transition: left 400ms ease-in-out;
+
   @media only screen and (max-width: 768px) {
     position: absolute;
     height: 100vh;
@@ -92,10 +93,12 @@ const Menu = styled.ul`
 `;
 const MenuItem = styled.li`
   ${LiStyle({})};
-
   width: 100%;
+
   a {
+    text-decoration: none;
     display: block;
+    color: #fff;
   }
   @media only screen and (max-width: 768px) {
     padding: 10px;
@@ -118,7 +121,8 @@ const Navbar = () => {
       <Content>
         <Logo>
           <Link href="/sqdq">
-            <ImageStyle src="/vercel.svg" height={50} width={80} layout="fixed"></ImageStyle>
+            <Image src="/vercel.svg" height={50} width={80} layout="fixed"></Image>
+            {/* <ImageStyle src="/vercel.svg" height={50} width={80} layout="fixed"></ImageStyle> */}
           </Link>
           <BurgerStyle color="gray" opened={opened} onClick={() => setOpened((o) => !o)} title={title} />
           {/* <div>aa</div> */}
