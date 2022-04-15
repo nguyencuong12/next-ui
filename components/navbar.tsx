@@ -105,7 +105,7 @@ const Menu = styled.ul<menuProps>`
   /* border: 2px solid white; */
 `;
 const MenuItem = styled.li`
-  ::after {
+  /* ::after {
     content: " ";
     font-size: 4px;
     width: 0;
@@ -114,9 +114,12 @@ const MenuItem = styled.li`
     background-color: #fff;
     transition: width 300ms;
     height: 3px;
-  }
-  :hover::after {
+  } */
+  /* :hover::after {
     width: 100%;
+  } */
+  :hover a {
+    color: #a6a6a6 !important;
   }
   ${LiStyle({})};
   width: 100%;
@@ -124,6 +127,7 @@ const MenuItem = styled.li`
     text-decoration: none;
     display: block;
     color: #fff;
+    transition: color 200ms;
   }
   @media only screen and (max-width: 768px) {
     padding: 10px;
