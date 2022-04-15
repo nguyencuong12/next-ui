@@ -10,12 +10,5 @@ function Home({ data }: any) {
 }
 
 // This gets called on every request
-export async function getServerSideProps() {
-  // Fetch data from external API
-
-  const data = "CUONG";
-  // Pass data to the page via props
-  return { props: { data } };
-}
 
 export default Home;

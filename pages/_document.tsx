@@ -6,8 +6,9 @@ import React, { ReactElement, ReactFragment } from "react";
 const stylesServer = createStylesServer();
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
+  static async getInitialProps(ctx: DocumentContext): Promise<any> {
     const sheet = new ServerStyleSheet();
+    console.log("DOCU", typeof window);
     const originalRenderPage = ctx.renderPage;
 
     try {

@@ -5,6 +5,9 @@ import { Input, Badge, Burger } from "@mantine/core";
 import { Search } from "tabler-icons-react";
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+
+import LogoSRC from "../public/vercel.svg";
 const BurgerStyle = styled(Burger)`
   display: none;
   @media only screen and (max-width: 768px) {
@@ -120,8 +123,10 @@ const Navbar = () => {
     <Wrapper>
       <Content>
         <Logo>
-          <Link href="/sqdq">
-            <Image src="/vercel.svg" height={50} width={80} layout="fixed"></Image>
+          <Link href="/">
+            <a>
+              <Image priority src={LogoSRC} height={50} width={80} layout="fixed" alt="logo"></Image>
+            </a>
             {/* <ImageStyle src="/vercel.svg" height={50} width={80} layout="fixed"></ImageStyle> */}
           </Link>
           <BurgerStyle color="gray" opened={opened} onClick={() => setOpened((o) => !o)} title={title} />
@@ -133,22 +138,22 @@ const Navbar = () => {
           </SearchStyle>
           <Menu>
             <MenuItem>
-              <Link href="/sd">
+              <Link href="/">
                 <a>Home</a>
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link href="/">
+              <Link href="/about">
                 <a>About</a>
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link href="/123">
+              <Link href="/">
                 <a>Contact</a>
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link href="/214">
+              <Link href="/">
                 <a>Product</a>
               </Link>
             </MenuItem>

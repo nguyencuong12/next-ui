@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 const Loading = () => {
   return (
     <Wrapper>
-      <Image src="/loading.gif" height={500} width={800}></Image>
+      <Image src="/loading.gif" height={500} width={800} alt="image"></Image>
       <h2>Loading ...</h2>
     </Wrapper>
   );
