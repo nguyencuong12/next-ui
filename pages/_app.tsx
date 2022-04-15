@@ -23,10 +23,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <NextNProgress></NextNProgress>
       <Head>
-        <title>Page title</title>
+        <title>Sashimeomeo Shop</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      {/* <Loading></Loading> */}
       <ThemeProvider theme={theme}>
         <MantineProvider withGlobalStyles withNormalizeCSS>
           <Navbar></Navbar>

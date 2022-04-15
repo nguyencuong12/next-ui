@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 
-import { Input, Badge, Burger } from "@mantine/core";
-import { Search } from "tabler-icons-react";
+import { Input, Badge, Burger, ActionIcon } from "@mantine/core";
+import { Search, ShoppingCart } from "tabler-icons-react";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -105,6 +105,19 @@ const Menu = styled.ul<menuProps>`
   /* border: 2px solid white; */
 `;
 const MenuItem = styled.li`
+  ::after {
+    content: " ";
+    font-size: 4px;
+    width: 0;
+    border-radius: 50%;
+    display: block;
+    background-color: #fff;
+    transition: width 300ms;
+    height: 3px;
+  }
+  :hover::after {
+    width: 100%;
+  }
   ${LiStyle({})};
   width: 100%;
   a {
@@ -193,7 +206,15 @@ const Navbar = () => {
           </Menu>
         </Center>
         <Control>
-          <ControlItem>Cart</ControlItem>
+          <ControlItem>
+            <Link href="/">
+              <a>
+                <ActionIcon variant="transparent" color="teal">
+                  <ShoppingCart />
+                </ActionIcon>
+              </a>
+            </Link>
+          </ControlItem>
         </Control>
       </Content>
     </Wrapper>
