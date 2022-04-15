@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 
 import { Input, Badge, Burger } from "@mantine/core";
@@ -6,8 +6,17 @@ import { Search } from "tabler-icons-react";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-
+import { RootState } from "../redux/store";
+import { useSelector, useDispatch } from "react-redux";
 import LogoSRC from "../public/vercel.svg";
+
+import { change } from "../redux/menu/menu";
+import { useRouter } from "next/router";
+import { useViewportSize } from "@mantine/hooks";
+
+interface menuProps {
+  open: boolean;
+}
 const BurgerStyle = styled(Burger)`
   display: none;
   @media only screen and (max-width: 768px) {
@@ -39,6 +48,7 @@ const Content = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  padding: 10px 0px;
 `;
 const Center = styled.div`
   display: flex;
@@ -74,17 +84,17 @@ const SearchStyle = styled.div`
   width: 100%;
 `;
 
-const Menu = styled.ul`
+const Menu = styled.ul<menuProps>`
   ${FlexRow({})};
   transition: left 400ms ease-in-out;
-
   @media only screen and (max-width: 768px) {
     position: absolute;
     height: 100vh;
-    background: pink;
-    top: 94px;
+    background: #4d4d4d;
+    top: 120px;
     width: 100%;
-    left: 0;
+    left: ${(props) => (props.open ? "0" : "-120%")};
+    /* left: 0; */
     right: 0;
     display: flex;
     flex-direction: column;
@@ -97,7 +107,6 @@ const Menu = styled.ul`
 const MenuItem = styled.li`
   ${LiStyle({})};
   width: 100%;
-
   a {
     text-decoration: none;
     display: block;
@@ -118,9 +127,33 @@ const ControlItem = styled.li`
 const Navbar = () => {
   const [opened, setOpened] = useState(false);
   const title = opened ? "Close navigation" : "Open navigation";
+  const open = useSelector((state: RootState) => state.menuReducer.open);
+  const dispatch = useDispatch();
+  const { height, width } = useViewportSize();
 
+  const router = useRouter();
+  useEffect(() => {
+    const handleRouteChange = () => {
+      console.log("asds", window.innerWidth);
+      if (window.innerWidth <= 768) {
+        dispatch(change());
+      }
+    };
+
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method:
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, []);
+  const setOpenMenu = () => {
+    dispatch(change());
+  };
   return (
     <Wrapper>
+      {/* <RenderT></RenderT> */}
       <Content>
         <Logo>
           <Link href="/">
@@ -129,14 +162,14 @@ const Navbar = () => {
             </a>
             {/* <ImageStyle src="/vercel.svg" height={50} width={80} layout="fixed"></ImageStyle> */}
           </Link>
-          <BurgerStyle color="gray" opened={opened} onClick={() => setOpened((o) => !o)} title={title} />
+          <BurgerStyle color="gray" opened={open} onClick={setOpenMenu} title={title} />
           {/* <div>aa</div> */}
         </Logo>
         <Center>
           <SearchStyle>
             <Input placeholder="Your twitter" rightSectionWidth={70} styles={{ rightSection: { pointerEvents: "none" } }} rightSection={<Search size={20} color="#000"></Search>} />
           </SearchStyle>
-          <Menu>
+          <Menu open={open}>
             <MenuItem>
               <Link href="/">
                 <a>Home</a>

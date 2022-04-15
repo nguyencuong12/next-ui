@@ -1,4 +1,4 @@
-import Document, { DocumentContext, DocumentInitialProps } from "next/document";
+import Document, { DocumentContext, DocumentInitialProps, Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 import { ServerStyles, createStylesServer } from "@mantine/next";
 import React, { ReactElement, ReactFragment } from "react";
@@ -19,6 +19,7 @@ class MyDocument extends Document {
       const initialProps = await Document.getInitialProps(ctx);
       return {
         ...initialProps,
+
         styles: (
           <>
             {initialProps.styles}

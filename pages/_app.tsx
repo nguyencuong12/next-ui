@@ -5,25 +5,27 @@ import "../styles/globals.css";
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import type { AppProps } from "next/app";
-const Loading = dynamic(() => import("../components/loading"));
-const Body = dynamic(() => import("../components/body"), { ssr: false });
 const Navbar = dynamic(() => import("../components/navbar"));
-import { Button } from "@mantine/core";
+
 import { MantineProvider } from "@mantine/core";
+import NextNProgress from "nextjs-progressbar";
+import { store } from "../redux/store";
+import { Provider } from "react-redux";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { change } from "../redux/menu/menu";
 const theme = {
   main: "mediumseagreen",
 };
+
 function MyApp({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    console.log("TYPE CLIENT", typeof window);
-  }, []);
   return (
-    <>
+    <Provider store={store}>
+      <NextNProgress></NextNProgress>
       <Head>
         <title>Page title</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-
       {/* <Loading></Loading> */}
       <ThemeProvider theme={theme}>
         <MantineProvider withGlobalStyles withNormalizeCSS>
@@ -31,7 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </MantineProvider>
       </ThemeProvider>
-    </>
+    </Provider>
   );
 }
 
