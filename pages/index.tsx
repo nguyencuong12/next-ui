@@ -1,34 +1,47 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 //
 import dynamic from "next/dynamic";
-function Home({ data }: any) {
-  // Render data...
-  useEffect(() => {
-    console.log("type", typeof window);
-    console.log("DATA", data);
-  }, []);
-  return (
-    <div style={{ paddingTop: "200px" }}>
-      <h1>{data.count}</h1>
-      CUONG
-    </div>
-  );
+interface arrProps {
+  tag: string;
+  title: string;
+  image: string;
+  description: string;
+  price: string;
+  _id: string;
+  hashtag: Array<string>;
+  type: string;
 }
 
-export async function getServerSideProps() {
-  // Fetch data from external API
-  // const res = await fetch(`https://.../data`);
-  let response = await axios.get("https://api.sashimeomeo.com/product");
-  // Fetch data from external API
-  const data = response.data.products;
-  // Pass data to the page via props
+function Home() {
+  const [products, setProducts] = useState<arrProps[] | []>([]);
+  const fetch = async () => {
+    let response = await axios.get("https://api.sashimeomeo.com/product");
+    setProducts(response.data.products.product);
+  };
 
-  // const data = await res.json();
+  useEffect(() => {
+    fetch();
+  }, []);
+  useEffect(() => {
+    console.log("PRODUCTS", products);
+    // if (products.length > 0) {
+    //   products.map((instance) => {
+    //     console.log("INSTANCE", instance.title);
+    //   });
+    // }
+  }, [products]);
+  // Render data...
 
-  // Pass data to the page via props
-  return { props: { data } };
+  return (
+    <div style={{ paddingTop: "200px" }}>
+      <h1>sad</h1>
+      {products.map((instance) => {
+        return <h1>{instance.title}</h1>;
+      })}
+    </div>
+  );
 }
 
 // This gets called on every request
