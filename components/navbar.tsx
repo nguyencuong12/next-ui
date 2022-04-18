@@ -8,17 +8,19 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { RootState } from "../redux/store";
 import { useSelector, useDispatch } from "react-redux";
-import LogoSRC from "../public/vercel.svg";
+import LogoSRC from "../public/favicon.ico";
 
 import { change } from "../redux/menu/menu";
 import { useRouter } from "next/router";
 import { useViewportSize } from "@mantine/hooks";
+const ProductMenu = dynamic(() => import("../components/productMenu"));
 
 interface menuProps {
   open: boolean;
 }
 const BurgerStyle = styled(Burger)`
   display: none;
+
   @media only screen and (max-width: 768px) {
     display: block;
   }
@@ -30,11 +32,13 @@ const ImageStyle = styled(Image)`
 `;
 
 const Wrapper = styled.div`
-  background: #333333;
+  background: #101010;
   color: #fff;
   height: auto;
   padding: 20px 0px;
   position: fixed;
+  z-index: 500;
+  top: 0;
   width: 100%;
   @media only screen and (max-width: 768px) {
     padding: 5px 0px;
@@ -79,6 +83,9 @@ const Logo = styled.div`
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
 `;
 const SearchStyle = styled.div`
   width: 100%;
@@ -89,6 +96,7 @@ const Menu = styled.ul<menuProps>`
   transition: left 400ms ease-in-out;
   @media only screen and (max-width: 768px) {
     position: absolute;
+
     height: 100vh;
     background: #4d4d4d;
     top: 120px;
@@ -149,6 +157,11 @@ const Navbar = () => {
   const { height, width } = useViewportSize();
 
   const router = useRouter();
+  const onSubmitSearch = (event: any) => {
+    if (event.keyCode === 13) {
+      console.log("ENTER KEY PRESS");
+    }
+  };
   useEffect(() => {
     const handleRouteChange = () => {
       console.log("asds", window.innerWidth);
@@ -156,9 +169,7 @@ const Navbar = () => {
         dispatch(change());
       }
     };
-
     router.events.on("routeChangeStart", handleRouteChange);
-
     // If the component is unmounted, unsubscribe
     // from the event with the `off` method:
     return () => {
@@ -175,7 +186,7 @@ const Navbar = () => {
         <Logo>
           <Link href="/">
             <a>
-              <Image priority src={LogoSRC} height={50} width={80} layout="fixed" alt="logo"></Image>
+              <Image priority src={LogoSRC} height={50} width={80} layout="fixed" alt="logo" objectFit="contain"></Image>
             </a>
             {/* <ImageStyle src="/vercel.svg" height={50} width={80} layout="fixed"></ImageStyle> */}
           </Link>
@@ -184,7 +195,7 @@ const Navbar = () => {
         </Logo>
         <Center>
           <SearchStyle>
-            <Input placeholder="Your twitter" rightSectionWidth={70} styles={{ rightSection: { pointerEvents: "none" } }} rightSection={<Search size={20} color="#000"></Search>} />
+            <Input placeholder="Fill Keyword Or Type" rightSectionWidth={70} onKeyDown={onSubmitSearch} styles={{ rightSection: { pointerEvents: "none" } }} rightSection={<Search size={20} color="#000"></Search>} />
           </SearchStyle>
           <Menu open={open}>
             <MenuItem>
@@ -203,9 +214,7 @@ const Navbar = () => {
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link href="/">
-                <a>Product</a>
-              </Link>
+              <ProductMenu />
             </MenuItem>
           </Menu>
         </Center>
@@ -213,8 +222,8 @@ const Navbar = () => {
           <ControlItem>
             <Link href="/">
               <a>
-                <ActionIcon variant="transparent" color="teal">
-                  <ShoppingCart />
+                <ActionIcon size="lg" radius="xl" variant="filled" style={{ color: "#fff", background: "#3e3e3f" }}>
+                  <ShoppingCart size={25} />
                 </ActionIcon>
               </a>
             </Link>

@@ -3,17 +3,20 @@ import dynamic from "next/dynamic";
 import React, { useEffect } from "react";
 import "../styles/globals.css";
 import Head from "next/head";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import type { AppProps } from "next/app";
-const Navbar = dynamic(() => import("../components/navbar"));
 
 import { MantineProvider } from "@mantine/core";
 import NextNProgress from "nextjs-progressbar";
 import { store } from "../redux/store";
 import { Provider } from "react-redux";
-import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-import { change } from "../redux/menu/menu";
+const Navbar = dynamic(() => import("../components/navbar"));
+const Footer = dynamic(() => import("../components/footer"));
+const Body = dynamic(() => import("../components/body"));
+const Layout = styled.div`
+  position: relative;
+`;
+
 const theme = {
   main: "mediumseagreen",
 };
@@ -28,8 +31,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <ThemeProvider theme={theme}>
         <MantineProvider withGlobalStyles withNormalizeCSS>
-          <Navbar></Navbar>
-          <Component {...pageProps} />
+          <Layout>
+            <Navbar></Navbar>
+            <Body>
+              <Component {...pageProps} />
+            </Body>
+
+            <Footer></Footer>
+          </Layout>
         </MantineProvider>
       </ThemeProvider>
     </Provider>

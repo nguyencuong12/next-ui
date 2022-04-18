@@ -14,3 +14,47 @@ a {
 * {
   box-sizing: border-box;
 }
+.swiper {
+  width:100%;
+  
+  
+}
+.swiper-button-next,
+.swiper-button-prev {
+    background-color: #29292A;
+    border-radius: 50%;
+    padding: 35px;
+    color: #fff !important;
+   
+}
+:root{
+  --swiper-theme-color:#fff;
+}
+
+.swiper-pagination-bullet{
+background:#fff!important;
+}
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  padding:12px 0px;
+ 
+  /* min-width:350px; */
+  display:flex;
+  justify-content: center;
+  align-items:center;
+ 
+
+}
+
+.swiper-slide img {
+  width:100%; 
+ 
+  /* min-height:150px; */
+  /* min-height:250px;
+  min-width:250px; */
+  object-fit: cover;
+  display:block;
+  
+}
+
