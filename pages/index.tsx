@@ -49,6 +49,7 @@ const SectionPolicy = styled.section`
   @media only screen and (max-width: 768px) {
     flex-direction: column;
   }
+  margin-bottom: 200px;
 `;
 
 const Wrapper = styled.div`
