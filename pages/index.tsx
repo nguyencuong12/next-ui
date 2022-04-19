@@ -96,7 +96,7 @@ function Home() {
         <div className="title">Feature Products</div>
         <CarouselCard></CarouselCard>
       </Section>
-      <Section className="hot-products">
+      {/* <Section className="hot-products">
         <div className="title">Hot Products</div>
         <div className="content">
           {products.length > 0 ? (
@@ -107,9 +107,9 @@ function Home() {
             <Loading></Loading>
           )}
         </div>
-      </Section>
+      </Section> */}
 
-      <Section className="feature-products">
+      {/* <Section className="feature-products">
         <div className="title">Feature</div>
         <div className="content">
           {products.length > 0 ? (
@@ -120,7 +120,7 @@ function Home() {
             <Loading></Loading>
           )}
         </div>
-      </Section>
+      </Section> */}
     </Wrapper>
   );
 }
