@@ -113,14 +113,14 @@ function Home({ results }: HomeProps) {
           )}
         </div>
       </Section>
-      {/* <Section>
+      <Section style={{ paddingTop: "800px" }}>
         <div className="title">Hot Products</div>
         <CarouselCard></CarouselCard>
       </Section>
       <Section>
         <div className="title">Feature Products</div>
         <CarouselCard></CarouselCard>
-      </Section> */}
+      </Section>
 
       {/* <Section className="feature-products">
         <div className="title">Feature</div>
