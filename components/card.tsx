@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   padding-top: 20px;
   align-items: center;
   background: #323232;
+  margin: 15px;
   .chips {
     position: absolute;
     top: 10px;

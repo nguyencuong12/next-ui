@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   min-height: 600px;
 `;
 const Content = styled.div`
-  width: 70%;
+  width: 80%;
   margin: 80px auto;
   display: flex;
   justify-content: space-between;

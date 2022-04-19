@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 10px;
   padding: 10px;
+  margin: 15px;
 
   div {
     font-family: "Square Peg", cursive;
