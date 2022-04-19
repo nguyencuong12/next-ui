@@ -45,7 +45,7 @@ const CardComponent = (props: cardProps) => {
   return (
     <Wrapper>
       <div className="chips">HOT</div>
-      <Image src={image} width="250" height="300" objectFit="cover"></Image>
+      <Image alt="product-image" src={image} width="250" height="300" objectFit="cover"></Image>
       <h3>{title}</h3>
       <div>{description}</div>
       <div>{price}</div>

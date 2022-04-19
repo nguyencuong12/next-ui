@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import Image from "next/image";
 
 // import "./styles.css";
 
@@ -27,16 +28,17 @@ export default function App() {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src="https://cdn.tgdd.vn/2022/04/banner/arp-5km-2880-800-1920x533.png" />
+          <Image alt="banner-image" src="https://cdn.tgdd.vn/2022/04/banner/arp-5km-2880-800-1920x533.png" width={1920} height={533}></Image>
+          {/* <img src="https://cdn.tgdd.vn/2022/04/banner/arp-5km-2880-800-1920x533.png" /> */}
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://cdn.tgdd.vn/2022/03/banner/2880-800-1920x533-15.png" />
+          <Image alt="banner-image" src="https://cdn.tgdd.vn/2022/03/banner/2880-800-1920x533-15.png" width={1920} height={533}></Image>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://cdn.tgdd.vn/2022/04/banner/13xanh-2880-800-1920x533-5.png" />
+          <Image alt="banner-image" src="https://cdn.tgdd.vn/2022/04/banner/13xanh-2880-800-1920x533-5.png" width={1920} height={533}></Image>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://cdn.tgdd.vn/2022/03/banner/2880-800-1920x533-2.png" />
+          <Image alt="banner-image" src="https://cdn.tgdd.vn/2022/03/banner/2880-800-1920x533-2.png" width={1920} height={533}></Image>
         </SwiperSlide>
       </Swiper>
     </>

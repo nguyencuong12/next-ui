@@ -9,6 +9,7 @@ const Loading = dynamic(() => import("../components/loading"));
 const Card = dynamic(() => import("../components/card"));
 const Carousel = dynamic(() => import("../components/carousel"));
 const CarouselCard = dynamic(() => import("../components/carouselCard"));
+const PolicyItem = dynamic(() => import("../components/policy"));
 
 // const Pagination = dynamic(() => import("../components/pagination"));
 export const SectionMixin = ({}) => css`
@@ -32,26 +33,27 @@ export const SectionMixin = ({}) => css`
 const Section = styled.section`
   color: #fff;
   ${SectionMixin({})};
-`;
-
-const Test = styled.div`
-  border: 2px solid black;
-  width: 300px;
-  height: 500px;
-  background: #323232;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  img {
-    width: 300px;
+  .introduce {
+    border: 1px solid white;
   }
 `;
+const SectionPolicy = styled.section`
+  color: #fff;
+  min-height: 340px;
+  background: #333333;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 50px;
+  padding: 10px 10px;
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
 `;
 
 interface arrProps {
@@ -101,6 +103,13 @@ function Home({ results }: HomeProps) {
       <Section className="banner">
         <Carousel></Carousel>
       </Section>
+      <SectionPolicy>
+        <PolicyItem></PolicyItem>
+        <PolicyItem></PolicyItem>
+        <PolicyItem></PolicyItem>
+        <PolicyItem></PolicyItem>
+      </SectionPolicy>
+
       <Section className="hot-products">
         <div className="title">TESTING : !!!</div>
         <div className="content">
@@ -113,7 +122,7 @@ function Home({ results }: HomeProps) {
           )}
         </div>
       </Section>
-      <Section style={{ paddingTop: "800px" }}>
+      <Section>
         <div className="title">Hot Products</div>
         <CarouselCard></CarouselCard>
       </Section>

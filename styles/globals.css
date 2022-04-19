@@ -17,7 +17,6 @@ a {
 .swiper {
   width:100%;
   
-  
 }
 .swiper-button-next,
 .swiper-button-prev {
@@ -37,7 +36,7 @@ background:#fff!important;
 .swiper-slide {
   background-position: center;
   background-size: cover;
-  padding:12px 0px;
+ 
  
   /* min-width:350px; */
   display:flex;

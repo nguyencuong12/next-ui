@@ -2,16 +2,26 @@ import React from "react";
 import { Menu, Divider, Text } from "@mantine/core";
 import Link from "next/link";
 import styled from "styled-components";
+import { useRouter } from "next/router";
+const MenuStyle = styled.div`
+  cursor: pointer;
+`;
 
 const MenuProducts = () => {
+  const router = useRouter();
+  const onNavigate = (event: any) => {
+    event.preventDefault();
+    router.push("/products");
+  };
   return (
     <Menu
       trigger="hover"
       delay={100}
       control={
-        <Link href="/product">
-          <a>Product</a>
-        </Link>
+        <MenuStyle onClick={onNavigate}>
+          Products
+          {/* <Link href="/product"> */}
+        </MenuStyle>
       }
     >
       <Menu.Label>Product Item 1 </Menu.Label>

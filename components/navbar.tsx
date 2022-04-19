@@ -37,7 +37,7 @@ const Wrapper = styled.div`
   height: auto;
   padding: 20px 0px;
   position: fixed;
-  z-index: 500;
+  z-index: 200;
   top: 0;
   width: 100%;
   @media only screen and (max-width: 768px) {
@@ -162,20 +162,18 @@ const Navbar = () => {
       console.log("ENTER KEY PRESS");
     }
   };
-  useEffect(() => {
-    const handleRouteChange = () => {
-      console.log("asds", window.innerWidth);
-      if (window.innerWidth <= 768) {
-        dispatch(change());
-      }
-    };
-    router.events.on("routeChangeStart", handleRouteChange);
-    // If the component is unmounted, unsubscribe
-    // from the event with the `off` method:
-    return () => {
-      router.events.off("routeChangeStart", handleRouteChange);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const handleRouteChange = () => {
+  //     if (window.innerWidth <= 768) {
+  //       dispatch(change());
+  //     }
+  //   };
+  //   router.events.on("routeChangeStart", handleRouteChange);
+
+  //   return () => {
+  //     router.events.off("routeChangeStart", handleRouteChange);
+  //   };
+  // }, []);
   const setOpenMenu = () => {
     dispatch(change());
   };
@@ -209,7 +207,7 @@ const Navbar = () => {
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link href="/">
+              <Link href="/contact">
                 <a>Contact</a>
               </Link>
             </MenuItem>
@@ -220,7 +218,7 @@ const Navbar = () => {
         </Center>
         <Control>
           <ControlItem>
-            <Link href="/">
+            <Link href="/cart">
               <a>
                 <ActionIcon size="lg" radius="xl" variant="filled" style={{ color: "#fff", background: "#3e3e3f" }}>
                   <ShoppingCart size={25} />

@@ -9,4 +9,7 @@ module.exports = {
     concurrentFeatures: true,
     serverComponents: true,
   },
+  images: {
+    domains: ["cdn.tgdd.vn"],
+  },
 };

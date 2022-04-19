@@ -13,6 +13,7 @@ import Link from "next/link";
 // import "./styles.css";
 const Wrapper = styled.div`
   position: relative;
+  padding: 20px 0px;
 `;
 const ViewAll = styled.div`
   display: flex;
