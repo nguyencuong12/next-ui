@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   /* border: 1px solid red; */
 
   background: #3e3e3f;
+  color: #fff;
   min-height: 100vh;
 `;
 

@@ -3,11 +3,11 @@ import styled from "styled-components";
 import Image from "next/image";
 
 const Wrapper = styled.div`
-  min-height: 100px;
-  background: #fff;
+  min-height: 120px;
+  background: #595959;
   color: #000;
   border-radius: 10px;
-  width: 250px;
+  width: 350px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,11 +15,13 @@ const Wrapper = styled.div`
   gap: 10px;
   padding: 10px;
 `;
-
-const Policy = () => {
+interface propsType {
+  image: string;
+}
+const Policy = (props: propsType) => {
   return (
     <Wrapper>
-      <Image src="/favicon.ico" height={60} width={60}></Image>
+      <Image src={props.image} height={60} width={60}></Image>
       <div>Description</div>
     </Wrapper>
   );

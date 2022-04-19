@@ -39,17 +39,18 @@ const Section = styled.section`
 `;
 const SectionPolicy = styled.section`
   color: #fff;
-  min-height: 340px;
+  min-height: 500px;
   background: #333333;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
   gap: 50px;
-  padding: 10px 10px;
+  padding: 100px 10px;
   @media only screen and (max-width: 768px) {
     flex-direction: column;
+    align-items: center;
   }
-  margin-bottom: 200px;
+  /* margin-bottom: 200px; */
 `;
 
 const Wrapper = styled.div`
@@ -105,10 +106,10 @@ function Home({ results }: HomeProps) {
         <Carousel></Carousel>
       </Section>
       <SectionPolicy>
-        <PolicyItem></PolicyItem>
-        <PolicyItem></PolicyItem>
-        <PolicyItem></PolicyItem>
-        <PolicyItem></PolicyItem>
+        <PolicyItem image="/box.png"></PolicyItem>
+        <PolicyItem image="/cat.png"></PolicyItem>
+        <PolicyItem image="/pet-food1.png"></PolicyItem>
+        <PolicyItem image="/vitamins.png"></PolicyItem>
       </SectionPolicy>
 
       <Section className="hot-products">
