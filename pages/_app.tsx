@@ -39,7 +39,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Body>
               <Component {...pageProps} />
             </Body>
-
             <Footer></Footer>
           </Layout>
         </MantineProvider>
