@@ -5,7 +5,8 @@ const Wrapper = styled.div`
   position: relative;
   bottom: 0;
   top: 46px;
-  background: #595959;
+  /* background: #595959; */
+  background: ${(props) => props.theme.footerBackground};
   color: #fff;
   min-height: 600px;
 `;
@@ -14,7 +15,6 @@ const Content = styled.div`
   margin: 80px auto;
   display: flex;
   justify-content: space-between;
-
   ul {
     list-style: none;
     font-size: 30px;

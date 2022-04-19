@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   top: 126px;
   /* border: 1px solid red; */
 
-  background: #3e3e3f;
+  background: ${(props) => props.theme.bodyBackground};
   color: #fff;
   min-height: 100vh;
 `;

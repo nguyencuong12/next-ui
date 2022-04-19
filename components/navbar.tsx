@@ -32,8 +32,8 @@ const ImageStyle = styled(Image)`
 `;
 
 const Wrapper = styled.div`
-  background: #101010;
-  color: #fff;
+  background: ${(props) => props.theme.navBackground};
+  color: ${(props) => props.theme.navColor};
   height: auto;
   padding: 20px 0px;
   position: fixed;
@@ -103,6 +103,7 @@ const Menu = styled.ul<menuProps>`
     width: 100%;
     left: ${(props) => (props.open ? "0" : "-120%")};
     /* left: 0; */
+
     right: 0;
     display: flex;
     flex-direction: column;
@@ -134,7 +135,7 @@ const MenuItem = styled.li`
   a {
     text-decoration: none;
     display: block;
-    color: #fff;
+    color: ${(props) => props.theme.navColor};
     transition: color 200ms;
   }
   @media only screen and (max-width: 768px) {
