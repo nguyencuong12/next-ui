@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
+
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import { EffectFade, Navigation, Pagination } from "swiper";
