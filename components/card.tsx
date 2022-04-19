@@ -24,10 +24,25 @@ const Wrapper = styled.div`
     border-radius: 10px;
     color: #ef9704;
   }
+
   cursor: pointer;
   transition: box-shadow 190ms;
   :hover {
     box-shadow: 1px 1px 15px 2px #ffffff;
+  }
+  div {
+    font-family: "Square Peg", cursive;
+    font-size: 22px;
+  }
+  .title-card {
+    font-size: ${(props) => props.theme.cardFontLg};
+  }
+  .description-card {
+    font-size: ${(props) => props.theme.cardFontMd};
+  }
+  .price-card {
+    font-size: ${(props) => props.theme.cardFontMd};
+    color: red;
   }
 `;
 interface cardProps {
@@ -46,9 +61,9 @@ const CardComponent = (props: cardProps) => {
     <Wrapper>
       <div className="chips">HOT</div>
       <Image alt="product-image" src={image} width="250" height="300" objectFit="cover"></Image>
-      <h3>{title}</h3>
-      <div>{description}</div>
-      <div>{price}</div>
+      <div className="title-card">{title}</div>
+      <div className="description-card">{description}</div>
+      <div className="price-card">{price}</div>
     </Wrapper>
   );
 };

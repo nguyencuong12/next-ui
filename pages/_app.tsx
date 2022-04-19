@@ -10,9 +10,12 @@ import { MantineProvider } from "@mantine/core";
 import NextNProgress from "nextjs-progressbar";
 import { store } from "../redux/store";
 import { Provider } from "react-redux";
+import { layoutVariables } from "../styles/variable.global";
+
 const Navbar = dynamic(() => import("../components/navbar"));
 const Footer = dynamic(() => import("../components/footer"));
 const Body = dynamic(() => import("../components/body"));
+
 const Layout = styled.div`
   position: relative;
 `;
@@ -29,7 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>Sashimeomeo Shop</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={layoutVariables}>
         <MantineProvider withGlobalStyles withNormalizeCSS>
           <Layout>
             <Navbar></Navbar>

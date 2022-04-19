@@ -18,7 +18,21 @@ export const SectionMixin = ({}) => css`
     padding: 5px;
     font-size: 35px;
     font-weight: 600;
-    background: #101010;
+    position: relative;
+    ::after {
+      content: "";
+      /* display: block; */
+      height: 5px;
+      width: 150px;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: orange;
+    }
+    @media only screen and (max-width: 768px) {
+      font-size: 24px;
+    }
   }
   .content {
     display: flex;
@@ -39,13 +53,14 @@ const Section = styled.section`
 `;
 const SectionPolicy = styled.section`
   color: #fff;
-  min-height: 500px;
+  min-height: 360px;
   background: #333333;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   gap: 50px;
   padding: 100px 10px;
+  margin-bottom: 20px;
   @media only screen and (max-width: 768px) {
     flex-direction: column;
     align-items: center;
@@ -86,19 +101,6 @@ function Home({ results }: HomeProps) {
   if (!products) {
     return <Loading></Loading>;
   }
-
-  // useEffect(() => {
-  //   fetch();
-  // }, []);
-  // useEffect(() => {
-  //   console.log("PRODUCTS", products);
-  //   // if (products.length > 0) {
-  //   //   products.map((instance) => {
-  //   //     console.log("INSTANCE", instance.title);
-  //   //   });
-  //   // }
-  // }, [products]);
-  // Render data...
 
   return (
     <Wrapper>
