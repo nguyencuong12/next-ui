@@ -71,14 +71,17 @@ type HomeProps = {
   results: arrProps[];
 };
 function Home({ results }: HomeProps) {
-  console.log("result", results);
-  console.log("type", typeof results);
-
-  // const [products, setProducts] = useState<arrProps[] | []>([]);
-  // const fetch = async () => {
-  //   let response = await axios.get("https://api.sashimeomeo.com/product");
-  //   setProducts(response.data.products.product);
-  // };
+  const [products, setProducts] = useState<arrProps[] | []>([]);
+  const fetch = async () => {
+    let response = await axios.get("https://api.sashimeomeo.com/product");
+    setProducts(response.data.products.product);
+  };
+  useEffect(() => {
+    fetch();
+  }, []);
+  if (!products) {
+    return <Loading></Loading>;
+  }
 
   // useEffect(() => {
   //   fetch();
@@ -101,8 +104,8 @@ function Home({ results }: HomeProps) {
       <Section className="hot-products">
         <div className="title">TESTING : !!!</div>
         <div className="content">
-          {results.length > 0 ? (
-            results.map((instance) => {
+          {products.length > 0 ? (
+            products.map((instance) => {
               return <Card id={instance._id} key={instance._id} title={instance.title} description={instance.description} image={"/cuong1.png"} price={instance.price} chips={""}></Card>;
             })
           ) : (
@@ -136,14 +139,14 @@ function Home({ results }: HomeProps) {
 }
 
 // This gets called on every request
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  let response = await axios.get("https://api.sashimeomeo.com/product");
-  const data = response.data.products.product;
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   let response = await axios.get("https://api.sashimeomeo.com/product");
+//   const data = response.data.products.product;
 
-  return {
-    props: {
-      results: data,
-    },
-  };
-};
+//   return {
+//     props: {
+//       results: data,
+//     },
+//   };
+// };
 export default Home;
