@@ -13,8 +13,14 @@ export const layoutVariables = {
 
   //BODY
   //3e3e3f;
-  bodyBackground: "#EABF9F",
 
   //footer
   footerBackground: "#1E212D",
+
+  primaryColor: "#e3ac82",
+  bodyBackground: "#EABF9F",
+  // secondaryColor: "#698474",
+  // accentColor: "#698474",
+  additionalColor: "",
+  typefaceColor: "",
 };

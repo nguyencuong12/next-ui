@@ -32,7 +32,8 @@ const ImageStyle = styled(Image)`
 `;
 
 const Wrapper = styled.div`
-  background: ${(props) => props.theme.navBackground};
+  /* background: ${(props) => props.theme.navBackground}; */
+  background: ${(props) => props.theme.primaryColor};
   color: ${(props) => props.theme.navColor};
   height: auto;
   padding: 20px 0px;
@@ -114,19 +115,6 @@ const Menu = styled.ul<menuProps>`
   /* border: 2px solid white; */
 `;
 const MenuItem = styled.li`
-  /* ::after {
-    content: " ";
-    font-size: 4px;
-    width: 0;
-    border-radius: 50%;
-    display: block;
-    background-color: #fff;
-    transition: width 300ms;
-    height: 3px;
-  } */
-  /* :hover::after {
-    width: 100%;
-  } */
   :hover a {
     color: #a6a6a6 !important;
   }

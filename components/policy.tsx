@@ -5,7 +5,6 @@ import Image from "next/image";
 const Wrapper = styled.div`
   min-height: 120px;
   background: #eabf9f;
-
   border-radius: 10px;
   width: 350px;
   display: flex;
@@ -27,13 +26,13 @@ const Wrapper = styled.div`
 `;
 interface propsType {
   image: string;
-  description?: string;
+  description: string;
 }
 const Policy = (props: propsType) => {
   return (
     <Wrapper>
       <Image src={props.image} height={60} width={60}></Image>
-      <div>Description</div>
+      <div>{props.description}</div>
     </Wrapper>
   );
 };

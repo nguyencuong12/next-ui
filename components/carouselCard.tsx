@@ -8,7 +8,7 @@ import "swiper/css";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import { EffectFade, Navigation, Pagination } from "swiper";
-import { useViewportSize } from "@mantine/hooks";
+
 import Link from "next/link";
 // import "./styles.css";
 const Wrapper = styled.div`
@@ -19,7 +19,29 @@ const ViewAll = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 0px 48px;
-  font-size: 20px;
+  font-size: 18px;
+
+  a {
+    color: #000;
+    font-weight: 600;
+    position: relative;
+    /* position: absolute; */
+    ::after {
+      content: "";
+      /* display: block; */
+      height: 3px;
+      width: 0;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: ${(props) => props.theme.footerBackground};
+      transition: width 200ms;
+    }
+    :hover::after {
+      width: 80px;
+    }
+  }
 `;
 
 const Card = dynamic(() => import("../components/card"));

@@ -17,7 +17,7 @@ const Content = styled.div`
   justify-content: space-between;
   ul {
     list-style: none;
-    font-size: 30px;
+    font-size: 26px;
     font-weight: 700;
   }
   li {

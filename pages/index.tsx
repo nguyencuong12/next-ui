@@ -16,7 +16,7 @@ export const SectionMixin = ({}) => css`
   .title {
     text-align: center;
     padding: 5px;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 600;
     position: relative;
     color: ${(props) => props.theme.footerBackground};
@@ -110,10 +110,10 @@ function Home({ results }: HomeProps) {
         <Carousel></Carousel>
       </Section>
       <SectionPolicy>
-        <PolicyItem image="/box.png"></PolicyItem>
-        <PolicyItem image="/cat.png"></PolicyItem>
-        <PolicyItem image="/pet-food1.png"></PolicyItem>
-        <PolicyItem image="/vitamins.png"></PolicyItem>
+        <PolicyItem image="/box.png" description="Order"></PolicyItem>
+        <PolicyItem image="/cat.png" description="Cats"></PolicyItem>
+        <PolicyItem image="/pet-food1.png" description="Foods"></PolicyItem>
+        <PolicyItem image="/vitamins.png" description="Vitamins"></PolicyItem>
       </SectionPolicy>
 
       <Section className="hot-products">
