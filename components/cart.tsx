@@ -75,8 +75,11 @@ const product = (element: any): ReactNode => {
     </ProductWrapper>
   );
 };
+const onChangeAmount = (callback: any) => {
+  console.log("CHANGE AMOUNT CALL!!!", callback);
+};
 const controlNumber = () => {
-  return <NumberControl></NumberControl>;
+  return <NumberControl amount={1} onChangeAmount={onChangeAmount} id={"testID"}></NumberControl>;
 };
 function Cart() {
   const rows = elements.map((element) => (
@@ -92,7 +95,6 @@ function Cart() {
     <Wrapper>
       <TableWrapper
         verticalSpacing="xs"
-        fontSize="xs"
         fontSize={"md"}
         sx={(theme) => ({
           backgroundColor: theme.colors.dark[3],
