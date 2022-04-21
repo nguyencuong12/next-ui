@@ -77,7 +77,7 @@ const ProductView = () => {
   return (
     <Wrapper>
       <div className="image">
-        <Image src="/box.png" width={600} height={600}></Image>
+        <Image alt="product-image" src="/box.png" width={600} height={600}></Image>
       </div>
       <div className="detail">
         <div className="title">IPHONE 11</div>

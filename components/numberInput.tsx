@@ -8,7 +8,6 @@ interface propsType {
 }
 function NumberControl(props: propsType) {
   const { amount, onChangeAmount, id } = props;
-
   const [value, setValue] = useState(amount);
   const handlers = useRef<NumberInputHandlers>();
   const changeAmount = (val: any) => {
