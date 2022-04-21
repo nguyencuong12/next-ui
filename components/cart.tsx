@@ -11,17 +11,26 @@ const NumberControl = dynamic(() => import("../components/numberInput"));
 import CartEvents from "../utils/storage";
 import formatEvents from "../utils/format";
 const Wrapper = styled.div`
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
   display: flex;
+  overflow: hidden;
   justify-content: center;
   align-items: flex-start;
+  font-size: 14px;
   @media only screen and (max-width: 768px) {
     flex-direction: column;
   }
 `;
+const SummaryWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0px;
+`;
+
 const TableWrapper = styled(Table)`
   margin: 5px;
+
   th {
     color: #fff !important;
   }
@@ -37,8 +46,9 @@ const CartCollateral = styled.div`
   }
   .subtotal {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    /* align-items: center;
+    justify-content: space-between; */
   }
   .total {
     display: flex;
@@ -57,23 +67,16 @@ const ProductWrapper = styled.div`
   align-items: center;
 `;
 
-const elements = [
-  { position: "Ciao", mass: 12.011, symbol: "C", name: "Carbon", href: "/ciao" },
-  { position: 7, mass: 14.007, symbol: "N", name: "Nitrogen" },
-  { position: 39, mass: 88.906, symbol: "Y", name: "Yttrium" },
-  { position: 56, mass: 137.33, symbol: "Ba", name: "Barium" },
-  { position: 58, mass: 140.12, symbol: "Ce", name: "Cerium" },
-];
 const onDeleteItem = (id: string) => {
   CartEvents.deleteItem(id);
 };
 const product = (element: cartInterface): ReactNode => {
   return (
     <ProductWrapper>
-      <ActionIcon variant="transparent" color={"red"} onClick={() => onDeleteItem(element.id)}>
+      <ActionIcon size={"md"} variant="transparent" color={"red"} onClick={() => onDeleteItem(element.id)}>
         <Trash />
       </ActionIcon>
-      <Image src={element.image} height={100} width={100}></Image>
+      <Image src={element.image} height={150} width={150}></Image>
       <Link href="/">
         <a>{element.title}</a>
       </Link>
@@ -104,16 +107,27 @@ function Cart() {
   const totalPrice = (price: string, amount: number): number => {
     let result = parseFloat(price) * amount;
     return formatVND(result);
-
-    // return result;
   };
   const formatVND = (price: number): any => {
     return formatEvents.priceVND(price);
   };
+  const totalAllProducts = () => {
+    let total: number = 0;
+    carts.map((instance) => {
+      total = total + parseFloat(instance.price) * instance.amount;
+    });
+    return formatVND(total);
 
-  //   window.addEventListener('storage', () => {
-  //     console.log("change to local storage!");
-  // }
+    // return total.toString();
+  };
+  const renderSummary = carts.map((element) => (
+    <SummaryWrapper>
+      <div className="summary-product">
+        {element.title} X {element.amount}
+      </div>
+      <div className="summary-price">{totalPrice(element.price, element.amount)}</div>
+    </SummaryWrapper>
+  ));
   const rows = carts.map((element) => (
     <tr key={element.id}>
       <td>{product(element)}</td>
@@ -128,13 +142,10 @@ function Cart() {
     <Wrapper>
       <TableWrapper
         verticalSpacing="xs"
-        fontSize={"md"}
+        fontSize={"xs"}
         sx={(theme) => ({
           backgroundColor: theme.colors.dark[3],
           color: theme.colors.cyan[1],
-          // "&:hover": {
-          //   backgroundColor: theme.colors.dark[1],
-          // },
         })}
       >
         <thead>
@@ -149,13 +160,10 @@ function Cart() {
       </TableWrapper>
       <CartCollateral>
         <div className="summary">Summary</div>
-        <div className="subtotal">
-          <h4>Subtotal</h4>
-          <p>3.5500.000</p>
-        </div>
+        <div className="subtotal">{renderSummary}</div>
         <div className="total">
           <h4>Total</h4>
-          <p>3.5500.000</p>
+          <p>{totalAllProducts()}</p>
         </div>
         <div className="payment">
           <Button fullWidth color={"dark"}>

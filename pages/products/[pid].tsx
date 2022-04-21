@@ -96,7 +96,7 @@ const ProductView = () => {
             Add To Cart
           </Button>
 
-          <Button
+          {/* <Button
             color="dark"
             fullWidth={true}
             onClick={() => {
@@ -108,7 +108,7 @@ const ProductView = () => {
             }}
           >
             TESTING
-          </Button>
+          </Button> */}
         </div>
       </div>
     </Wrapper>
