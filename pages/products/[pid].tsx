@@ -62,10 +62,11 @@ const Wrapper = styled.div`
 
 const ProductView = () => {
   const onAddToCart = () => {
+    let value = 11;
     let products = {
       id: uuidv4(),
-      title: "IPHONE 11",
-      price: "300.000",
+      title: "IPHONE" + (value + 1),
+      price: "300000",
       description: "LOREM",
       image: "/cuong1.png",
       amount: 1,
