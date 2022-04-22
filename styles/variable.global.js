@@ -9,15 +9,13 @@ export const layoutVariables = {
   navColor: "#000",
 
   //POLICY
-  policyBackground: "#003A57",
+  policyBackground: "#656667",
 
   footerBackground: "#424243",
   primaryColor: "#555657",
   productColor: "#323232",
 
   bodyBackground: "#fff",
-  additionalColor: "",
-  typefaceColor: "",
 
   primary: "#041C32",
   accent: "#ECB365",

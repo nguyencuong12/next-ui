@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@200&family=Square+Peg&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@200&family=Open+Sans:wght@300&family=Square+Peg&display=swap');
 html,
 body {
   
@@ -15,8 +15,9 @@ a {
 
 * {
   box-sizing: border-box;
-  font-family: 'Archivo', sans-serif;
- 
+  /* font-family: 'Archivo', sans-serif; */
+  font-family: 'Open Sans', sans-serif;
+
   /* font-size:24px; */
 }
 .swiper {

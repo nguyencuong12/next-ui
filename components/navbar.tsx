@@ -33,7 +33,7 @@ const ImageStyle = styled(Image)`
 
 const Wrapper = styled.div`
   /* background: ${(props) => props.theme.navBackground}; */
-  background: ${(props) => props.theme.primary};
+  background: ${(props) => props.theme.primaryColor};
   color: ${(props) => props.theme.secondary};
   height: auto;
   padding: 20px 0px;
@@ -115,11 +115,10 @@ const Menu = styled.ul<menuProps>`
 
     height: 100vh;
     /* background: ${(props) => props.theme.swatches2}; */
-    background: #062747;
+    background: ${(props) => props.theme.productColor};
     top: 120px;
     width: 100%;
     left: ${(props) => (props.open ? "0" : "-120%")};
-    /* left: 0; */
 
     right: 0;
     display: flex;
@@ -194,7 +193,7 @@ const Navbar = () => {
             </a>
             {/* <ImageStyle src="/vercel.svg" height={50} width={80} layout="fixed"></ImageStyle> */}
           </Link>
-          <BurgerStyle color="gray" opened={open} onClick={setOpenMenu} title={title} />
+          <BurgerStyle color="#fff" opened={open} onClick={setOpenMenu} title={title} />
           {/* <div>aa</div> */}
         </Logo>
         <Center>

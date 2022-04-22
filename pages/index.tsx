@@ -58,7 +58,7 @@ const SectionPolicy = styled.section`
   color: #fff;
   min-height: 360px;
   /* background: #333333; */
-  background: ${(props) => props.theme.swatches2};
+  background: ${(props) => props.theme.policyBackground};
   display: flex;
   justify-content: center;
   align-items: flex-start;
