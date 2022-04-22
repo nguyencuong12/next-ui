@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import { Button, Group } from "@mantine/core";
+import dynamic from "next/dynamic";
+const CustomButton = dynamic(() => import("../components/actionButton"));
 
 const Wrapper = styled.div`
   position: relative;
@@ -65,6 +68,10 @@ const CardComponent = (props: cardProps) => {
       <div className="title-card">{title}</div>
       <div className="description-card">{description}</div>
       <div className="price-card">{price}</div>
+      <Group style={{ padding: "10px" }} noWrap={true}>
+        <CustomButton title="View"></CustomButton>
+        <CustomButton title="Add to cart"></CustomButton>
+      </Group>
     </Wrapper>
   );
 };

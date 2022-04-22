@@ -33,8 +33,11 @@ const Wrapper = styled.div`
     align-items: center;
     padding: 50px 0px;
     /* gap: 1em; */
-    * {
+    div {
       margin: 0.5em;
+      :last-child {
+        margin: 0;
+      }
     }
 
     .title {
@@ -87,6 +90,7 @@ const ProductView = () => {
         <div className="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea error labore minus minima laborum non doloribus hic, quae ut repellat itaque vel esse asperiores suscipit fugiat, harum odit recusandae atque?</div>
         <div className="controls">
           <Button
+            style={{ marginTop: "20px" }}
             color="red"
             fullWidth={true}
             onClick={() => {

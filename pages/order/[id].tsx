@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   /* align-items: */
   width: 95%;
   margin: 0 auto;
+  padding: 20px 0;
   @media only screen and (max-width: 768px) {
     flex-direction: column;
   }
@@ -20,11 +21,12 @@ const Wrapper = styled.div`
 const UserInfo = styled.div`
   margin: 5px;
   background: ${(props) => props.theme.productColor};
+
   color: ${(props) => props.theme.secondary};
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 40px;
   border-radius: 5px;
   * {
     margin: 8px 0px !important;
@@ -37,10 +39,13 @@ const ProductInfo = styled.div`
   color: ${(props) => props.theme.secondary};
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 40px;
   border-radius: 5px;
   * {
-    margin: 5px !important;
+    margin: 5px;
+    :last-child {
+      margin: 0;
+    }
   }
 `;
 const ProductInfoContent = styled.div`
@@ -107,7 +112,6 @@ const OrderProducts = () => {
           })}
           placeholder="Ghi chu"
           label="Ghi chu"
-          required
         />
       </UserInfo>
       <ProductInfo>
@@ -117,7 +121,7 @@ const OrderProducts = () => {
           <h4 className="title">Total</h4>
           <div className="total-price">{renderTotalPrice()}</div>
         </Total>
-        <Button color="dark" onClick={() => handleOrder()}>
+        <Button color="red" onClick={() => handleOrder()}>
           Pre Order
         </Button>
       </ProductInfo>
