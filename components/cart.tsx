@@ -121,7 +121,7 @@ function Cart() {
     // return total.toString();
   };
   const renderSummary = carts.map((element) => (
-    <SummaryWrapper>
+    <SummaryWrapper key={element.id}>
       <div className="summary-product">
         {element.title} X {element.amount}
       </div>
