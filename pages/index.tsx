@@ -62,8 +62,8 @@ const SectionPolicy = styled.section`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 50px;
-  padding: 100px 10px;
+  /* gap: 50px; */
+  padding: 50px 10px;
   margin-bottom: 20px;
   @media only screen and (max-width: 768px) {
     flex-direction: column;

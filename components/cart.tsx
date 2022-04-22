@@ -16,6 +16,8 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
   font-size: 14px;
+  width: 98%;
+  margin: 0 auto;
   @media only screen and (max-width: 768px) {
     flex-direction: column;
   }

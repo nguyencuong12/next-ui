@@ -52,14 +52,18 @@ const Content = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  /* gap: 20px; */
   padding: 10px 0px;
-  @supports not (gap: 20px) {
-    margin-right: 5px;
+  * {
+    margin-right: 8px;
     :last-child {
-      margin-right: 0px;
+      margin-right: 0;
     }
   }
+
+  /* @supports not (gap: 20px) {
+   
+  } */
 `;
 const Center = styled.div`
   display: flex;
