@@ -110,9 +110,10 @@ const SearchStyle = styled.div`
 const Menu = styled.ul<menuProps>`
   ${FlexRow({})};
   transition: left 400ms ease-in-out;
+  /* border: 2px solid black; */
+  min-width: 400px;
   @media only screen and (max-width: 768px) {
     position: absolute;
-
     height: 100vh;
     /* background: ${(props) => props.theme.swatches2}; */
     background: ${(props) => props.theme.productColor};
