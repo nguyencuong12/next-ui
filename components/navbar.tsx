@@ -54,6 +54,12 @@ const Content = styled.div`
   align-items: center;
   gap: 20px;
   padding: 10px 0px;
+  @supports not (gap: 20px) {
+    margin-right: 5px;
+    :last-child {
+      margin-right: 0px;
+    }
+  }
 `;
 const Center = styled.div`
   display: flex;

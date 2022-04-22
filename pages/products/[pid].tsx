@@ -14,7 +14,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #323232;
+    background: ${(props) => props.theme.productColor};
     border-radius: 10px;
     margin: 5px;
     padding: 10px;
@@ -23,7 +23,8 @@ const Wrapper = styled.div`
     border: 1px solid black;
     flex: 1;
     margin: 10px;
-    background: #323232;
+    background: ${(props) => props.theme.productColor};
+    color: ${(props) => props.theme.secondary};
     border-radius: 10px;
     margin: 5px;
     min-height: 400px;
@@ -87,7 +88,7 @@ const ProductView = () => {
         <div className="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea error labore minus minima laborum non doloribus hic, quae ut repellat itaque vel esse asperiores suscipit fugiat, harum odit recusandae atque?</div>
         <div className="controls">
           <Button
-            color="dark"
+            color="red"
             fullWidth={true}
             onClick={() => {
               onAddToCart();

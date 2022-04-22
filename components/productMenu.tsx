@@ -26,10 +26,12 @@ const MenuProducts = () => {
     >
       <Menu.Label>Product Item 1 </Menu.Label>
       <Menu.Item>
-        <Link href="/product/seed">Product 1</Link>
+        <Link href="/products/seed">Product 1</Link>
       </Menu.Item>
       <Menu.Item>
-        <Link href="/product/pate">Product 2 </Link>
+        <Link href="/products/pate">
+          <a>Product 2</a>
+        </Link>
       </Menu.Item>
       <Divider />
       <Menu.Label>Product Item 2 </Menu.Label>

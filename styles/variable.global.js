@@ -18,10 +18,12 @@ export const layoutVariables = {
   bodyBackground: "#fff",
   additionalColor: "",
   typefaceColor: "",
+
   primary: "#041C32",
   accent: "#ECB365",
   secondary: "#fff",
   swatches1: "#04293A",
   swatches2: "#064663",
+
   //SUPPORT PRIMARY COLOR
 };
