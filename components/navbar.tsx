@@ -8,7 +8,7 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { RootState } from "../redux/store";
 import { useSelector, useDispatch } from "react-redux";
-import LogoSRC from "../public/favicon.ico";
+import LogoSRC from "../public/cat.png";
 
 import { change } from "../redux/menu/menu";
 import { useRouter } from "next/router";
@@ -33,8 +33,8 @@ const ImageStyle = styled(Image)`
 
 const Wrapper = styled.div`
   /* background: ${(props) => props.theme.navBackground}; */
-  background: ${(props) => props.theme.primaryColor};
-  color: ${(props) => props.theme.navColor};
+  background: ${(props) => props.theme.primary};
+  color: ${(props) => props.theme.secondary};
   height: auto;
   padding: 20px 0px;
   position: fixed;
@@ -42,7 +42,7 @@ const Wrapper = styled.div`
   top: 0;
   width: 100%;
   @media only screen and (max-width: 768px) {
-    padding: 5px 0px;
+    padding: 18px 0px;
   }
 `;
 const Content = styled.div`
@@ -86,7 +86,12 @@ const Logo = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  align-items: center;
+  align-items: flex-start;
+  a {
+    color: ${(props) => props.theme.accent};
+    font-weight: 700;
+    font-size: 20px;
+  }
 `;
 const SearchStyle = styled.div`
   width: 100%;
@@ -99,7 +104,7 @@ const Menu = styled.ul<menuProps>`
     position: absolute;
 
     height: 100vh;
-    background: #4d4d4d;
+    background: ${(props) => props.theme.swatches2};
     top: 120px;
     width: 100%;
     left: ${(props) => (props.open ? "0" : "-120%")};
@@ -123,7 +128,7 @@ const MenuItem = styled.li`
   a {
     text-decoration: none;
     display: block;
-    color: ${(props) => props.theme.navColor};
+    color: ${(props) => props.theme.secondary};
     transition: color 200ms;
   }
   @media only screen and (max-width: 768px) {
@@ -173,7 +178,8 @@ const Navbar = () => {
         <Logo>
           <Link href="/">
             <a>
-              <Image priority src={LogoSRC} height={50} width={80} layout="fixed" alt="logo" objectFit="contain"></Image>
+              Sashimeomeo
+              {/* <Image priority src={LogoSRC} height={50} width={80} layout="fixed" alt="logo" objectFit="contain"></Image> */}
             </a>
             {/* <ImageStyle src="/vercel.svg" height={50} width={80} layout="fixed"></ImageStyle> */}
           </Link>

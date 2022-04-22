@@ -11,8 +11,6 @@ const NumberControl = dynamic(() => import("../components/numberInput"));
 import CartEvents from "../utils/storage";
 import formatEvents from "../utils/format";
 const Wrapper = styled.div`
-  width: 95%;
-  margin: 0 auto;
   display: flex;
   overflow: hidden;
   justify-content: center;
@@ -39,8 +37,10 @@ const CartCollateral = styled.div`
   flex-basis: 600px;
   padding: 10px;
   margin: 5px;
-  background: #5c5f66;
-  min-height: 400px;
+  background: #373a40;
+  /* background: ${(props) => props.theme.swatches}; */
+  color: ${(props) => props.theme.secondary};
+  min-height: 300px;
   @media only screen and (max-width: 768px) {
     width: 100%;
   }
@@ -144,7 +144,7 @@ function Cart() {
         verticalSpacing="xs"
         fontSize={"xs"}
         sx={(theme) => ({
-          backgroundColor: theme.colors.dark[3],
+          backgroundColor: theme.colors.dark[4],
           color: theme.colors.cyan[1],
         })}
       >
@@ -166,7 +166,7 @@ function Cart() {
           <p>{totalAllProducts()}</p>
         </div>
         <div className="payment">
-          <Button fullWidth color={"dark"}>
+          <Button fullWidth color={"red"}>
             ORDER
           </Button>
         </div>

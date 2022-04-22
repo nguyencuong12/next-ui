@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   padding-top: 20px;
   align-items: center;
-  background: #323232;
+  background: ${(props) => props.theme.productColor};
   margin: 15px;
   .chips {
     position: absolute;

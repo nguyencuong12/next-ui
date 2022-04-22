@@ -19,7 +19,8 @@ export const SectionMixin = ({}) => css`
     font-size: 30px;
     font-weight: 600;
     position: relative;
-    color: ${(props) => props.theme.footerBackground};
+    /* color: ${(props) => props.theme.footerBackground}; */
+    color: #000;
     ::after {
       content: "";
       /* display: block; */
@@ -29,7 +30,8 @@ export const SectionMixin = ({}) => css`
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      background: ${(props) => props.theme.footerBackground};
+      /* background: ${(props) => props.theme.footerBackground}; */
+      background: #000;
     }
     @media only screen and (max-width: 768px) {
       font-size: 24px;
@@ -56,7 +58,7 @@ const SectionPolicy = styled.section`
   color: #fff;
   min-height: 360px;
   /* background: #333333; */
-  background: ${(props) => props.theme.policyBackground};
+  background: ${(props) => props.theme.swatches2};
   display: flex;
   justify-content: center;
   align-items: flex-start;
