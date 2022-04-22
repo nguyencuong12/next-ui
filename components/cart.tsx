@@ -102,7 +102,9 @@ function Cart() {
 
   useEffect(() => {
     const listCarts = JSON.parse(CartEvents.get()!);
-    setCarts(listCarts);
+    if (listCarts) {
+      setCarts(listCarts);
+    }
     window.addEventListener("storage", () => {
       setCarts(JSON.parse(CartEvents.get()!));
     });
