@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   .detail {
     border: 1px solid black;
     flex: 1;
-    margin: 10px;
+
     background: ${(props) => props.theme.productColor};
     color: ${(props) => props.theme.secondary};
     border-radius: 10px;
@@ -32,7 +32,10 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 50px 0px;
-    gap: 1em;
+    /* gap: 1em; */
+    * {
+      margin: 0.5em;
+    }
 
     .title {
       font-size: 20px;
@@ -47,11 +50,7 @@ const Wrapper = styled.div`
     .controls {
       width: 90%;
     }
-    @supports not (gap: 1em) {
-      * {
-        margin: 1em;
-      }
-    }
+
     @media only screen and (max-width: 768px) {
       width: 98%;
     }

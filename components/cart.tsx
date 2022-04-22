@@ -10,6 +10,8 @@ import cartInterface from "../interfaces/cart";
 const NumberControl = dynamic(() => import("../components/numberInput"));
 import CartEvents from "../utils/storage";
 import formatEvents from "../utils/format";
+import { useRouter } from "next/router";
+
 const Wrapper = styled.div`
   display: flex;
   overflow: hidden;
@@ -72,6 +74,7 @@ const ProductWrapper = styled.div`
 const onDeleteItem = (id: string) => {
   CartEvents.deleteItem(id);
 };
+
 const product = (element: cartInterface): ReactNode => {
   return (
     <ProductWrapper>
@@ -95,6 +98,7 @@ function Cart() {
   // const [portfolioData, setPortfoloioData] = useState<IProject[] | []>([])
 
   const [carts, setCarts] = useState<cartInterface[] | []>([]);
+  const router = useRouter();
 
   useEffect(() => {
     const listCarts = JSON.parse(CartEvents.get()!);
@@ -103,6 +107,10 @@ function Cart() {
       setCarts(JSON.parse(CartEvents.get()!));
     });
   }, []);
+
+  const onHandleOrder = () => {
+    router.push("/order/test");
+  };
   // useEffect(() => {
   //   console.log("CARTS CHANGE !!!", carts);
   // }, [carts]);
@@ -168,7 +176,7 @@ function Cart() {
           <p>{totalAllProducts()}</p>
         </div>
         <div className="payment">
-          <Button fullWidth color={"red"}>
+          <Button fullWidth color={"red"} onClick={onHandleOrder}>
             ORDER
           </Button>
         </div>
