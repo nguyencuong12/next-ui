@@ -9,6 +9,6 @@ module.exports = {
     serverComponents: true,
   },
   images: {
-    domains: ["cdn.tgdd.vn"],
+    domains: ["cdn.tgdd.vn", "api.sashimeomeo.com"],
   },
 };
