@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Button, Table, ActionIcon } from "@mantine/core";
 import { JSXElementConstructor, ReactNode } from "react";
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import { Trash } from "tabler-icons-react";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import cartInterface from "../interfaces/cart";
+const CustomButton = dynamic(() => import("../components/actionButton"));
 const NumberControl = dynamic(() => import("../components/numberInput"));
 import CartEvents from "../utils/storage";
 import formatEvents from "../utils/format";
 import { useRouter } from "next/router";
+import { SweetAlert } from "./sweetAlert";
 
 const Wrapper = styled.div`
   display: flex;
@@ -41,7 +43,7 @@ const CartCollateral = styled.div`
   flex-basis: 600px;
   padding: 10px;
   margin: 5px;
-  background: #373a40;
+  background: ${(props) => props.theme.productColor};
   /* background: ${(props) => props.theme.swatches}; */
   color: ${(props) => props.theme.secondary};
   min-height: 300px;
@@ -72,21 +74,9 @@ const ProductWrapper = styled.div`
 `;
 
 const onDeleteItem = (id: string) => {
-  CartEvents.deleteItem(id);
-};
+  SweetAlert.onConfirmDelete(id);
 
-const product = (element: cartInterface): ReactNode => {
-  return (
-    <ProductWrapper>
-      <ActionIcon size={"md"} variant="transparent" color={"red"} onClick={() => onDeleteItem(element.id)}>
-        <Trash />
-      </ActionIcon>
-      <Image src={element.image} height={150} width={150}></Image>
-      <Link href="/">
-        <a>{element.title}</a>
-      </Link>
-    </ProductWrapper>
-  );
+  // CartEvents.deleteItem(id);
 };
 
 const controlNumber = (element: cartInterface) => {
@@ -99,7 +89,20 @@ function Cart() {
 
   const [carts, setCarts] = useState<cartInterface[] | []>([]);
   const router = useRouter();
-
+  const themeContext = useContext(ThemeContext);
+  const product = (element: cartInterface): ReactNode => {
+    return (
+      <ProductWrapper>
+        <ActionIcon size={"md"} variant="transparent" style={{ color: themeContext.accent }} onClick={() => onDeleteItem(element.id)}>
+          <Trash />
+        </ActionIcon>
+        <Image src={element.image} height={150} width={150}></Image>
+        <Link href="/">
+          <a>{element.title}</a>
+        </Link>
+      </ProductWrapper>
+    );
+  };
   useEffect(() => {
     const listCarts = JSON.parse(CartEvents.get()!);
     if (listCarts) {
@@ -156,8 +159,8 @@ function Cart() {
         verticalSpacing="xs"
         fontSize={"xs"}
         sx={(theme) => ({
-          backgroundColor: theme.colors.dark[4],
-          color: theme.colors.cyan[1],
+          backgroundColor: themeContext.productColor,
+          color: themeContext.secondary,
         })}
       >
         <thead>
@@ -178,9 +181,7 @@ function Cart() {
           <p>{totalAllProducts()}</p>
         </div>
         <div className="payment">
-          <Button fullWidth color={"red"} onClick={onHandleOrder}>
-            ORDER
-          </Button>
+          <CustomButton title="Order" fullWidth={true}></CustomButton>
         </div>
       </CartCollateral>
     </Wrapper>

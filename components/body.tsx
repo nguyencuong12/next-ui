@@ -4,7 +4,7 @@ const Wrapper = styled.div`
   position: relative;
   top: 126px;
   /* border: 1px solid red; */
-  background: ${(props) => props.theme.secondary};
+  background: ${(props) => props.theme.primaryColor};
   color: #000;
   min-height: 100vh;
 `;

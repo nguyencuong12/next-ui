@@ -20,7 +20,7 @@ export const SectionMixin = ({}) => css`
     font-weight: 600;
     position: relative;
     /* color: ${(props) => props.theme.footerBackground}; */
-    color: #000;
+    color: ${(props) => props.theme.accent};
     ::after {
       content: "";
       /* display: block; */
@@ -31,7 +31,7 @@ export const SectionMixin = ({}) => css`
       left: 50%;
       transform: translateX(-50%);
       /* background: ${(props) => props.theme.footerBackground}; */
-      background: #000;
+      background: ${(props) => props.theme.accent};
     }
     @media only screen and (max-width: 768px) {
       font-size: 24px;

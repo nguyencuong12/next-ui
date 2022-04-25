@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
+import React, { useState, useEffect, useContext } from "react";
+import styled, { css, ThemeContext } from "styled-components";
 
 import { Input, Badge, Burger, ActionIcon } from "@mantine/core";
 import { Search, ShoppingCart } from "tabler-icons-react";
@@ -13,6 +13,7 @@ import LogoSRC from "../public/cat.png";
 import { change } from "../redux/menu/menu";
 import { useRouter } from "next/router";
 import { useViewportSize } from "@mantine/hooks";
+
 const ProductMenu = dynamic(() => import("../components/productMenu"));
 
 interface menuProps {
@@ -41,6 +42,8 @@ const Wrapper = styled.div`
   z-index: 200;
   top: 0;
   width: 100%;
+  border-bottom: 0.5px solid #fff;
+
   @media only screen and (max-width: 768px) {
     padding: 18px 0px;
   }
@@ -60,10 +63,6 @@ const Content = styled.div`
       margin-right: 0;
     }
   }
-
-  /* @supports not (gap: 20px) {
-   
-  } */
 `;
 const Center = styled.div`
   display: flex;
@@ -159,26 +158,13 @@ const Navbar = () => {
   const title = opened ? "Close navigation" : "Open navigation";
   const open = useSelector((state: RootState) => state.menuReducer.open);
   const dispatch = useDispatch();
-  const { height, width } = useViewportSize();
-
-  const router = useRouter();
+  const themeContext = useContext(ThemeContext);
   const onSubmitSearch = (event: any) => {
     if (event.keyCode === 13) {
       console.log("ENTER KEY PRESS");
     }
   };
-  // useEffect(() => {
-  //   const handleRouteChange = () => {
-  //     if (window.innerWidth <= 768) {
-  //       dispatch(change());
-  //     }
-  //   };
-  //   router.events.on("routeChangeStart", handleRouteChange);
 
-  //   return () => {
-  //     router.events.off("routeChangeStart", handleRouteChange);
-  //   };
-  // }, []);
   const setOpenMenu = () => {
     dispatch(change());
   };
@@ -194,7 +180,7 @@ const Navbar = () => {
             </a>
             {/* <ImageStyle src="/vercel.svg" height={50} width={80} layout="fixed"></ImageStyle> */}
           </Link>
-          <BurgerStyle color="#fff" opened={open} onClick={setOpenMenu} title={title} />
+          <BurgerStyle color={themeContext.accent} opened={open} onClick={setOpenMenu} title={title} />
           {/* <div>aa</div> */}
         </Logo>
         <Center>
@@ -226,7 +212,7 @@ const Navbar = () => {
           <ControlItem>
             <Link href="/cart">
               <a>
-                <ActionIcon size="lg" radius="xl" variant="filled" style={{ color: "#fff", background: "#3e3e3f" }}>
+                <ActionIcon size="lg" radius="xl" variant="filled" style={{ color: "#000", background: themeContext.accent }}>
                   <ShoppingCart size={25} />
                 </ActionIcon>
               </a>

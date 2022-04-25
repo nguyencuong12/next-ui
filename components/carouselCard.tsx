@@ -22,7 +22,7 @@ const ViewAll = styled.div`
   font-size: 18px;
 
   a {
-    color: #000;
+    color: ${(props) => props.theme.secondary};
     font-weight: 600;
     position: relative;
     /* position: absolute; */

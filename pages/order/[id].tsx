@@ -7,7 +7,12 @@ import cartInterface from "../../interfaces/cart";
 import CartEvents from "../../utils/storage";
 import formatEvents from "../../utils/format";
 import { addAbortSignal } from "stream";
-
+import { orderProducts, userInfoInterface, orderInterface } from "../../interfaces/orderProducts";
+import { v4 as uuidv4 } from "uuid";
+import { guestAPI } from "../../api";
+import { SweetAlert } from "../../components/sweetAlert";
+import { LoadingOverlay } from "@mantine/core";
+import LoadingComponent from "../../components/loading";
 const Wrapper = styled.div`
   display: flex;
   /* align-items: */
@@ -63,6 +68,15 @@ const Total = styled.div`
 const OrderProducts = () => {
   const [carts, setCarts] = useState<cartInterface[] | []>([]);
   const [totalOrder, setTotalOrder] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState<userInfoInterface>({
+    FullName: "",
+    PhoneNumber: "",
+    Note: "",
+    Email: "",
+    Address: "",
+  });
+
   useEffect(() => {
     const listCarts = JSON.parse(CartEvents.get()!);
     setCarts(listCarts);
@@ -80,12 +94,24 @@ const OrderProducts = () => {
     return formatEvents.priceVND(result);
     // return result;
   };
-  const handleOrder = () => {
-    let test = {
-      productInfo: carts,
-      userInfo: "userInfo",
+  const onFormChange = (model: string, e: any) => {
+    setFormData({
+      ...formData,
+      [model]: e.target.value,
+    });
+  };
+  const handleOrder = async () => {
+    let infoOrder: orderProducts = {
+      userInfo: formData,
+      orderInfo: carts,
+      totalPriceOrders: renderTotalPrice(),
     };
-    console.log("test", test);
+    setLoading(true);
+    let response = await guestAPI.order(infoOrder);
+    if (response) {
+      setLoading(false);
+      SweetAlert.onSuccess("Order Products Success !!");
+    }
   };
   const renderProductInfo = carts.map((instance) => (
     <ProductInfoContent key={instance.id}>
@@ -95,15 +121,41 @@ const OrderProducts = () => {
       <div className="product-price">{totalPriceWithAmount(instance.price, instance.amount)}</div>
     </ProductInfoContent>
   ));
-
   return (
     <Wrapper>
+      <LoadingOverlay visible={loading}></LoadingOverlay>
       <UserInfo>
         <h4>USER INFORMATION</h4>
-        <Input icon={<At />} placeholder="Ho ten" />
-        <Input icon={<Phone />} placeholder="SDT" />
-        <Input icon={<Mail />} placeholder="Email" />
-        <Input icon={<AddressBook />} placeholder="Dia Chi" />
+        <Input
+          icon={<At />}
+          placeholder="Ho ten"
+          onChange={(e: any) => {
+            onFormChange("FullName", e);
+          }}
+        />
+
+        <Input
+          icon={<Phone />}
+          placeholder="SDT"
+          onChange={(e: any) => {
+            onFormChange("PhoneNumber", e);
+          }}
+        />
+        <Input
+          icon={<Mail />}
+          placeholder="Email"
+          onChange={(e: any) => {
+            onFormChange("Email", e);
+          }}
+        />
+
+        <Input
+          icon={<AddressBook />}
+          placeholder="Dia Chi"
+          onChange={(e: any) => {
+            onFormChange("Address", e);
+          }}
+        />
         <Textarea
           sx={(theme) => ({
             backgroundColor: theme.colors.gray[0],
@@ -112,6 +164,9 @@ const OrderProducts = () => {
           })}
           placeholder="Ghi chu"
           label="Ghi chu"
+          onChange={(e: any) => {
+            onFormChange("Note", e);
+          }}
         />
       </UserInfo>
       <ProductInfo>

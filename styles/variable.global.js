@@ -14,9 +14,7 @@ export const layoutVariables = {
   footerBackground: "#424243",
   primaryColor: "#555657",
   productColor: "#323232",
-
   bodyBackground: "#fff",
-
   primary: "#041C32",
   accent: "#ECB365",
   secondary: "#fff",

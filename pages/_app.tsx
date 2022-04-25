@@ -11,7 +11,6 @@ import NextNProgress from "nextjs-progressbar";
 import { store } from "../redux/store";
 import { Provider } from "react-redux";
 import { layoutVariables } from "../styles/variable.global";
-
 const Navbar = dynamic(() => import("../components/navbar"));
 const Footer = dynamic(() => import("../components/footer"));
 const Body = dynamic(() => import("../components/body"));
@@ -23,6 +22,16 @@ const Layout = styled.div`
 const theme = {
   main: "mediumseagreen",
 };
+const WrapperLoading = styled.div`
+  width: 100%;
+  height: 100vh;
+  border: 1px solid red;
+  position: absolute;
+  z-index: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

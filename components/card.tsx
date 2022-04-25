@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import { Button, Group } from "@mantine/core";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 const CustomButton = dynamic(() => import("../components/actionButton"));
 
 const Wrapper = styled.div`
@@ -60,6 +61,7 @@ interface cardProps {
 
 const CardComponent = (props: cardProps) => {
   const { title, description, image, price, chips } = props;
+  const router = useRouter();
 
   return (
     <Wrapper>
@@ -69,8 +71,18 @@ const CardComponent = (props: cardProps) => {
       <div className="description-card">{description}</div>
       <div className="price-card">{price}</div>
       <Group style={{ padding: "10px" }} noWrap={true}>
-        <CustomButton title="View"></CustomButton>
-        <CustomButton title="Add to cart"></CustomButton>
+        <CustomButton
+          title="View"
+          onClick={() => {
+            router.push("/products/asd");
+          }}
+        ></CustomButton>
+        <CustomButton
+          title="Add to cart"
+          onClick={() => {
+            router.push("/cart");
+          }}
+        ></CustomButton>
       </Group>
     </Wrapper>
   );
