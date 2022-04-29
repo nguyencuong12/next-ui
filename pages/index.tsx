@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
 import dynamic from "next/dynamic";
 import styled, { css } from "styled-components";
-import { addAbortSignal } from "stream";
 
+import { Product_API } from "../api/product";
 const Loading = dynamic(() => import("../components/loading"));
 const Card = dynamic(() => import("../components/card"));
 const Carousel = dynamic(() => import("../components/carousel"));
@@ -96,8 +95,12 @@ type HomeProps = {
 function Home({ results }: HomeProps) {
   const [products, setProducts] = useState<arrProps[] | []>([]);
   const fetch = async () => {
-    let response = await axios.get("https://api.sashimeomeo.com/product");
-    setProducts(response.data.products.product);
+    let productData = await getProductsFromResponse();
+    setProducts(productData);
+  };
+  const getProductsFromResponse = async () => {
+    let res = await Product_API.fetch();
+    return res.data.products.product;
   };
   useEffect(() => {
     fetch();
@@ -123,7 +126,7 @@ function Home({ results }: HomeProps) {
         <div className="content">
           {products.length > 0 ? (
             products.map((instance) => {
-              return <Card id={instance._id} key={instance._id} title={instance.title} description={instance.description} image={"/cuong1.png"} price={instance.price} chips={""}></Card>;
+              return <Card id={instance._id} key={instance._id} title={instance.title} description={instance.description} image={instance.image} price={instance.price} chips={""}></Card>;
             })
           ) : (
             <Loading></Loading>
@@ -138,32 +141,8 @@ function Home({ results }: HomeProps) {
         <div className="title">Feature Products</div>
         <CarouselCard></CarouselCard>
       </Section>
-
-      {/* <Section className="feature-products">
-        <div className="title">Feature</div>
-        <div className="content">
-          {products.length > 0 ? (
-            products.map((instance) => {
-              return <Card id={instance._id} key={instance._id} title={instance.title} description={instance.description} image={"/cuong1.png"} price={instance.price} chips={""}></Card>;
-            })
-          ) : (
-            <Loading></Loading>
-          )}
-        </div>
-      </Section> */}
     </Wrapper>
   );
 }
 
-// This gets called on every request
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   let response = await axios.get("https://api.sashimeomeo.com/product");
-//   const data = response.data.products.product;
-
-//   return {
-//     props: {
-//       results: data,
-//     },
-//   };
-// };
 export default Home;

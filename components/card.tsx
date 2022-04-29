@@ -28,6 +28,7 @@ const Wrapper = styled.div`
     padding: 0px 10px;
     border-radius: 10px;
     color: #ef9704;
+    z-index: 100;
   }
 
   cursor: pointer;
@@ -62,7 +63,7 @@ interface cardProps {
 const CardComponent = (props: cardProps) => {
   const { title, description, image, price, chips } = props;
   const router = useRouter();
-
+  console.log("IMAGE", image);
   return (
     <Wrapper>
       <div className="chips">HOT</div>

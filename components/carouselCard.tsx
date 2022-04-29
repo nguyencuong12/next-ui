@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -10,6 +10,7 @@ import styled from "styled-components";
 import { EffectFade, Navigation, Pagination } from "swiper";
 
 import Link from "next/link";
+import { Product_API } from "../api/product";
 // import "./styles.css";
 const Wrapper = styled.div`
   position: relative;
@@ -44,9 +45,25 @@ const ViewAll = styled.div`
   }
 `;
 
+interface propsCarousel {
+  hotProducts: [];
+  featureProducts: [];
+}
+
 const Card = dynamic(() => import("../components/card"));
 
 export default function CarouselCard() {
+  useEffect(() => {
+    fetchHotProducts();
+  }, []);
+  const fetchHotProducts = async () => {
+    let hotProducts = await getHotProducts();
+    console.log("HOT PRODUCTS", hotProducts);
+  };
+  const getHotProducts = async () => {
+    let response = await Product_API.fetchHotProducts();
+    return response.data.products;
+  };
   return (
     <Wrapper>
       <ViewAll>
@@ -54,7 +71,6 @@ export default function CarouselCard() {
           <a>View All</a>
         </Link>
       </ViewAll>
-
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
