@@ -87,7 +87,7 @@ export default function CarouselCard(props: carouselCardProps) {
         return (
           <SwiperSlide key={instance._id}>
             {" "}
-            <Card title={instance.title} description={instance.description} image={instance.image} price={instance.price} chips={""} id={instance._id}></Card>
+            <Card title={instance.title} description={instance.description} image={instance.image} price={instance.price} chips={""} id={instance._id} _id={instance._id}></Card>
           </SwiperSlide>
         );
       })
