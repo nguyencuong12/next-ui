@@ -5,11 +5,12 @@ import { Button, Group } from "@mantine/core";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 const CustomButton = dynamic(() => import("../components/actionButton"));
+import { useTranslation } from "react-i18next";
 
 const Wrapper = styled.div`
   position: relative;
   height: 450px;
-  width: 300px;
+  width: 400px;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -18,6 +19,7 @@ const Wrapper = styled.div`
   align-items: center;
   background: ${(props) => props.theme.productColor};
   margin: 15px;
+
   .chips {
     position: absolute;
     top: 10px;
@@ -58,28 +60,36 @@ interface cardProps {
   price: string;
   chips: string;
   id: string;
+  _id: string;
 }
 
 const CardComponent = (props: cardProps) => {
-  const { title, description, image, price, chips } = props;
+  const { t, i18n } = useTranslation();
+  const { title, description, image, price, chips, _id, id } = props;
   const router = useRouter();
-  console.log("IMAGE", image);
+  const onHandleClick = (href: string) => {
+    router.push("products/" + href);
+  };
   return (
-    <Wrapper>
-      <div className="chips">HOT</div>
+    <Wrapper
+      onClick={() => {
+        onHandleClick(_id);
+      }}
+    >
+      {chips && <div className="chips">{chips}</div>}
       <Image alt="product-image" src={image} width="250" height="300" objectFit="cover"></Image>
       <div className="title-card">{title}</div>
       <div className="description-card">{description}</div>
       <div className="price-card">{price}</div>
       <Group style={{ padding: "10px" }} noWrap={true}>
         <CustomButton
-          title="View"
+          title={t("viewProduct")}
           onClick={() => {
             router.push("/products/asd");
           }}
         ></CustomButton>
         <CustomButton
-          title="Add to cart"
+          title={t("addToCart")}
           onClick={() => {
             router.push("/cart");
           }}

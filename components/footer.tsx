@@ -17,11 +17,13 @@ const Content = styled.div`
   justify-content: space-between;
   ul {
     list-style: none;
+
     font-size: 26px;
     font-weight: 700;
   }
   li {
     font-size: 16px;
+
     font-weight: 500;
   }
   @media only screen and (max-width: 768px) {

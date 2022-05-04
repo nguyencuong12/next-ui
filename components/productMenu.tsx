@@ -6,8 +6,11 @@ import { useRouter } from "next/router";
 const MenuStyle = styled.div`
   cursor: pointer;
 `;
-
-const MenuProducts = () => {
+interface MenuProductProps {
+  title: string;
+}
+const MenuProducts = (props: MenuProductProps) => {
+  const { title } = props;
   const router = useRouter();
   const onNavigate = (event: any) => {
     event.preventDefault();
@@ -19,7 +22,7 @@ const MenuProducts = () => {
       delay={100}
       control={
         <MenuStyle onClick={onNavigate}>
-          Products
+          {title}
           {/* <Link href="/product"> */}
         </MenuStyle>
       }

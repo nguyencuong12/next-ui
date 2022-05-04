@@ -9,6 +9,9 @@ const Card = dynamic(() => import("../components/card"));
 const Carousel = dynamic(() => import("../components/carousel"));
 const CarouselCard = dynamic(() => import("../components/carouselCard"));
 const PolicyItem = dynamic(() => import("../components/policy"));
+const HotCarousel = dynamic(() => import("../components/hotCarousel"));
+const FeatureCarousel = dynamic(() => import("../components/featureCarousel"));
+import { useTranslation } from "react-i18next";
 
 // const Pagination = dynamic(() => import("../components/pagination"));
 export const SectionMixin = ({}) => css`
@@ -94,6 +97,8 @@ type HomeProps = {
 };
 function Home({ results }: HomeProps) {
   const [products, setProducts] = useState<arrProps[] | []>([]);
+  const { t, i18n } = useTranslation();
+
   const fetch = async () => {
     let productData = await getProductsFromResponse();
     setProducts(productData);
@@ -115,31 +120,19 @@ function Home({ results }: HomeProps) {
         <Carousel></Carousel>
       </Section>
       <SectionPolicy>
-        <PolicyItem image="/box.png" description="Order"></PolicyItem>
-        <PolicyItem image="/cat.png" description="Cats"></PolicyItem>
-        <PolicyItem image="/pet-food1.png" description="Foods"></PolicyItem>
-        <PolicyItem image="/vitamins.png" description="Vitamins"></PolicyItem>
+        <PolicyItem href="/" image="/box.png" description={t("orders")}></PolicyItem>
+        <PolicyItem href="/animals/cat" image="/cat.png" description={t("cat")}></PolicyItem>
+        <PolicyItem href="/product/food" image="/pet-food1.png" description={t("foods")}></PolicyItem>
+        <PolicyItem href="/product/vitamin" image="/vitamins.png" description={t("vitamin")}></PolicyItem>
       </SectionPolicy>
 
-      <Section className="hot-products">
-        <div className="title">TESTING : !!!</div>
-        <div className="content">
-          {products.length > 0 ? (
-            products.map((instance) => {
-              return <Card id={instance._id} key={instance._id} title={instance.title} description={instance.description} image={instance.image} price={instance.price} chips={""}></Card>;
-            })
-          ) : (
-            <Loading></Loading>
-          )}
-        </div>
+      <Section>
+        <div className="title">{t("hotProducts")}</div>
+        <HotCarousel></HotCarousel>
       </Section>
       <Section>
-        <div className="title">Hot Products</div>
-        <CarouselCard></CarouselCard>
-      </Section>
-      <Section>
-        <div className="title">Feature Products</div>
-        <CarouselCard></CarouselCard>
+        <div className="title">{t("featureProducts")}</div>
+        <FeatureCarousel></FeatureCarousel>
       </Section>
     </Wrapper>
   );

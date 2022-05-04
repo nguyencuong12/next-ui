@@ -15,5 +15,19 @@ let Product_API = {
       method: "POST",
     });
   },
+  fetchFeatureProducts: async () => {
+    return await axios({
+      url: API_URL + "feature",
+      method: "POST",
+    });
+  },
+  fetchProductByID: async (id: string) => {
+    return await axios({
+      // /site/siteDashboard/:id
+      url: API_URL + id,
+      method: "GET",
+    });
+    // product
+  },
 };
 export { Product_API };

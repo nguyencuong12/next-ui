@@ -1,17 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
-// Import Swiper React components
+
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
-
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import { EffectFade, Navigation, Pagination } from "swiper";
-
 import Link from "next/link";
 import { Product_API } from "../api/product";
-// import "./styles.css";
+const Card = dynamic(() => import("../components/card"));
 const Wrapper = styled.div`
   position: relative;
   padding: 20px 0px;
@@ -44,14 +40,6 @@ const ViewAll = styled.div`
     }
   }
 `;
-
-interface propsCarousel {
-  hotProducts: [];
-  featureProducts: [];
-}
-
-const Card = dynamic(() => import("../components/card"));
-
 interface productProps {
   title: string;
   image: string;
@@ -62,38 +50,19 @@ interface productProps {
   type: string;
   id: string;
 }
-interface carouselCardProps {
-  type: string;
-}
-export default function CarouselCard(props: carouselCardProps) {
+const FeatureCarousel = () => {
   const [products, setProducts] = useState<productProps[]>([]);
-  const { type } = props;
-
   useEffect(() => {
-    Promise.all([fetchHotProducts()]).then(() => {});
+    getProducts();
   }, []);
-  const fetchHotProducts = async () => {
-    let hotProducts = await getHotProducts();
-    setProducts(hotProducts);
+  const getProducts = async () => {
+    let featureProducts = await getProductsFromResponse();
+    setProducts(featureProducts);
   };
-  const getHotProducts = async () => {
-    let response = await Product_API.fetchHotProducts();
+  const getProductsFromResponse = async () => {
+    let response = await Product_API.fetchFeatureProducts();
     return response.data.products;
   };
-  const RenderForType = (type: string) => {
-    return (
-      products &&
-      products.map((instance) => {
-        return (
-          <SwiperSlide key={instance._id}>
-            {" "}
-            <Card title={instance.title} description={instance.description} image={instance.image} price={instance.price} chips={""} id={instance._id}></Card>
-          </SwiperSlide>
-        );
-      })
-    );
-  };
-
   return (
     <Wrapper>
       <ViewAll>
@@ -129,17 +98,17 @@ export default function CarouselCard(props: carouselCardProps) {
         modules={[Pagination, Navigation, EffectFade]}
         className="mySwiper"
       >
-        {RenderForType(type)}
-        {/* {products &&
+        {products &&
           products.map((instance) => {
             return (
               <SwiperSlide key={instance._id}>
-                {" "}
                 <Card title={instance.title} description={instance.description} image={instance.image} price={instance.price} chips={""} id={instance._id}></Card>
               </SwiperSlide>
             );
-          })} */}
+          })}
       </Swiper>
     </Wrapper>
   );
-}
+};
+
+export default FeatureCarousel;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import styled, { css, ThemeContext } from "styled-components";
 
-import { Input, Badge, Burger, ActionIcon } from "@mantine/core";
+import { Input, Badge, Burger, ActionIcon, Switch } from "@mantine/core";
 import { Search, ShoppingCart } from "tabler-icons-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -13,6 +13,7 @@ import LogoSRC from "../public/cat.png";
 import { change } from "../redux/menu/menu";
 import { useRouter } from "next/router";
 import { useViewportSize } from "@mantine/hooks";
+import { useTranslation } from "react-i18next";
 
 const ProductMenu = dynamic(() => import("../components/productMenu"));
 
@@ -134,7 +135,9 @@ const MenuItem = styled.li`
     color: #a6a6a6 !important;
   }
   ${LiStyle({})};
-  width: 100%;
+  border: 0.5px solid white;
+  text-align: center;
+  min-width: 120px;
   a {
     text-decoration: none;
     display: block;
@@ -144,16 +147,25 @@ const MenuItem = styled.li`
   @media only screen and (max-width: 768px) {
     padding: 10px;
     margin: 0;
+
+    width: 100%;
   }
 `;
 const Control = styled.ul`
   ${FlexRow({})};
 `;
 const ControlItem = styled.li`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 80px;
+
   ${LiStyle({})};
 `;
 
 const Navbar = () => {
+  const { t, i18n } = useTranslation();
+  const [check, setCheck] = useState(false);
   const [opened, setOpened] = useState(false);
   const title = opened ? "Close navigation" : "Open navigation";
   const open = useSelector((state: RootState) => state.menuReducer.open);
@@ -164,10 +176,25 @@ const Navbar = () => {
       console.log("ENTER KEY PRESS");
     }
   };
+  useEffect(() => {
+    let language = localStorage.getItem("language");
+
+    if (language === "en") {
+      setCheck(true);
+    } else {
+      setCheck(false);
+    }
+  }, []);
+  useEffect(() => {
+    if (check) {
+      console.log("CHECK", check);
+    }
+  }, [check]);
 
   const setOpenMenu = () => {
     dispatch(change());
   };
+
   return (
     <Wrapper>
       {/* <RenderT></RenderT> */}
@@ -190,26 +217,46 @@ const Navbar = () => {
           <Menu open={open}>
             <MenuItem>
               <Link href="/">
-                <a>Home</a>
+                <a>{t("home")}</a>
               </Link>
             </MenuItem>
             <MenuItem>
               <Link href="/about">
-                <a>About</a>
+                <a>{t("about")}</a>
               </Link>
             </MenuItem>
             <MenuItem>
               <Link href="/contact">
-                <a>Contact</a>
+                <a>{t("contact")}</a>
               </Link>
             </MenuItem>
             <MenuItem>
-              <ProductMenu />
+              <ProductMenu title={t("product")} />
             </MenuItem>
           </Menu>
         </Center>
         <Control>
           <ControlItem>
+            <Switch
+              color="yellow"
+              onLabel="VN"
+              offLabel="US"
+              size="lg"
+              checked={check}
+              onChange={() => {
+                let language = localStorage.getItem("language");
+
+                if (language === "vn") {
+                  localStorage.setItem("language", "en");
+                  i18n.changeLanguage("en");
+                  setCheck(true);
+                } else {
+                  localStorage.setItem("language", "vn");
+                  i18n.changeLanguage("vn");
+                  setCheck(false);
+                }
+              }}
+            />
             <Link href="/cart">
               <a>
                 <ActionIcon size="lg" radius="xl" variant="filled" style={{ color: "#000", background: themeContext.accent }}>
@@ -217,6 +264,17 @@ const Navbar = () => {
                 </ActionIcon>
               </a>
             </Link>
+            {/* <ActionIcon
+              size="lg"
+              radius="xl"
+              variant="filled"
+              style={{ color: "#000", background: themeContext.accent }}
+              onClick={() => {
+                i18n.changeLanguage("vn");
+              }}
+            >
+              <ShoppingCart size={25} />
+            </ActionIcon> */}
           </ControlItem>
         </Control>
       </Content>

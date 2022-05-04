@@ -93,12 +93,12 @@ function Cart() {
   const product = (element: cartInterface): ReactNode => {
     return (
       <ProductWrapper>
-        <ActionIcon size={"md"} variant="transparent" style={{ color: themeContext.accent }} onClick={() => onDeleteItem(element.id)}>
+        <ActionIcon size={"md"} variant="transparent" style={{ color: themeContext.accent, paddingRight: "5px" }} onClick={() => onDeleteItem(element.id)}>
           <Trash />
         </ActionIcon>
-        <Image src={element.image} height={150} width={150}></Image>
+        <Image src={element.image} height={80} width={80} objectFit="cover"></Image>
         <Link href="/">
-          <a>{element.title}</a>
+          <a style={{ paddingLeft: "20px" }}>{element.title}</a>
         </Link>
       </ProductWrapper>
     );

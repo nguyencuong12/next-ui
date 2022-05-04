@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
-
+import { useRouter } from "next/router";
 const Wrapper = styled.div`
   min-height: 120px;
   background: ${(props) => props.theme.accent};
@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   gap: 10px;
   padding: 10px;
   margin: 15px;
+  cursor: pointer;
 
   div {
     font-family: "Square Peg", cursive;
@@ -29,12 +30,22 @@ const Wrapper = styled.div`
 interface propsType {
   image: string;
   description: string;
+  href: string;
 }
 const Policy = (props: propsType) => {
+  const { image, href, description } = props;
+  const router = useRouter();
+  const onHandleClick = (href: string) => {
+    router.push(href);
+  };
   return (
-    <Wrapper>
-      <Image src={props.image} height={60} width={60}></Image>
-      <div>{props.description}</div>
+    <Wrapper
+      onClick={() => {
+        onHandleClick(href);
+      }}
+    >
+      <Image src={image} height={60} width={60}></Image>
+      <div>{description}</div>
     </Wrapper>
   );
 };
