@@ -1,18 +1,18 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Button, Table, ActionIcon } from "@mantine/core";
-import { JSXElementConstructor, ReactNode } from "react";
-import styled, { ThemeContext } from "styled-components";
-import { Trash } from "tabler-icons-react";
-import Link from "next/link";
-import Image from "next/image";
-import dynamic from "next/dynamic";
-import cartInterface from "../interfaces/cart";
-const CustomButton = dynamic(() => import("../components/actionButton"));
-const NumberControl = dynamic(() => import("../components/numberInput"));
-import CartEvents from "../utils/storage";
-import formatEvents from "../utils/format";
-import { useRouter } from "next/router";
-import { SweetAlert } from "./sweetAlert";
+import React, { useEffect, useState, useContext } from 'react';
+import { Button, Table, ActionIcon } from '@mantine/core';
+import { JSXElementConstructor, ReactNode } from 'react';
+import styled, { ThemeContext } from 'styled-components';
+import { Trash } from 'tabler-icons-react';
+import Link from 'next/link';
+import Image from 'next/image';
+import dynamic from 'next/dynamic';
+import cartInterface from '../interfaces/cart';
+const CustomButton = dynamic(() => import('../components/actionButton'));
+const NumberControl = dynamic(() => import('../components/numberInput'));
+import CartEvents from '../utils/storage';
+import formatEvents from '../utils/format';
+import { useRouter } from 'next/router';
+import { SweetAlert } from './sweetAlert';
 
 const Wrapper = styled.div`
   display: flex;
@@ -43,9 +43,9 @@ const CartCollateral = styled.div`
   flex-basis: 600px;
   padding: 10px;
   margin: 5px;
-  background: ${(props) => props.theme.productColor};
-  /* background: ${(props) => props.theme.swatches}; */
-  color: ${(props) => props.theme.secondary};
+  background: ${props => props.theme.productColor};
+  /* background: ${props => props.theme.swatches}; */
+  color: ${props => props.theme.secondary};
   min-height: 300px;
   @media only screen and (max-width: 768px) {
     width: 100%;
@@ -93,12 +93,22 @@ function Cart() {
   const product = (element: cartInterface): ReactNode => {
     return (
       <ProductWrapper>
-        <ActionIcon size={"md"} variant="transparent" style={{ color: themeContext.accent, paddingRight: "5px" }} onClick={() => onDeleteItem(element.id)}>
+        <ActionIcon
+          size={'md'}
+          variant="transparent"
+          style={{ color: themeContext.accent, paddingRight: '5px' }}
+          onClick={() => onDeleteItem(element.id)}
+        >
           <Trash />
         </ActionIcon>
-        <Image src={element.image} height={80} width={80} objectFit="cover"></Image>
+        <Image
+          src={element.image}
+          height={80}
+          width={80}
+          objectFit="cover"
+        ></Image>
         <Link href="/">
-          <a style={{ paddingLeft: "20px" }}>{element.title}</a>
+          <a style={{ paddingLeft: '20px' }}>{element.title}</a>
         </Link>
       </ProductWrapper>
     );
@@ -108,13 +118,13 @@ function Cart() {
     if (listCarts) {
       setCarts(listCarts);
     }
-    window.addEventListener("storage", () => {
+    window.addEventListener('storage', () => {
       setCarts(JSON.parse(CartEvents.get()!));
     });
   }, []);
 
   const onHandleOrder = () => {
-    router.push("/order/test");
+    router.push('/order/test');
   };
   // useEffect(() => {
   //   console.log("CARTS CHANGE !!!", carts);
@@ -128,22 +138,24 @@ function Cart() {
   };
   const totalAllProducts = () => {
     let total: number = 0;
-    carts.map((instance) => {
+    carts.map(instance => {
       total = total + parseFloat(instance.price) * instance.amount;
     });
     return formatVND(total);
 
     // return total.toString();
   };
-  const renderSummary = carts.map((element) => (
+  const renderSummary = carts.map(element => (
     <SummaryWrapper key={element.id}>
       <div className="summary-product">
         {element.title} X {element.amount}
       </div>
-      <div className="summary-price">{totalPrice(element.price, element.amount)}</div>
+      <div className="summary-price">
+        {totalPrice(element.price, element.amount)}
+      </div>
     </SummaryWrapper>
   ));
-  const rows = carts.map((element) => (
+  const rows = carts.map(element => (
     <tr key={element.id}>
       <td>{product(element)}</td>
       <td>{controlNumber(element)}</td>
@@ -157,8 +169,8 @@ function Cart() {
     <Wrapper>
       <TableWrapper
         verticalSpacing="xs"
-        fontSize={"xs"}
-        sx={(theme) => ({
+        fontSize={'xs'}
+        sx={theme => ({
           backgroundColor: themeContext.productColor,
           color: themeContext.secondary,
         })}
@@ -181,7 +193,11 @@ function Cart() {
           <p>{totalAllProducts()}</p>
         </div>
         <div className="payment">
-          <CustomButton title="Order" fullWidth={true}></CustomButton>
+          <CustomButton
+            title="Order"
+            fullWidth={true}
+            onClick={() => onHandleOrder()}
+          ></CustomButton>
         </div>
       </CartCollateral>
     </Wrapper>
