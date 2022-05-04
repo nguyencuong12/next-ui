@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import Image from "next/image";
-import { Button } from "@mantine/core";
-import CartEvents from "../../utils/storage";
-import { v4 as uuidv4 } from "uuid";
-import { useRouter } from "next/router";
-import { Product_API } from "../../api/product";
-import { useTranslation } from "react-i18next";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import Image from 'next/image';
+import { Button } from '@mantine/core';
+import CartEvents from '../../utils/storage';
+import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from 'next/router';
+import { Product_API } from '../../api/product';
+import { useTranslation } from 'react-i18next';
+import { SweetAlert } from '../../components/sweetAlert';
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,17 +18,15 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: ${(props) => props.theme.productColor};
+    background: ${props => props.theme.productColor};
     border-radius: 10px;
     margin: 5px;
     padding: 10px;
   }
   .detail {
-    border: 1px solid black;
     flex: 1;
-
-    background: ${(props) => props.theme.productColor};
-    color: ${(props) => props.theme.secondary};
+    background: ${props => props.theme.productColor};
+    color: ${props => props.theme.secondary};
     border-radius: 10px;
     margin: 5px;
     min-height: 400px;
@@ -48,10 +47,10 @@ const Wrapper = styled.div`
       font-weight: 600;
     }
     .description {
-      border: 1px solid white;
       border-radius: 10px;
       padding: 20px;
       width: 400px;
+      text-align: center;
     }
     .controls {
       width: 90%;
@@ -109,6 +108,9 @@ const ProductView = () => {
       amount: 1,
     };
     CartEvents.add(products);
+    SweetAlert.onSuccess('Add To Cart Complete !!!').then(() => {
+      router.push('/cart');
+    });
     // localStorage.setItem("addToCart", JSON.stringify(tempObject));
   };
   return (
@@ -116,7 +118,13 @@ const ProductView = () => {
       {product && (
         <Wrapper>
           <div className="image">
-            <Image alt="product-image" src={product.image} width={600} height={600} objectFit="cover"></Image>
+            <Image
+              alt="product-image"
+              src={product.image}
+              width={600}
+              height={600}
+              objectFit="contain"
+            ></Image>
           </div>
 
           <div className="detail">
@@ -126,14 +134,14 @@ const ProductView = () => {
             <div className="description">{product.description}</div>
             <div className="controls">
               <Button
-                style={{ marginTop: "20px" }}
+                style={{ marginTop: '20px' }}
                 color="red"
                 fullWidth={true}
                 onClick={() => {
                   onAddToCart();
                 }}
               >
-                {t("addToCart")}
+                {t('addToCart')}
               </Button>
             </div>
           </div>

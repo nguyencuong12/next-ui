@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Button, Table, ActionIcon } from '@mantine/core';
 import { JSXElementConstructor, ReactNode } from 'react';
 import styled, { ThemeContext } from 'styled-components';
-import { Trash } from 'tabler-icons-react';
+import { Trash, ShoppingCart } from 'tabler-icons-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
@@ -108,7 +108,7 @@ function Cart() {
           objectFit="cover"
         ></Image>
         <Link href="/">
-          <a style={{ paddingLeft: '20px' }}>{element.title}</a>
+          <a>{element.title}</a>
         </Link>
       </ProductWrapper>
     );
@@ -194,6 +194,7 @@ function Cart() {
         </div>
         <div className="payment">
           <CustomButton
+            IconCustom={() => <ShoppingCart></ShoppingCart>}
             title="Order"
             fullWidth={true}
             onClick={() => onHandleOrder()}

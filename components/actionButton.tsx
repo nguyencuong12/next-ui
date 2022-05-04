@@ -1,17 +1,18 @@
-import React, { useContext } from "react";
-import { Button } from "@mantine/core";
-import { Database } from "tabler-icons-react";
-import { ThemeContext } from "styled-components";
+import React, { useContext } from 'react';
+import { Button } from '@mantine/core';
+import { Icon, ShoppingCart } from 'tabler-icons-react';
+import { ThemeContext } from 'styled-components';
 
 interface propsType {
   title: string;
   onClick?: Function;
   fullWidth?: boolean;
+  IconCustom: Icon;
 }
 const ActionButton = (props: propsType) => {
   const themeContext = useContext(ThemeContext);
 
-  const { title, onClick, fullWidth } = props;
+  const { title, onClick, fullWidth, IconCustom } = props;
 
   return (
     <Button
@@ -22,12 +23,12 @@ const ActionButton = (props: propsType) => {
           onClick();
         }
       }}
-      size={"xs"}
-      leftIcon={<Database size={14} />}
-      sx={(theme) => ({
-        color: "#000",
+      size={'xs'}
+      leftIcon={<IconCustom size={14} />}
+      sx={theme => ({
+        color: '#000',
         backgroundColor: themeContext.accent,
-        "&:hover": {
+        '&:hover': {
           backgroundColor: theme.colors.gray[1],
         },
       })}

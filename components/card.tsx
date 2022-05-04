@@ -1,11 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import Image from "next/image";
-import { Button, Group } from "@mantine/core";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
-const CustomButton = dynamic(() => import("../components/actionButton"));
-import { useTranslation } from "react-i18next";
+import React from 'react';
+import styled from 'styled-components';
+import Image from 'next/image';
+import { Button, Group } from '@mantine/core';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+const CustomButton = dynamic(() => import('../components/actionButton'));
+import { useTranslation } from 'react-i18next';
+import { View360, ShoppingCart } from 'tabler-icons-react';
 
 const Wrapper = styled.div`
   position: relative;
@@ -17,7 +18,7 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   padding-top: 20px;
   align-items: center;
-  background: ${(props) => props.theme.productColor};
+  background: ${props => props.theme.productColor};
   margin: 15px;
 
   .chips {
@@ -39,17 +40,17 @@ const Wrapper = styled.div`
     box-shadow: 1px 1px 15px 2px #ffffff;
   }
   div {
-    font-family: "Square Peg", cursive;
+    font-family: 'Square Peg', cursive;
     font-size: 22px;
   }
   .title-card {
-    font-size: ${(props) => props.theme.cardFontLg};
+    font-size: ${props => props.theme.cardFontLg};
   }
   .description-card {
-    font-size: ${(props) => props.theme.cardFontMd};
+    font-size: ${props => props.theme.cardFontMd};
   }
   .price-card {
-    font-size: ${(props) => props.theme.cardFontMd};
+    font-size: ${props => props.theme.cardFontMd};
     color: red;
   }
 `;
@@ -68,7 +69,7 @@ const CardComponent = (props: cardProps) => {
   const { title, description, image, price, chips, _id, id } = props;
   const router = useRouter();
   const onHandleClick = (href: string) => {
-    router.push("products/" + href);
+    router.push('products/' + href);
   };
   return (
     <Wrapper
@@ -77,24 +78,32 @@ const CardComponent = (props: cardProps) => {
       }}
     >
       {chips && <div className="chips">{chips}</div>}
-      <Image alt="product-image" src={image} width="250" height="300" objectFit="cover"></Image>
+      <Image
+        alt="product-image"
+        src={image}
+        width="250"
+        height="300"
+        objectFit="cover"
+      ></Image>
       <div className="title-card">{title}</div>
       <div className="description-card">{description}</div>
       <div className="price-card">{price}</div>
-      <Group style={{ padding: "10px" }} noWrap={true}>
+      {/* <Group style={{ padding: '10px' }} noWrap={true}>
         <CustomButton
-          title={t("viewProduct")}
+          IconCustom={() => <View360></View360>}
+          title={t('viewProduct')}
           onClick={() => {
-            router.push("/products/asd");
+            router.push('/products/asd');
           }}
         ></CustomButton>
         <CustomButton
-          title={t("addToCart")}
+          IconCustom={() => <ShoppingCart></ShoppingCart>}
+          title={t('addToCart')}
           onClick={() => {
-            router.push("/cart");
+            router.push('/cart');
           }}
         ></CustomButton>
-      </Group>
+      </Group> */}
     </Wrapper>
   );
 };
