@@ -12,6 +12,6 @@ module.exports = {
     domains: ["cdn.tgdd.vn", "api.sashimeomeo.com", "localhost"],
   },
   env: {
-    API_URL: "http://localhost:5000",
+    API_URL: "https://api.sashimeomeo.com:5000",
   },
 };
