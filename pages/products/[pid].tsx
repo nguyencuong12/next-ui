@@ -11,7 +11,7 @@ import { SweetAlert } from "../../components/sweetAlert";
 import dynamic from "next/dynamic";
 // const CustomButton = dynamic(() => import("../../components/actionButton"));
 
-const LoadingOver = dynamic(() => import("../../components/loadingover"));
+const LoadingOver = dynamic(() => import("../../components/loadingOver"));
 
 const Wrapper = styled.div`
   display: flex;

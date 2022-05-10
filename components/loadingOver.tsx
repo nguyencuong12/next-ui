@@ -1,13 +1,8 @@
-import { useState } from "react";
-import { LoadingOverlay, Button, Group } from "@mantine/core";
+import React from "react";
+import { Loader } from "@mantine/core";
 
-function LoadingOver() {
-  // Note that position: relative is required
-  return (
-    <>
-      <LoadingOverlay visible={true} />
-      {/* ...other content */}
-    </>
-  );
-}
-export default LoadingOver;
+const LoadingComponent = () => {
+  return <Loader variant="dots" color="indigo" />;
+};
+
+export default LoadingComponent;
