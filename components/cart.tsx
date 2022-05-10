@@ -9,7 +9,8 @@ import dynamic from "next/dynamic";
 import cartInterface from "../interfaces/cart";
 const CustomButton = dynamic(() => import("../components/actionButton"));
 const NumberControl = dynamic(() => import("../components/numberInput"));
-const LoadingOverLay = dynamic(() => import("../components/loadingover"));
+// const LoadingOverLay = dynamic(() => import("../components/loadingover"));
+import LoadingOverLay from "../components/loadingover";
 
 import CartEvents from "../utils/storage";
 import formatEvents from "../utils/format";
