@@ -1,20 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import styled, { css, ThemeContext } from "styled-components";
 
-import { Input, Badge, Burger, ActionIcon, Switch } from "@mantine/core";
+import { Burger, ActionIcon, Switch, Modal, useMantineTheme, Autocomplete } from "@mantine/core";
 import { Search, ShoppingCart } from "tabler-icons-react";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { RootState } from "../redux/store";
 import { useSelector, useDispatch } from "react-redux";
-import LogoSRC from "../public/cat.png";
-
 import { change } from "../redux/menu/menu";
-import { useRouter } from "next/router";
-import { useViewportSize } from "@mantine/hooks";
 import { useTranslation } from "react-i18next";
-import { setIncludeBanner } from "../redux/navbar/navbar";
 
 const ProductMenu = dynamic(() => import("../components/productMenu"));
 
@@ -35,6 +30,10 @@ const ImageStyle = styled(Image)`
   @media only screen and (max-width: 768px) {
     margin-top: 10px !important;
   }
+`;
+const SearchWrapper = styled.div`
+  overflow: hidden;
+  min-height: 500px;
 `;
 
 const Wrapper = styled.div<wrapperProps>`
@@ -71,6 +70,7 @@ const Content = styled.div`
     }
   }
 `;
+
 const Center = styled.div`
   display: flex;
   flex-basis: 350px;
@@ -170,9 +170,11 @@ const ControlItem = styled.li`
 `;
 
 const Navbar = () => {
+  const theme = useMantineTheme();
   const { t, i18n } = useTranslation();
   const [check, setCheck] = useState(false);
   const [opened, setOpened] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const title = opened ? "Close navigation" : "Open navigation";
   const open = useSelector((state: RootState) => state.menuReducer.open);
   const includeNav = useSelector((state: RootState) => state.navbarReducer.includeBanner);
@@ -263,13 +265,19 @@ const Navbar = () => {
                 }
               }}
             />
-            <Link href="/search">
-              <a>
-                <ActionIcon size="lg" radius="xl" variant="transparent" style={{ color: "#fff" }}>
-                  <Search size={22} />
-                </ActionIcon>
-              </a>
-            </Link>
+
+            <ActionIcon
+              size="lg"
+              radius="xl"
+              variant="transparent"
+              style={{ color: "#fff" }}
+              onClick={() => {
+                setSearchOpen(true);
+              }}
+            >
+              <Search size={22} />
+            </ActionIcon>
+
             <Link href="/cart">
               <a>
                 <ActionIcon size="lg" radius="xl" variant="transparent" style={{ color: "#fff" }}>
@@ -292,6 +300,23 @@ const Navbar = () => {
           </ControlItem>
         </Control>
       </Content>
+      <Modal
+        style={{ height: "100vh" }}
+        size="100%"
+        opened={searchOpen}
+        transition="fade"
+        transitionDuration={600}
+        transitionTimingFunction="ease"
+        onClose={() => setSearchOpen(false)}
+        title="Search Screen!"
+        overlayColor={theme.colorScheme === "dark" ? theme.colors.dark[9] : theme.colors.gray[2]}
+        overlayOpacity={0.55}
+      >
+        {/* Modal content */}
+        <SearchWrapper>
+          <Autocomplete label="Your favorite framework/library" placeholder="Pick one" data={["React", "Angular", "Svelte", "Vue"]} />
+        </SearchWrapper>
+      </Modal>
     </Wrapper>
   );
 };

@@ -9,6 +9,8 @@ import { Product_API } from "../../api/product";
 import { useTranslation } from "react-i18next";
 import { SweetAlert } from "../../components/sweetAlert";
 import dynamic from "next/dynamic";
+import formatEvents from "../../utils/format";
+
 // const CustomButton = dynamic(() => import("../../components/actionButton"));
 
 const LoadingOver = dynamic(() => import("../../components/loadingOver"));
@@ -16,6 +18,7 @@ const LoadingOver = dynamic(() => import("../../components/loadingOver"));
 const Wrapper = styled.div`
   display: flex;
   align-items: flex-start;
+
   .image {
     flex: 1;
     display: flex;
@@ -26,6 +29,9 @@ const Wrapper = styled.div`
     border-radius: 10px;
     margin: 5px;
     padding: 10px;
+
+    /* min-height: 800px;
+    max-width: 800px; */
   }
   .detail {
     flex: 1;
@@ -38,29 +44,44 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px 0px;
+    padding: 40px;
     /* gap: 1em; */
     div {
-      margin: 0.5em;
+      margin: 0.2em;
       :last-child {
         margin: 0;
       }
     }
 
     .title {
-      font-size: 20px;
+      font-size: 30px;
       font-weight: 700;
+      width: 100%;
+      padding: 30px 0px;
+
+      border-bottom: 1px solid black;
+      .price {
+        font-size: 24px;
+        color: red;
+      }
     }
     .description {
-      border-radius: 10px;
-      padding: 20px;
-      width: 400px;
+      width: 100%;
       font-size: 18px;
-
-      text-align: center;
+      border-bottom: 1px solid black;
+      padding: 30px 0px;
+    }
+    .amount {
+      width: 100%;
+      font-size: 18px;
+      border-bottom: 1px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 30px 0px;
     }
     .controls {
-      width: 90%;
+      width: 100%;
     }
 
     @media only screen and (max-width: 768px) {
@@ -135,10 +156,14 @@ const ProductView = () => {
           </div>
 
           <div className="detail">
-            <div className="title">{product.title}</div>
-            <div className="location">TPHCM</div>
-            <div className="price">{product.price}</div>
+            <div className="title">
+              {product.title}
+              <div className="price"> {formatEvents.priceVND(parseFloat(product.price))}</div>
+            </div>
+            {/* <div className="location">TPHCM</div> */}
+
             <div className="description">{product.description}</div>
+
             <div className="controls">
               <Button
                 style={{ marginTop: "20px" }}
