@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   min-height: 120px;
   background: ${(props) => props.theme.productColor};
   border-radius: 10px;
-  width: 400px;
+  width: 350px;
   min-height: 140px;
   display: flex;
   flex-direction: column;

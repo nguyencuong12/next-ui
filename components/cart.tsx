@@ -119,7 +119,7 @@ function Cart() {
             </ActionIcon>
             <Image alt="cart-image" src={element.image} height={80} width={80} objectFit="cover"></Image>
             <Link href="/">
-              <a>{element.title}</a>
+              <a style={{ marginLeft: "10px", fontSize: "14px" }}>{element.title}</a>
             </Link>
           </ProductWrapper>
         ) : (
