@@ -4,9 +4,10 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 const Wrapper = styled.div`
   min-height: 120px;
-  background: ${(props) => props.theme.accent};
+  background: ${(props) => props.theme.productColor};
   border-radius: 10px;
-  width: 350px;
+  width: 400px;
+  min-height: 140px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,13 +18,13 @@ const Wrapper = styled.div`
   cursor: pointer;
 
   div {
-    font-family: "Square Peg", cursive;
-    font-size: 30px;
+    /* font-family: "Square Peg", cursive; */
+    font-size: 20px;
     /* color: #fff; */
     /* color: ${(props) => props.theme.footerBackground}; */
-    color: #000;
+    color: #fff;
     @media only screen and (max-width: 768px) {
-      font-size: ${(props) => props.theme.cardFontLg};
+      font-size: 16px;
     }
   }
 `;
@@ -44,7 +45,7 @@ const Policy = (props: propsType) => {
         onHandleClick(href);
       }}
     >
-      <Image src={image} height={60} width={60}></Image>
+      <Image alt="policy" src={image} height={60} width={60}></Image>
       <div>{description}</div>
     </Wrapper>
   );

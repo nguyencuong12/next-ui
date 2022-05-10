@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import Image from 'next/image';
-import { Button } from '@mantine/core';
-import CartEvents from '../../utils/storage';
-import { v4 as uuidv4 } from 'uuid';
-import { useRouter } from 'next/router';
-import { Product_API } from '../../api/product';
-import { useTranslation } from 'react-i18next';
-import { SweetAlert } from '../../components/sweetAlert';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Image from "next/image";
+import { Button } from "@mantine/core";
+import CartEvents from "../../utils/storage";
+
+import { useRouter } from "next/router";
+import { Product_API } from "../../api/product";
+import { useTranslation } from "react-i18next";
+import { SweetAlert } from "../../components/sweetAlert";
+import dynamic from "next/dynamic";
+// const CustomButton = dynamic(() => import("../../components/actionButton"));
+
+const LoadingOver = dynamic(() => import("../../components/loadingover"));
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,15 +22,16 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: ${props => props.theme.productColor};
+    background: ${(props) => props.theme.productColor};
     border-radius: 10px;
     margin: 5px;
     padding: 10px;
   }
   .detail {
     flex: 1;
-    background: ${props => props.theme.productColor};
-    color: ${props => props.theme.secondary};
+    /* background: ${(props) => props.theme.productColor}; */
+    /* color: ${(props) => props.theme.secondary}; */
+    color: black;
     border-radius: 10px;
     margin: 5px;
     min-height: 400px;
@@ -44,12 +49,14 @@ const Wrapper = styled.div`
 
     .title {
       font-size: 20px;
-      font-weight: 600;
+      font-weight: 700;
     }
     .description {
       border-radius: 10px;
       padding: 20px;
       width: 400px;
+      font-size: 18px;
+
       text-align: center;
     }
     .controls {
@@ -77,18 +84,24 @@ interface productProps {
 const ProductView = () => {
   const router = useRouter();
   const { t, i18n } = useTranslation();
-
   const [product, setProduct] = useState<productProps>();
-  const { pid } = router.query;
+
+  useEffect(() => {}, []);
+
   useEffect(() => {
-    if (pid) {
-      getProduct(pid);
+    const getProduct = async (id: string | string[]) => {
+      let productFromResponses = await getProductFromResponse(id);
+      setProduct(productFromResponses);
+    };
+
+    if (router.isReady) {
+      const { pid } = router.query;
+      if (pid) {
+        getProduct(pid!);
+      }
     }
-  }, []);
-  const getProduct = async (id: string | string[]) => {
-    let productFromResponses = await getProductFromResponse(id);
-    setProduct(productFromResponses);
-  };
+  }, [router.isReady]);
+
   const getProductFromResponse = async (id: string | string[]) => {
     let response = await Product_API.fetchProductByID(id.toString());
     return response.data.product;
@@ -108,23 +121,17 @@ const ProductView = () => {
       amount: 1,
     };
     CartEvents.add(products);
-    SweetAlert.onSuccess('Add To Cart Complete !!!').then(() => {
-      router.push('/cart');
+    SweetAlert.onSuccess("Add To Cart Complete !!!").then(() => {
+      router.push("/cart");
     });
     // localStorage.setItem("addToCart", JSON.stringify(tempObject));
   };
   return (
     <>
-      {product && (
+      {product ? (
         <Wrapper>
           <div className="image">
-            <Image
-              alt="product-image"
-              src={product.image}
-              width={600}
-              height={600}
-              objectFit="contain"
-            ></Image>
+            <Image alt="product-image" src={product.image} width={600} height={600} objectFit="contain"></Image>
           </div>
 
           <div className="detail">
@@ -134,18 +141,20 @@ const ProductView = () => {
             <div className="description">{product.description}</div>
             <div className="controls">
               <Button
-                style={{ marginTop: '20px' }}
+                style={{ marginTop: "20px" }}
                 color="red"
                 fullWidth={true}
                 onClick={() => {
                   onAddToCart();
                 }}
               >
-                {t('addToCart')}
+                {t("addToCart")}
               </Button>
             </div>
           </div>
         </Wrapper>
+      ) : (
+        <LoadingOver></LoadingOver>
       )}
     </>
   );

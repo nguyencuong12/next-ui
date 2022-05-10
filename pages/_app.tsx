@@ -24,6 +24,9 @@ import vietnam from "../locates/vietnam.json";
 import english from "../locates/english.json";
 const Layout = styled.div`
   position: relative;
+  top: 0;
+  z-index: 200;
+  height: auto;
 `;
 const theme = {
   main: "mediumseagreen",

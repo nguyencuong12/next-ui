@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import initialReducer from "./initial/initial";
 import menuReducer from "./menu/menu";
+import navbarReducer from "./navbar/navbar";
 
 export const store = configureStore({
   reducer: {
     initial: initialReducer,
     menuReducer: menuReducer,
+    navbarReducer,
   },
 });
 

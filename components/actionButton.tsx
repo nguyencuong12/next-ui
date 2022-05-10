@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
-import { Button } from '@mantine/core';
-import { Icon, ShoppingCart } from 'tabler-icons-react';
-import { ThemeContext } from 'styled-components';
+import React, { useContext } from "react";
+import { Button } from "@mantine/core";
+import { Icon, ShoppingCart } from "tabler-icons-react";
+import { ThemeContext } from "styled-components";
+import styled from "styled-components";
 
 interface propsType {
   title: string;
@@ -9,6 +10,11 @@ interface propsType {
   fullWidth?: boolean;
   IconCustom: Icon;
 }
+
+const TitleWrapper = styled.div`
+  font-size: 12px;
+`;
+
 const ActionButton = (props: propsType) => {
   const themeContext = useContext(ThemeContext);
 
@@ -23,17 +29,17 @@ const ActionButton = (props: propsType) => {
           onClick();
         }
       }}
-      size={'xs'}
+      size={"xs"}
       leftIcon={<IconCustom size={14} />}
-      sx={theme => ({
-        color: '#000',
+      sx={(theme) => ({
+        color: "#000",
         backgroundColor: themeContext.accent,
-        '&:hover': {
+        "&:hover": {
           backgroundColor: theme.colors.gray[1],
         },
       })}
     >
-      {title}
+      <TitleWrapper> {title}</TitleWrapper>
     </Button>
   );
 };

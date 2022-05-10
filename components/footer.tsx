@@ -3,8 +3,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   position: relative;
-  bottom: 0;
-  top: 46px;
+  width: 100%;
   /* background: #595959; */
   background: ${(props) => props.theme.footerBackground};
   color: #fff;
@@ -13,6 +12,8 @@ const Wrapper = styled.div`
 const Content = styled.div`
   width: 80%;
   margin: 80px auto;
+  /* margin: 80px auto; */
+  padding: 80px auto;
   display: flex;
   justify-content: space-between;
   ul {

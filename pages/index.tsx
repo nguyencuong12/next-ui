@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import styled, { css } from "styled-components";
-
 import { Product_API } from "../api/product";
+import { setIncludeBanner } from "../redux/navbar/navbar";
+import { useDispatch } from "react-redux";
+
 const Loading = dynamic(() => import("../components/loading"));
 const Card = dynamic(() => import("../components/card"));
 const Carousel = dynamic(() => import("../components/carousel"));
@@ -11,6 +13,7 @@ const CarouselCard = dynamic(() => import("../components/carouselCard"));
 const PolicyItem = dynamic(() => import("../components/policy"));
 const HotCarousel = dynamic(() => import("../components/hotCarousel"));
 const FeatureCarousel = dynamic(() => import("../components/featureCarousel"));
+
 import { useTranslation } from "react-i18next";
 
 // const Pagination = dynamic(() => import("../components/pagination"));
@@ -22,18 +25,20 @@ export const SectionMixin = ({}) => css`
     font-weight: 600;
     position: relative;
     /* color: ${(props) => props.theme.footerBackground}; */
-    color: ${(props) => props.theme.accent};
+    /* color: ${(props) => props.theme.accent}; */
+    color: black;
     ::after {
       content: "";
       /* display: block; */
-      height: 5px;
+      height: 6px;
       width: 150px;
       position: absolute;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       /* background: ${(props) => props.theme.footerBackground}; */
-      background: ${(props) => props.theme.accent};
+      /* background: ${(props) => props.theme.accent}; */
+      background: black;
     }
     @media only screen and (max-width: 768px) {
       font-size: 24px;
@@ -58,14 +63,17 @@ const Section = styled.section`
 `;
 const SectionPolicy = styled.section`
   color: #fff;
-  min-height: 360px;
+  ${SectionMixin({})};
+  position: relative;
+  top: 0;
   /* background: #333333; */
-  background: ${(props) => props.theme.policyBackground};
+  /* background: ${(props) => props.theme.policyBackground}; */
   display: flex;
-  justify-content: center;
+
+  justify-content: space-between;
   align-items: flex-start;
   /* gap: 50px; */
-  padding: 50px 10px;
+  padding: 20px 20px;
   margin-bottom: 20px;
   @media only screen and (max-width: 768px) {
     flex-direction: column;
@@ -78,6 +86,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+const SectionBanner = styled.section``;
 
 interface arrProps {
   tag: string;
@@ -98,17 +108,21 @@ type HomeProps = {
 function Home({ results }: HomeProps) {
   const [products, setProducts] = useState<arrProps[] | []>([]);
   const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
 
-  const fetch = async () => {
-    let productData = await getProductsFromResponse();
-    setProducts(productData);
-  };
   const getProductsFromResponse = async () => {
     let res = await Product_API.fetch();
     return res.data.products.product;
   };
+
   useEffect(() => {
-    fetch();
+    console.log("render");
+    // dispatch(setIncludeBanner(true));
+    const fetchProducts = async () => {
+      let productData = await getProductsFromResponse();
+      setProducts(productData);
+    };
+    fetchProducts();
   }, []);
   if (!products) {
     return <Loading></Loading>;
@@ -116,16 +130,15 @@ function Home({ results }: HomeProps) {
 
   return (
     <Wrapper>
-      <Section className="banner">
+      <SectionBanner>
         <Carousel></Carousel>
-      </Section>
+      </SectionBanner>
       <SectionPolicy>
         <PolicyItem href="/" image="/box.png" description={t("orders")}></PolicyItem>
         <PolicyItem href="/animals/cat" image="/cat.png" description={t("cat")}></PolicyItem>
         <PolicyItem href="/product/food" image="/pet-food1.png" description={t("foods")}></PolicyItem>
         <PolicyItem href="/product/vitamin" image="/vitamins.png" description={t("vitamin")}></PolicyItem>
       </SectionPolicy>
-
       <Section>
         <div className="title">{t("hotProducts")}</div>
         <HotCarousel></HotCarousel>
@@ -134,6 +147,10 @@ function Home({ results }: HomeProps) {
         <div className="title">{t("featureProducts")}</div>
         <FeatureCarousel></FeatureCarousel>
       </Section>
+
+      {/* <Section className="banner">
+        <Carousel></Carousel>
+      </Section> */}
     </Wrapper>
   );
 }

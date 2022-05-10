@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@200&family=Open+Sans:wght@300&family=Square+Peg&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@200&family=Nunito+Sans:ital,wght@1,200&family=Open+Sans:wght@300&display=swap');
 html,
 body {
   
@@ -16,7 +16,7 @@ a {
 * {
   box-sizing: border-box;
   /* font-family: 'Archivo', sans-serif; */
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size:16px;
 
   /* font-size:24px; */
@@ -47,9 +47,6 @@ background:#fff!important;
 .swiper-slide {
   background-position: center;
   background-size: cover;
- 
- 
-  /* min-width:350px; */
   display:flex;
   justify-content: center;
   align-items:center;
@@ -58,11 +55,9 @@ background:#fff!important;
 }
 
 .swiper-slide img {
+  border:5px solid red;
+  min-height:300px;
   width:100%; 
- 
-  /* min-height:150px; */
-  /* min-height:250px;
-  min-width:250px; */
   object-fit: cover;
   display:block;
   

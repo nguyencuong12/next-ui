@@ -21,9 +21,11 @@ const ViewAll = styled.div`
   font-size: 18px;
 
   a {
-    color: ${(props) => props.theme.secondary};
+    /* color: ${(props) => props.theme.secondary}; */
+    color: black;
     font-weight: 600;
     position: relative;
+    font-size: 18px;
     /* position: absolute; */
     ::after {
       content: "";

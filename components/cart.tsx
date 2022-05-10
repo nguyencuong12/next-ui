@@ -1,18 +1,20 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { Button, Table, ActionIcon } from '@mantine/core';
-import { JSXElementConstructor, ReactNode } from 'react';
-import styled, { ThemeContext } from 'styled-components';
-import { Trash, ShoppingCart } from 'tabler-icons-react';
-import Link from 'next/link';
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
-import cartInterface from '../interfaces/cart';
-const CustomButton = dynamic(() => import('../components/actionButton'));
-const NumberControl = dynamic(() => import('../components/numberInput'));
-import CartEvents from '../utils/storage';
-import formatEvents from '../utils/format';
-import { useRouter } from 'next/router';
-import { SweetAlert } from './sweetAlert';
+import React, { useEffect, useState, useContext } from "react";
+import { Button, Table, ActionIcon } from "@mantine/core";
+import { JSXElementConstructor, ReactNode } from "react";
+import styled, { ThemeContext } from "styled-components";
+import { Trash, ShoppingCart } from "tabler-icons-react";
+import Link from "next/link";
+import Image from "next/image";
+import dynamic from "next/dynamic";
+import cartInterface from "../interfaces/cart";
+const CustomButton = dynamic(() => import("../components/actionButton"));
+const NumberControl = dynamic(() => import("../components/numberInput"));
+const LoadingOverLay = dynamic(() => import("../components/loadingover"));
+
+import CartEvents from "../utils/storage";
+import formatEvents from "../utils/format";
+import { useRouter } from "next/router";
+import { SweetAlert } from "./sweetAlert";
 
 const Wrapper = styled.div`
   display: flex;
@@ -20,8 +22,9 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
   font-size: 14px;
-  width: 98%;
+  width: 100%;
   margin: 0 auto;
+
   @media only screen and (max-width: 768px) {
     flex-direction: column;
   }
@@ -33,22 +36,37 @@ const SummaryWrapper = styled.div`
 `;
 
 const TableWrapper = styled(Table)`
-  margin: 5px;
-
+  margin: 10px;
   th {
-    color: #fff !important;
+    color: #000 !important;
+  }
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    margin: 0px;
   }
 `;
 const CartCollateral = styled.div`
   flex-basis: 600px;
-  padding: 10px;
-  margin: 5px;
-  background: ${props => props.theme.productColor};
-  /* background: ${props => props.theme.swatches}; */
-  color: ${props => props.theme.secondary};
-  min-height: 300px;
+  padding: 5px;
+  margin: 10px;
+
+  /* background: ${(props) => props.theme.productColor}; */
+
+  background: #f6f6f6;
+  /* background: ${(props) => props.theme.swatches}; */
+  /* color: ${(props) => props.theme.secondary}; */
+  color: black;
+  min-height: 280px;
   @media only screen and (max-width: 768px) {
     width: 100%;
+    margin: 0px;
+  }
+  .summary {
+    background: #e9e9e9;
+    padding: 10px 0px;
+    font-weight: 800;
+    font-size: 18px !important;
+    text-align: center;
   }
   .subtotal {
     display: flex;
@@ -60,8 +78,8 @@ const CartCollateral = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid #fff;
-    border-bottom: 1px solid #fff;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
   }
   .payment {
     padding-top: 10px;
@@ -92,25 +110,22 @@ function Cart() {
   const themeContext = useContext(ThemeContext);
   const product = (element: cartInterface): ReactNode => {
     return (
-      <ProductWrapper>
-        <ActionIcon
-          size={'md'}
-          variant="transparent"
-          style={{ color: themeContext.accent, paddingRight: '5px' }}
-          onClick={() => onDeleteItem(element.id)}
-        >
-          <Trash />
-        </ActionIcon>
-        <Image
-          src={element.image}
-          height={80}
-          width={80}
-          objectFit="cover"
-        ></Image>
-        <Link href="/">
-          <a>{element.title}</a>
-        </Link>
-      </ProductWrapper>
+      <>
+        {element ? (
+          <ProductWrapper>
+            {/* {element ? <h1>a</h1> : <h1>LOADING</h1>}; */}
+            <ActionIcon size={"md"} variant="transparent" style={{ color: themeContext.accent, paddingRight: "5px" }} onClick={() => onDeleteItem(element.id)}>
+              <Trash />
+            </ActionIcon>
+            <Image alt="cart-image" src={element.image} height={80} width={80} objectFit="cover"></Image>
+            <Link href="/">
+              <a>{element.title}</a>
+            </Link>
+          </ProductWrapper>
+        ) : (
+          <LoadingOverLay></LoadingOverLay>
+        )}
+      </>
     );
   };
   useEffect(() => {
@@ -118,13 +133,13 @@ function Cart() {
     if (listCarts) {
       setCarts(listCarts);
     }
-    window.addEventListener('storage', () => {
+    window.addEventListener("storage", () => {
       setCarts(JSON.parse(CartEvents.get()!));
     });
   }, []);
 
   const onHandleOrder = () => {
-    router.push('/order/test');
+    router.push("/order/test");
   };
   // useEffect(() => {
   //   console.log("CARTS CHANGE !!!", carts);
@@ -138,24 +153,22 @@ function Cart() {
   };
   const totalAllProducts = () => {
     let total: number = 0;
-    carts.map(instance => {
+    carts.map((instance) => {
       total = total + parseFloat(instance.price) * instance.amount;
     });
     return formatVND(total);
 
     // return total.toString();
   };
-  const renderSummary = carts.map(element => (
+  const renderSummary = carts.map((element) => (
     <SummaryWrapper key={element.id}>
       <div className="summary-product">
         {element.title} X {element.amount}
       </div>
-      <div className="summary-price">
-        {totalPrice(element.price, element.amount)}
-      </div>
+      <div className="summary-price">{totalPrice(element.price, element.amount)}</div>
     </SummaryWrapper>
   ));
-  const rows = carts.map(element => (
+  const rows = carts.map((element) => (
     <tr key={element.id}>
       <td>{product(element)}</td>
       <td>{controlNumber(element)}</td>
@@ -169,10 +182,10 @@ function Cart() {
     <Wrapper>
       <TableWrapper
         verticalSpacing="xs"
-        fontSize={'xs'}
-        sx={theme => ({
-          backgroundColor: themeContext.productColor,
-          color: themeContext.secondary,
+        fontSize={"xs"}
+        sx={(theme) => ({
+          color: "black",
+          border: "1px solid gray",
         })}
       >
         <thead>
@@ -186,19 +199,14 @@ function Cart() {
         <tbody>{rows}</tbody>
       </TableWrapper>
       <CartCollateral>
-        <div className="summary">Summary</div>
+        <div className="summary">Cart Totals</div>
         <div className="subtotal">{renderSummary}</div>
         <div className="total">
           <h4>Total</h4>
           <p>{totalAllProducts()}</p>
         </div>
         <div className="payment">
-          <CustomButton
-            IconCustom={() => <ShoppingCart></ShoppingCart>}
-            title="Order"
-            fullWidth={true}
-            onClick={() => onHandleOrder()}
-          ></CustomButton>
+          <CustomButton IconCustom={() => <ShoppingCart></ShoppingCart>} title="PROCEED TO CHECKOUT" fullWidth={true} onClick={() => onHandleOrder()}></CustomButton>
         </div>
       </CartCollateral>
     </Wrapper>
