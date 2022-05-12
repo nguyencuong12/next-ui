@@ -24,7 +24,7 @@ import { change } from '../redux/menu/menu';
 import { useTranslation } from 'react-i18next';
 import { searchAPI } from '../api';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
+import { setCloseMenu } from '../redux/menu/menu';
 const ProductMenu = dynamic(() => import('../components/productMenu'));
 
 interface menuProps {
@@ -235,10 +235,15 @@ const Navbar = () => {
     }
   }, []);
   useEffect(() => {
-    if (check) {
-      console.log('CHECK', check);
-    }
-  }, [check]);
+    router.events.on('routeChangeComplete', () => {
+      dispatch(setCloseMenu());
+    });
+    return () => {
+      router.events.off('routeChangeComplete', () => {
+        console.log('stoped');
+      });
+    };
+  }, [router.events]);
 
   const setOpenMenu = () => {
     dispatch(change());
@@ -246,14 +251,6 @@ const Navbar = () => {
 
   return (
     <Wrapper includeBanner={includeNav}>
-      <Head>
-        <title>Navbar</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        />
-      </Head>
-
       <Content>
         <Logo>
           <Link href="/">

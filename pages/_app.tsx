@@ -15,13 +15,14 @@ import { layoutVariables } from '../styles/variable.global';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { useTranslation } from 'react-i18next';
-
+import { useRouter } from 'next/router';
 const Navbar = dynamic(() => import('../components/navbar'));
 const Footer = dynamic(() => import('../components/footer'));
 const Body = dynamic(() => import('../components/body'));
 
 import vietnam from '../locates/vietnam.json';
 import english from '../locates/english.json';
+
 const Layout = styled.div`
   position: relative;
   top: 0;
