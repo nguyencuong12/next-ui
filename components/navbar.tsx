@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, forwardRef } from "react";
 import styled, { css, ThemeContext } from "styled-components";
 
-import { Burger, ActionIcon, Switch, Modal, useMantineTheme, Autocomplete } from "@mantine/core";
+import { Burger, ActionIcon, Switch, Modal, useMantineTheme, Autocomplete, Group, Avatar, Text, MantineColor, SelectItemProps } from "@mantine/core";
 import { Search, ShoppingCart } from "tabler-icons-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,6 +10,8 @@ import { RootState } from "../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { change } from "../redux/menu/menu";
 import { useTranslation } from "react-i18next";
+import { searchAPI } from "../api";
+import { useRouter } from "next/router";
 
 const ProductMenu = dynamic(() => import("../components/productMenu"));
 
@@ -168,18 +170,39 @@ const ControlItem = styled.li`
   min-width: 150px;
   ${LiStyle({})};
 `;
-
+interface AutoCompleteProps extends SelectItemProps {
+  value: string;
+  image?: string;
+}
+const AutoCompleteItem = forwardRef<HTMLDivElement, AutoCompleteProps>(({ value, image, ...others }: AutoCompleteProps, ref) => (
+  <div ref={ref} {...others}>
+    <Group noWrap>
+      <Avatar src={image} />
+      <div>
+        <Text>{value}</Text>
+        {/* <Text size="xs" color="dimmed">
+          <h1>Cuong</h1>
+        </Text> */}
+      </div>
+    </Group>
+  </div>
+));
 const Navbar = () => {
   const theme = useMantineTheme();
   const { t, i18n } = useTranslation();
   const [check, setCheck] = useState(false);
   const [opened, setOpened] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+
+  const [searchResult, setSearchResult] = useState<AutoCompleteProps[]>([]);
+
   const title = opened ? "Close navigation" : "Open navigation";
   const open = useSelector((state: RootState) => state.menuReducer.open);
   const includeNav = useSelector((state: RootState) => state.navbarReducer.includeBanner);
   const dispatch = useDispatch();
   const themeContext = useContext(ThemeContext);
+  const router = useRouter();
+
   const onSubmitSearch = (event: any) => {
     if (event.keyCode === 13) {
       console.log("ENTER KEY PRESS");
@@ -209,11 +232,7 @@ const Navbar = () => {
       <Content>
         <Logo>
           <Link href="/">
-            <a>
-              Sashimeomeo
-              {/* <Image priority src={LogoSRC} height={50} width={80} layout="fixed" alt="logo" objectFit="contain"></Image> */}
-            </a>
-            {/* <ImageStyle src="/vercel.svg" height={50} width={80} layout="fixed"></ImageStyle> */}
+            <a>Sashimeomeo</a>
           </Link>
           <BurgerStyle color={themeContext.accent} opened={open} onClick={setOpenMenu} title={title} />
           {/* <div>aa</div> */}
@@ -285,18 +304,6 @@ const Navbar = () => {
                 </ActionIcon>
               </a>
             </Link>
-
-            {/* <ActionIcon
-              size="lg"
-              radius="xl"
-              variant="filled"
-              style={{ color: "#000", background: themeContext.accent }}
-              onClick={() => {
-                i18n.changeLanguage("vn");
-              }}
-            >
-              <ShoppingCart size={25} />
-            </ActionIcon> */}
           </ControlItem>
         </Control>
       </Content>
@@ -308,13 +315,37 @@ const Navbar = () => {
         transitionDuration={600}
         transitionTimingFunction="ease"
         onClose={() => setSearchOpen(false)}
-        title="Search Screen!"
+        // title="Search Screen!"
         overlayColor={theme.colorScheme === "dark" ? theme.colors.dark[9] : theme.colors.gray[2]}
         overlayOpacity={0.55}
       >
         {/* Modal content */}
         <SearchWrapper>
-          <Autocomplete label="Your favorite framework/library" placeholder="Pick one" data={["React", "Angular", "Svelte", "Vue"]} />
+          <Autocomplete
+            label="Tìm Kiếm"
+            itemComponent={AutoCompleteItem}
+            placeholder="Nhập từ tên sản phẩm tìm kiếm"
+            data={searchResult}
+            onItemSubmit={(item) => {
+              console.log("ROUTER", router);
+              if (router.pathname === "/products/[pid]") {
+                router.push(item._id);
+              } else {
+                router.push("products/" + item._id);
+              }
+
+              // _id: '6271eabaa30461cb51803239
+            }}
+            onChange={async (value) => {
+              let result = await searchAPI.search(value);
+              var arr: any[] = [];
+              result.data.searchResults.map((instance: any) => {
+                arr.push({ ...instance, value: instance.title });
+                // setSearchResult([{ ...instance, value: instance.title }]);
+              });
+              setSearchResult(arr);
+            }}
+          />
         </SearchWrapper>
       </Modal>
     </Wrapper>

@@ -1,2 +1,4 @@
 import guestAPI from "./guest";
-export { guestAPI };
+import searchAPI from "./search";
+
+export { guestAPI, searchAPI };

@@ -72,7 +72,7 @@ const CardComponent = (props: cardProps) => {
   const { t, i18n } = useTranslation();
   const { title, description, image, price, chips, _id, id } = props;
   const router = useRouter();
-  console.log("IMAGE", image);
+
   const onHandleClick = (href: string) => {
     router.push("products/" + href);
   };
