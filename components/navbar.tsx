@@ -24,7 +24,7 @@ import { change } from '../redux/menu/menu';
 import { useTranslation } from 'react-i18next';
 import { searchAPI } from '../api';
 import { useRouter } from 'next/router';
-
+import Head from 'next/head';
 const ProductMenu = dynamic(() => import('../components/productMenu'));
 
 interface menuProps {
@@ -247,13 +247,13 @@ const Navbar = () => {
   return (
     <Wrapper includeBanner={includeNav}>
       <Head>
-        <title>Sashimeomeo Shop</title>
+        <title>Navbar</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
       </Head>
-      {/* <RenderT></RenderT> */}
+
       <Content>
         <Logo>
           <Link href="/">
