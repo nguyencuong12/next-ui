@@ -187,6 +187,7 @@ const AutoCompleteItem = forwardRef<HTMLDivElement, AutoCompleteProps>(({ value,
     </Group>
   </div>
 ));
+AutoCompleteItem.displayName = "AutoCompleteItem";
 const Navbar = () => {
   const theme = useMantineTheme();
   const { t, i18n } = useTranslation();
