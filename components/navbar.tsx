@@ -334,7 +334,7 @@ const Navbar = () => {
               } else {
                 router.push("products/" + item._id);
               }
-
+              setSearchOpen(false);
               // _id: '6271eabaa30461cb51803239
             }}
             onChange={async (value) => {
