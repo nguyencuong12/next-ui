@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import Image from "next/image";
-import { Button } from "@mantine/core";
-import CartEvents from "../../utils/storage";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import Image from 'next/image';
+import { Button } from '@mantine/core';
+import CartEvents from '../../utils/storage';
 
-import { useRouter } from "next/router";
-import { Product_API } from "../../api/product";
-import { useTranslation } from "react-i18next";
-import { SweetAlert } from "../../components/sweetAlert";
-import dynamic from "next/dynamic";
-import formatEvents from "../../utils/format";
+import { useRouter } from 'next/router';
+import { Product_API } from '../../api/product';
+import { useTranslation } from 'react-i18next';
+import { SweetAlert } from '../../components/sweetAlert';
+import dynamic from 'next/dynamic';
+import formatEvents from '../../utils/format';
 
 // const CustomButton = dynamic(() => import("../../components/actionButton"));
 
-const LoadingOver = dynamic(() => import("../../components/loadingOver"));
+const LoadingOver = dynamic(() => import('../../components/loadingOver'));
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: ${(props) => props.theme.productColor};
+    background: ${props => props.theme.productColor};
     border-radius: 10px;
     margin: 5px;
     padding: 10px;
@@ -35,8 +35,8 @@ const Wrapper = styled.div`
   }
   .detail {
     flex: 1;
-    /* background: ${(props) => props.theme.productColor}; */
-    /* color: ${(props) => props.theme.secondary}; */
+    /* background: ${props => props.theme.productColor}; */
+    /* color: ${props => props.theme.secondary}; */
     color: black;
     border-radius: 10px;
     margin: 5px;
@@ -107,7 +107,9 @@ const ProductView = () => {
   const { t, i18n } = useTranslation();
   const [product, setProduct] = useState<productProps>();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log('CALL !!');
+  }, []);
 
   useEffect(() => {
     const getProduct = async (id: string | string[]) => {
@@ -142,8 +144,8 @@ const ProductView = () => {
       amount: 1,
     };
     CartEvents.add(products);
-    SweetAlert.onSuccess("Add To Cart Complete !!!").then(() => {
-      router.push("/cart");
+    SweetAlert.onSuccess('Add To Cart Complete !!!').then(() => {
+      router.push('/cart');
     });
     // localStorage.setItem("addToCart", JSON.stringify(tempObject));
   };
@@ -152,13 +154,22 @@ const ProductView = () => {
       {product ? (
         <Wrapper>
           <div className="image">
-            <Image alt="product-image" src={product.image} width={600} height={600} objectFit="contain"></Image>
+            <Image
+              alt="product-image"
+              src={product.image}
+              width={600}
+              height={600}
+              objectFit="contain"
+            ></Image>
           </div>
 
           <div className="detail">
             <div className="title">
               {product.title}
-              <div className="price"> {formatEvents.priceVND(parseFloat(product.price))}</div>
+              <div className="price">
+                {' '}
+                {formatEvents.priceVND(parseFloat(product.price))}
+              </div>
             </div>
             {/* <div className="location">TPHCM</div> */}
 
@@ -166,14 +177,14 @@ const ProductView = () => {
 
             <div className="controls">
               <Button
-                style={{ marginTop: "20px" }}
+                style={{ marginTop: '20px' }}
                 color="red"
                 fullWidth={true}
                 onClick={() => {
                   onAddToCart();
                 }}
               >
-                {t("addToCart")}
+                {t('addToCart')}
               </Button>
             </div>
           </div>

@@ -234,6 +234,7 @@ const Navbar = () => {
       setCheck(false);
     }
   }, []);
+
   useEffect(() => {
     router.events.on('routeChangeComplete', () => {
       dispatch(setCloseMenu());
@@ -363,14 +364,12 @@ const Navbar = () => {
             placeholder="Nhập từ tên sản phẩm tìm kiếm"
             data={searchResult}
             onItemSubmit={item => {
-              console.log('ROUTER', router);
               if (router.pathname === '/products/[pid]') {
-                router.push(item._id);
+                window.location.href = item._id;
               } else {
                 router.push('products/' + item._id);
               }
               setSearchOpen(false);
-              // _id: '6271eabaa30461cb51803239
             }}
             onChange={async value => {
               let result = await searchAPI.search(value);
