@@ -40,7 +40,7 @@ const VitaminPage = () => {
       <VitaminContent>
         {products &&
           products.map((instance) => {
-            return <CardComponent title={""} description={""} image={""} price={""} chips={""} id={""} _id={""}></CardComponent>;
+            return <CardComponent key={instance._id} title={""} description={""} image={""} price={""} chips={""} id={""} _id={""}></CardComponent>;
           })}
       </VitaminContent>
       <PaginationComponent total={totalPage!} pageChange={() => {}}></PaginationComponent>

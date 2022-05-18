@@ -53,7 +53,7 @@ const Products = () => {
       <ProductItem>
         {products &&
           products.map((instance) => {
-            return <CardComponent title={instance.title} description={instance.description} image={instance.image} price={instance.price} chips={""} id={instance._id} _id={instance._id}></CardComponent>;
+            return <CardComponent key={instance._id} title={instance.title} description={instance.description} image={instance.image} price={instance.price} chips={""} id={instance._id} _id={instance._id}></CardComponent>;
           })}
       </ProductItem>
       <PaginationComponent total={totalProduct!} pageChange={changePage}></PaginationComponent>
