@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 const MenuStyle = styled.div`
   cursor: pointer;
+  width: 120px;
 `;
 interface MenuProductProps {
   title: string;
@@ -18,26 +19,42 @@ const MenuProducts = (props: MenuProductProps) => {
   };
   return (
     <Menu
-      trigger="hover"
+      // trigger="hover"
+
       delay={100}
       control={
-        <MenuStyle onClick={onNavigate}>
+        <MenuStyle>
           {title}
           {/* <Link href="/product"> */}
         </MenuStyle>
       }
     >
-      <Menu.Label>Product Item 1 </Menu.Label>
+      <Menu.Label>Sản Phẩm </Menu.Label>
       <Menu.Item>
-        <Link href="/products/seed">Product 1</Link>
+        <Link href="/products">Tất Cả Sản Phẩm</Link>
       </Menu.Item>
+
+      <Divider />
+      <Menu.Label>Danh Mục Sản Phẩm </Menu.Label>
       <Menu.Item>
-        <Link href="/products/pate">
-          <a>Product 2</a>
-        </Link>
+        <Link href="/vitamins">Vitamin Cho Mèo</Link>
       </Menu.Item>
       <Divider />
-      <Menu.Label>Product Item 2 </Menu.Label>
+      <Menu.Item>
+        <Link href="/cats">Các Giống Mèo</Link>
+      </Menu.Item>
+      <Divider />
+      <Menu.Item>
+        <Link href="/cats">Hạt Cho Mèo</Link>
+      </Menu.Item>
+      <Divider />
+      <Menu.Item>
+        <Link href="/cats">Pate Cho Mèo</Link>
+      </Menu.Item>
+      <Divider />
+      <Menu.Item>
+        <Link href="/cats">Đồ Chơi Cho Mèo</Link>
+      </Menu.Item>
       {/* <Menu.Item >Transfer my data</Menu.Item>,
             <Menu.Item color="red" >Delete my account</Menu.Item> */}
     </Menu>

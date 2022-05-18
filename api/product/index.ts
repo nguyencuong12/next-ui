@@ -2,17 +2,25 @@ import axios from "../axios.interceptor";
 const API_URL = "/product/";
 
 let Product_API = {
-  fetch: async () => {
+  fetch: async (page: number) => {
     console.log("FETCH CALL", API_URL);
     return await axios({
       url: API_URL,
       method: "GET",
+      params: { currentPage: page },
     });
   },
   fetchHotProducts: async () => {
     return await axios({
       url: API_URL + "hot",
       method: "POST",
+    });
+  },
+  fetchVitaminProducts: async (page: number) => {
+    return await axios({
+      url: API_URL + "vitamins",
+      method: "POST",
+      data: { currentPage: page },
     });
   },
   fetchFeatureProducts: async () => {

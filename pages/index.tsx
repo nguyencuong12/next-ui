@@ -111,10 +111,17 @@ function Home({ results }: HomeProps) {
   const dispatch = useDispatch();
 
   const getProductsFromResponse = async () => {
-    let res = await Product_API.fetch();
+    let res = await Product_API.fetch(1);
     return res.data.products.product;
   };
-
+  const getHotProducts = async () => {
+    let response = await Product_API.fetchHotProducts();
+    return response.data.products;
+  };
+  const getFeatureProducts = async () => {
+    let response = await Product_API.fetchFeatureProducts();
+    return response.data.products;
+  };
   useEffect(() => {
     console.log("render");
     // dispatch(setIncludeBanner(true));
@@ -141,11 +148,22 @@ function Home({ results }: HomeProps) {
       </SectionPolicy>
       <Section>
         <div className="title">{t("hotProducts")}</div>
-        <HotCarousel></HotCarousel>
+        <CarouselCard
+          chip={"hot"}
+          callback={async () => {
+            return await getHotProducts();
+          }}
+        ></CarouselCard>
       </Section>
+
       <Section>
-        <div className="title">{t("featureProducts")}</div>
-        <FeatureCarousel></FeatureCarousel>
+        <div className="title">Các Sản Phẩm Nổi Bật</div>
+        <CarouselCard
+          chip={"feature"}
+          callback={async () => {
+            return await getFeatureProducts();
+          }}
+        ></CarouselCard>
       </Section>
 
       {/* <Section className="banner">

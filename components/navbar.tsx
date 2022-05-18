@@ -1,31 +1,19 @@
-import React, { useState, useEffect, useContext, forwardRef } from 'react';
-import styled, { css, ThemeContext } from 'styled-components';
+import React, { useState, useEffect, useContext, forwardRef } from "react";
+import styled, { css, ThemeContext } from "styled-components";
 
-import {
-  Burger,
-  ActionIcon,
-  Switch,
-  Modal,
-  useMantineTheme,
-  Autocomplete,
-  Group,
-  Avatar,
-  Text,
-  MantineColor,
-  SelectItemProps,
-} from '@mantine/core';
-import { Search, ShoppingCart } from 'tabler-icons-react';
-import Link from 'next/link';
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
-import { RootState } from '../redux/store';
-import { useSelector, useDispatch } from 'react-redux';
-import { change } from '../redux/menu/menu';
-import { useTranslation } from 'react-i18next';
-import { searchAPI } from '../api';
-import { useRouter } from 'next/router';
-import { setCloseMenu } from '../redux/menu/menu';
-const ProductMenu = dynamic(() => import('../components/productMenu'));
+import { Burger, ActionIcon, Switch, Modal, useMantineTheme, Autocomplete, Group, Avatar, Text, MantineColor, SelectItemProps } from "@mantine/core";
+import { Search, ShoppingCart } from "tabler-icons-react";
+import Link from "next/link";
+import Image from "next/image";
+import dynamic from "next/dynamic";
+import { RootState } from "../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { change } from "../redux/menu/menu";
+import { useTranslation } from "react-i18next";
+import { searchAPI } from "../api";
+import { useRouter } from "next/router";
+import { setCloseMenu } from "../redux/menu/menu";
+const ProductMenu = dynamic(() => import("../components/productMenu"));
 
 interface menuProps {
   open: boolean;
@@ -51,13 +39,12 @@ const SearchWrapper = styled.div`
 `;
 
 const Wrapper = styled.div<wrapperProps>`
-  /* background: ${props => props.theme.navBackground}; */
-  /* background: ${props => props.theme.primaryColor}; */
+  /* background: ${(props) => props.theme.navBackground}; */
+  /* background: ${(props) => props.theme.primaryColor}; */
 
-  /* background-color: ${props =>
-    props.includeBanner ? 'rgba(255, 255, 255, 0)' : 'black'}; */
+  /* background-color: ${(props) => (props.includeBanner ? "rgba(255, 255, 255, 0)" : "black")}; */
   background: black;
-  color: ${props => props.theme.secondary};
+  color: ${(props) => props.theme.secondary};
   height: 90px;
   padding: 20px 0px;
   position: fixed;
@@ -119,7 +106,7 @@ const Logo = styled.div`
   gap: 5px;
   align-items: flex-start;
   a {
-    color: ${props => props.theme.accent};
+    color: ${(props) => props.theme.accent};
     font-weight: 700;
     font-size: 20px;
   }
@@ -136,11 +123,11 @@ const Menu = styled.ul<menuProps>`
   @media only screen and (max-width: 768px) {
     position: absolute;
     height: 100vh;
-    /* background: ${props => props.theme.swatches2}; */
-    background: ${props => props.theme.productColor};
+    /* background: ${(props) => props.theme.swatches2}; */
+    background: ${(props) => props.theme.productColor};
     top: 88px;
     width: 100%;
-    left: ${props => (props.open ? '0' : '-120%')};
+    left: ${(props) => (props.open ? "0" : "-120%")};
     right: 0;
     display: flex;
     flex-direction: column;
@@ -155,13 +142,12 @@ const MenuItem = styled.li`
     color: #a6a6a6 !important;
   }
   ${LiStyle({})};
-
   text-align: center;
-  min-width: 100px;
+  min-width: 120px;
   a {
     text-decoration: none;
     display: block;
-    color: ${props => props.theme.secondary};
+    color: ${(props) => props.theme.secondary};
     transition: color 200ms;
   }
   @media only screen and (max-width: 768px) {
@@ -187,22 +173,20 @@ interface AutoCompleteProps extends SelectItemProps {
   value: string;
   image?: string;
 }
-const AutoCompleteItem = forwardRef<HTMLDivElement, AutoCompleteProps>(
-  ({ value, image, ...others }: AutoCompleteProps, ref) => (
-    <div ref={ref} {...others}>
-      <Group noWrap>
-        <Avatar src={image} />
-        <div>
-          <Text>{value}</Text>
-          {/* <Text size="xs" color="dimmed">
+const AutoCompleteItem = forwardRef<HTMLDivElement, AutoCompleteProps>(({ value, image, ...others }: AutoCompleteProps, ref) => (
+  <div ref={ref} {...others}>
+    <Group noWrap>
+      <Avatar src={image} />
+      <div>
+        <Text>{value}</Text>
+        {/* <Text size="xs" color="dimmed">
           <h1>Cuong</h1>
         </Text> */}
-        </div>
-      </Group>
-    </div>
-  )
-);
-AutoCompleteItem.displayName = 'AutoCompleteItem';
+      </div>
+    </Group>
+  </div>
+));
+AutoCompleteItem.displayName = "AutoCompleteItem";
 const Navbar = () => {
   const theme = useMantineTheme();
   const { t, i18n } = useTranslation();
@@ -212,23 +196,21 @@ const Navbar = () => {
 
   const [searchResult, setSearchResult] = useState<AutoCompleteProps[]>([]);
 
-  const title = opened ? 'Close navigation' : 'Open navigation';
+  const title = opened ? "Close navigation" : "Open navigation";
   const open = useSelector((state: RootState) => state.menuReducer.open);
-  const includeNav = useSelector(
-    (state: RootState) => state.navbarReducer.includeBanner
-  );
+  const includeNav = useSelector((state: RootState) => state.navbarReducer.includeBanner);
   const dispatch = useDispatch();
   const themeContext = useContext(ThemeContext);
   const router = useRouter();
 
   const onSubmitSearch = (event: any) => {
     if (event.keyCode === 13) {
-      console.log('ENTER KEY PRESS');
+      console.log("ENTER KEY PRESS");
     }
   };
   useEffect(() => {
-    let language = localStorage.getItem('language');
-    if (language === 'en') {
+    let language = localStorage.getItem("language");
+    if (language === "en") {
       setCheck(true);
     } else {
       setCheck(false);
@@ -236,12 +218,12 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    router.events.on('routeChangeComplete', () => {
+    router.events.on("routeChangeComplete", () => {
       dispatch(setCloseMenu());
     });
     return () => {
-      router.events.off('routeChangeComplete', () => {
-        console.log('stoped');
+      router.events.off("routeChangeComplete", () => {
+        console.log("stoped");
       });
     };
   }, [router.events]);
@@ -257,12 +239,7 @@ const Navbar = () => {
           <Link href="/">
             <a>Sashimeomeo</a>
           </Link>
-          <BurgerStyle
-            color={themeContext.accent}
-            opened={open}
-            onClick={setOpenMenu}
-            title={title}
-          />
+          <BurgerStyle color={themeContext.accent} opened={open} onClick={setOpenMenu} title={title} />
           {/* <div>aa</div> */}
         </Logo>
         <Center>
@@ -272,21 +249,21 @@ const Navbar = () => {
           <Menu open={open}>
             <MenuItem>
               <Link href="/">
-                <a>{t('home')}</a>
+                <a>{t("home")}</a>
               </Link>
             </MenuItem>
             <MenuItem>
               <Link href="/about">
-                <a>{t('about')}</a>
+                <a>{t("about")}</a>
               </Link>
             </MenuItem>
             <MenuItem>
               <Link href="/contact">
-                <a>{t('contact')}</a>
+                <a>{t("contact")}</a>
               </Link>
             </MenuItem>
             <MenuItem>
-              <ProductMenu title={t('product')} />
+              <ProductMenu title={t("product")} />
             </MenuItem>
           </Menu>
         </Center>
@@ -299,15 +276,15 @@ const Navbar = () => {
               size="md"
               checked={check}
               onChange={() => {
-                let language = localStorage.getItem('language');
+                let language = localStorage.getItem("language");
 
-                if (language === 'vn') {
-                  localStorage.setItem('language', 'en');
-                  i18n.changeLanguage('en');
+                if (language === "vn") {
+                  localStorage.setItem("language", "en");
+                  i18n.changeLanguage("en");
                   setCheck(true);
                 } else {
-                  localStorage.setItem('language', 'vn');
-                  i18n.changeLanguage('vn');
+                  localStorage.setItem("language", "vn");
+                  i18n.changeLanguage("vn");
                   setCheck(false);
                 }
               }}
@@ -317,7 +294,7 @@ const Navbar = () => {
               size="lg"
               radius="xl"
               variant="transparent"
-              style={{ color: '#fff' }}
+              style={{ color: "#fff" }}
               onClick={() => {
                 setSearchOpen(true);
               }}
@@ -327,12 +304,7 @@ const Navbar = () => {
 
             <Link href="/cart">
               <a>
-                <ActionIcon
-                  size="lg"
-                  radius="xl"
-                  variant="transparent"
-                  style={{ color: '#fff' }}
-                >
+                <ActionIcon size="lg" radius="xl" variant="transparent" style={{ color: "#fff" }}>
                   <ShoppingCart size={22} />
                 </ActionIcon>
               </a>
@@ -341,7 +313,7 @@ const Navbar = () => {
         </Control>
       </Content>
       <Modal
-        style={{ height: '100vh' }}
+        style={{ height: "100vh" }}
         size="100%"
         opened={searchOpen}
         transition="fade"
@@ -349,11 +321,7 @@ const Navbar = () => {
         transitionTimingFunction="ease"
         onClose={() => setSearchOpen(false)}
         // title="Search Screen!"
-        overlayColor={
-          theme.colorScheme === 'dark'
-            ? theme.colors.dark[9]
-            : theme.colors.gray[2]
-        }
+        overlayColor={theme.colorScheme === "dark" ? theme.colors.dark[9] : theme.colors.gray[2]}
         overlayOpacity={0.55}
       >
         {/* Modal content */}
@@ -363,15 +331,15 @@ const Navbar = () => {
             itemComponent={AutoCompleteItem}
             placeholder="Nhập từ tên sản phẩm tìm kiếm"
             data={searchResult}
-            onItemSubmit={item => {
-              if (router.pathname === '/products/[pid]') {
+            onItemSubmit={(item) => {
+              if (router.pathname === "/products/[pid]") {
                 window.location.href = item._id;
               } else {
-                router.push('products/' + item._id);
+                router.push("products/" + item._id);
               }
               setSearchOpen(false);
             }}
-            onChange={async value => {
+            onChange={async (value) => {
               let result = await searchAPI.search(value);
               var arr: any[] = [];
               result.data.searchResults.map((instance: any) => {

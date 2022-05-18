@@ -63,30 +63,27 @@ interface productProps {
   id: string;
 }
 interface carouselCardProps {
-  type: string;
+  callback: Function;
+  chip?: string;
 }
 export default function CarouselCard(props: carouselCardProps) {
   const [products, setProducts] = useState<productProps[]>([]);
-  const { type } = props;
+  const { callback, chip } = props;
 
   useEffect(() => {
-    Promise.all([fetchHotProducts()]).then(() => {});
+    fetchDataFromCallback();
   }, []);
-  const fetchHotProducts = async () => {
-    let hotProducts = await getHotProducts();
-    setProducts(hotProducts);
+  const fetchDataFromCallback = async () => {
+    setProducts(await callback());
   };
-  const getHotProducts = async () => {
-    let response = await Product_API.fetchHotProducts();
-    return response.data.products;
-  };
-  const RenderForType = (type: string) => {
+
+  const RenderForType = () => {
     return (
       products &&
       products.map((instance) => {
         return (
           <SwiperSlide key={instance._id}>
-            <Card title={instance.title} description={instance.description} image={instance.image} price={instance.price} chips={""} id={instance._id} _id={instance.id}></Card>
+            <Card title={instance.title} description={instance.description} image={instance.image} price={instance.price} chips={chip ? chip : ""} id={instance._id} _id={instance._id}></Card>
           </SwiperSlide>
         );
       })
@@ -128,16 +125,7 @@ export default function CarouselCard(props: carouselCardProps) {
         modules={[Pagination, Navigation, EffectFade]}
         className="mySwiper"
       >
-        {RenderForType(type)}
-        {/* {products &&
-          products.map((instance) => {
-            return (
-              <SwiperSlide key={instance._id}>
-                {" "}
-                <Card title={instance.title} description={instance.description} image={instance.image} price={instance.price} chips={""} id={instance._id}></Card>
-              </SwiperSlide>
-            );
-          })} */}
+        {RenderForType()}
       </Swiper>
     </Wrapper>
   );

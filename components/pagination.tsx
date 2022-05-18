@@ -1,6 +1,23 @@
 import { Pagination } from "@mantine/core";
 
-function PaginationComponent() {
-  return <Pagination total={6} color="cyan" radius="xl" withControls={false} />;
+interface propsType {
+  total: number;
+  pageChange: Function;
+}
+function PaginationComponent(props: propsType) {
+  const { total, pageChange } = props;
+
+  return (
+    <Pagination
+      onChange={(page) => {
+        console.log("PAGE", page);
+        pageChange(page);
+      }}
+      total={Math.ceil(total / 4)}
+      color="cyan"
+      radius="xl"
+      withControls={false}
+    />
+  );
 }
 export default PaginationComponent;
