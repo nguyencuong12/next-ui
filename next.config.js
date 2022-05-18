@@ -12,7 +12,7 @@ module.exports = {
     domains: ["cdn.tgdd.vn", "api.sashimeomeo.com", "martech.org", "localhost"],
   },
   env: {
-    // API_URL: "https://api.sashimeomeo.com",
-    API_URL: "http://localhost:5000",
+    API_URL: "https://api.sashimeomeo.com",
+    // API_URL: "http://localhost:5000",
   },
 };
