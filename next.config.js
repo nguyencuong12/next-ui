@@ -9,7 +9,7 @@ module.exports = {
     serverComponents: true,
   },
   images: {
-    domains: ["cdn.tgdd.vn", "api.sashimeomeo.com", "martech.org", "localhost"],
+    domains: ["cdn.tgdd.vn", "api.sashimeomeo.com", "martech.org"],
   },
   env: {
     API_URL: "https://api.sashimeomeo.com",
