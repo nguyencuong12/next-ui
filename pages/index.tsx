@@ -66,6 +66,7 @@ const SectionPolicy = styled.section`
   ${SectionMixin({})};
   position: relative;
   top: 0;
+  margin-top: 80px;
   /* background: #333333; */
   /* background: ${(props) => props.theme.policyBackground}; */
   display: flex;

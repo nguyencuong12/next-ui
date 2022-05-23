@@ -43,9 +43,11 @@ const Wrapper = styled.div<wrapperProps>`
   /* background: ${(props) => props.theme.primaryColor}; */
 
   /* background-color: ${(props) => (props.includeBanner ? "rgba(255, 255, 255, 0)" : "black")}; */
-  background: black;
-  color: ${(props) => props.theme.secondary};
-  height: 90px;
+  background: white;
+  border-bottom: 1px solid #ccc;
+  /* color: ${(props) => props.theme.secondary}; */
+  color: black;
+  height: 95px;
   padding: 20px 0px;
   position: fixed;
   z-index: 200;
@@ -54,6 +56,7 @@ const Wrapper = styled.div<wrapperProps>`
 
   @media only screen and (max-width: 768px) {
     padding: 18px 0px;
+    /* font-size: 14px; */
   }
 `;
 const Content = styled.div`
@@ -125,6 +128,7 @@ const Menu = styled.ul<menuProps>`
     height: 100vh;
     /* background: ${(props) => props.theme.swatches2}; */
     background: ${(props) => props.theme.productColor};
+
     top: 88px;
     width: 100%;
     left: ${(props) => (props.open ? "0" : "-120%")};
@@ -138,22 +142,27 @@ const Menu = styled.ul<menuProps>`
   /* border: 2px solid white; */
 `;
 const MenuItem = styled.li`
-  :hover a {
-    color: #a6a6a6 !important;
+  :hover * {
+    color: #cccc !important;
   }
+
   ${LiStyle({})};
   text-align: center;
   min-width: 120px;
   a {
     text-decoration: none;
     display: block;
-    color: ${(props) => props.theme.secondary};
+    /* color: ${(props) => props.theme.secondary}; */
+    color: black;
     transition: color 200ms;
   }
   @media only screen and (max-width: 768px) {
     padding: 10px;
     margin: 0;
     width: 100%;
+    * {
+      color: white !important;
+    }
   }
 `;
 const Control = styled.ul`
@@ -165,8 +174,7 @@ const ControlItem = styled.li`
   justify-content: space-between;
   align-items: center;
   min-height: 80px;
-
-  min-width: 150px;
+  min-width: 80px;
   ${LiStyle({})};
 `;
 interface AutoCompleteProps extends SelectItemProps {
@@ -237,15 +245,14 @@ const Navbar = () => {
       <Content>
         <Logo>
           <Link href="/">
-            <a>Sashimeomeo</a>
+            <a style={{ color: "black" }}>
+              <span style={{ color: "red", fontSize: "20px" }}>Sashi</span>meomeo
+            </a>
           </Link>
-          <BurgerStyle color={themeContext.accent} opened={open} onClick={setOpenMenu} title={title} />
+          <BurgerStyle color={"black"} opened={open} onClick={setOpenMenu} title={title} />
           {/* <div>aa</div> */}
         </Logo>
         <Center>
-          {/* <SearchStyle>
-            <Input placeholder="Fill Keyword Or Type" rightSectionWidth={70} onKeyDown={onSubmitSearch} styles={{ rightSection: { pointerEvents: "none" } }} rightSection={<Search size={20} color="#000"></Search>} />
-          </SearchStyle> */}
           <Menu open={open}>
             <MenuItem>
               <Link href="/">
@@ -269,7 +276,7 @@ const Navbar = () => {
         </Center>
         <Control>
           <ControlItem>
-            <Switch
+            {/* <Switch
               color="yellow"
               onLabel="VN"
               offLabel="US"
@@ -288,13 +295,13 @@ const Navbar = () => {
                   setCheck(false);
                 }
               }}
-            />
+            /> */}
 
             <ActionIcon
               size="lg"
               radius="xl"
               variant="transparent"
-              style={{ color: "#fff" }}
+              style={{ color: "#000" }}
               onClick={() => {
                 setSearchOpen(true);
               }}
@@ -304,7 +311,7 @@ const Navbar = () => {
 
             <Link href="/cart">
               <a>
-                <ActionIcon size="lg" radius="xl" variant="transparent" style={{ color: "#fff" }}>
+                <ActionIcon size="lg" radius="xl" variant="transparent" style={{ color: "#000" }}>
                   <ShoppingCart size={22} />
                 </ActionIcon>
               </a>

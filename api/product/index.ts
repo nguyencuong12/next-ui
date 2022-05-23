@@ -1,6 +1,5 @@
 import axios from "../axios.interceptor";
 const API_URL = "/product/";
-
 let Product_API = {
   fetch: async (page: number) => {
     console.log("FETCH CALL", API_URL);

@@ -19,12 +19,12 @@ const Wrapper = styled.div`
 
   div {
     /* font-family: "Square Peg", cursive; */
-    font-size: 20px;
+    font-size: 16px;
     /* color: #fff; */
     /* color: ${(props) => props.theme.footerBackground}; */
     color: #fff;
     @media only screen and (max-width: 768px) {
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 `;

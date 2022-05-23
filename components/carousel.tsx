@@ -28,17 +28,17 @@ export default function App() {
         className="mySwiper"
       >
         <SwiperSlide>
-          <Image alt="banner-image" src="/sashiBannerTest.svg" width={1920} height={"930"}></Image>
+          <Image alt="banner-image" src="/sashiBannerTest.svg" width={1920} height={610}></Image>
           {/* <img src="https://cdn.tgdd.vn/2022/04/banner/arp-5km-2880-800-1920x533.png" /> */}
         </SwiperSlide>
         <SwiperSlide>
-          <Image alt="banner-image" src="/sashiBannerTest.svg" width={1920} height={"930"}></Image>{" "}
+          <Image alt="banner-image" src="/sashiBannerTest.svg" width={1920} height={610}></Image>{" "}
         </SwiperSlide>
         <SwiperSlide>
-          <Image alt="banner-image" src="/sashiBannerTest.png" width={1920} height={"930"}></Image>{" "}
+          <Image alt="banner-image" src="/sashiBannerTest.png" width={1920} height={610}></Image>{" "}
         </SwiperSlide>
         <SwiperSlide>
-          <Image alt="banner-image" src="/sashiBannerTest.png" width={1920} height={"930"}></Image>{" "}
+          <Image alt="banner-image" src="/sashiBannerTest.png" width={1920} height={610}></Image>{" "}
         </SwiperSlide>
       </Swiper>
     </>

@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 const Wrapper = styled.div`
   position: relative;
-  top: 90px;
+  top: 96px;
   /* background: ${(props) => props.theme.primaryColor}; */
   color: #000;
   min-height: 100vh;

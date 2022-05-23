@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 const CustomButton = dynamic(() => import("../components/actionButton"));
 import { useTranslation } from "react-i18next";
 import { View360, ShoppingCart } from "tabler-icons-react";
-
+import formatEvents from "../utils/format";
 const Wrapper = styled.div`
   position: relative;
   min-height: 450px;
@@ -45,6 +45,7 @@ const Wrapper = styled.div`
   .title-card {
     padding-top: 30px;
     font-size: 20px;
+    color: #fff;
   }
   .price-card {
     color: red;
@@ -83,9 +84,9 @@ const CardComponent = (props: cardProps) => {
       }}
     >
       {chips && <div className="chips">{chips}</div>}
-      {image && <Image priority alt="product-image" src={image} width="250" height="300" objectFit="cover"></Image>}
+      {image && <Image alt="product-image" src={image} width="250" height="300" objectFit="contain"></Image>}
       <div className="title-card">{title}</div>
-      <div className="price-card">{price}</div>
+      <div className="price-card">{formatEvents.priceVND(parseFloat(price))}</div>
     </Wrapper>
   );
 };

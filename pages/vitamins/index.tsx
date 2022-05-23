@@ -28,7 +28,7 @@ const VitaminPage = () => {
 
   const fetchVitaminFromResponse = async (page: number) => {
     let response = await Product_API.fetchVitaminProducts(page);
-
+    console.log("RESPONSE  ", response);
     setTotalPage(response.data.products.count);
     setProducts(response.data.products.product);
   };
@@ -40,7 +40,7 @@ const VitaminPage = () => {
       <VitaminContent>
         {products &&
           products.map((instance) => {
-            return <CardComponent key={instance._id} title={""} description={""} image={""} price={""} chips={""} id={""} _id={""}></CardComponent>;
+            return <CardComponent key={instance._id} title={instance.title} description={instance.description} image={instance.image} price={instance.price} chips={"VT"} id={instance._id} _id={instance._id}></CardComponent>;
           })}
       </VitaminContent>
       <PaginationComponent total={totalPage!} pageChange={() => {}}></PaginationComponent>
