@@ -126,7 +126,7 @@ const OrderProducts = () => {
     <Wrapper>
       <LoadingOverlay visible={loading}></LoadingOverlay>
       <UserInfo>
-        <h4>USER INFORMATION</h4>
+        <h4>Thông tin đặt hàng</h4>
         <Input
           icon={<At />}
           placeholder="Ho ten"
@@ -171,14 +171,14 @@ const OrderProducts = () => {
         />
       </UserInfo>
       <ProductInfo>
-        <h4>Product Information</h4>
+        <h4>Các sản phẩm trong đơn hàng</h4>
         {renderProductInfo}
         <Total>
-          <h4 className="title">Total</h4>
+          <h4 className="title">Tổng Tiền</h4>
           <div className="total-price">{renderTotalPrice()}</div>
         </Total>
         <Button color="red" onClick={() => handleOrder()}>
-          Pre Order
+          Đặt Hàng
         </Button>
       </ProductInfo>
     </Wrapper>

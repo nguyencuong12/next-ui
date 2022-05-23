@@ -190,23 +190,23 @@ function Cart() {
       >
         <thead>
           <tr>
-            <th>Product</th>
-            <th>Amount</th>
-            <th>Price</th>
-            <th>Total</th>
+            <th>Sản Phẩm</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>Tổng Tiền</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
       </TableWrapper>
       <CartCollateral>
-        <div className="summary">Cart Totals</div>
+        <div className="summary">Tổng Tiền Đơn Hàng</div>
         <div className="subtotal">{renderSummary}</div>
         <div className="total">
           <h4>Total</h4>
           <p>{totalAllProducts()}</p>
         </div>
         <div className="payment">
-          <CustomButton IconCustom={() => <ShoppingCart></ShoppingCart>} title="PROCEED TO CHECKOUT" fullWidth={true} onClick={() => onHandleOrder()}></CustomButton>
+          <CustomButton IconCustom={() => <ShoppingCart></ShoppingCart>} title="Thanh Toán" fullWidth={true} onClick={() => onHandleOrder()}></CustomButton>
         </div>
       </CartCollateral>
     </Wrapper>
