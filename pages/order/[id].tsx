@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import styled from 'styled-components';
-import { Button, Input, Select, Textarea } from '@mantine/core';
-import { AddressBook, At, Mail, Phone } from 'tabler-icons-react';
-import cartInterface from '../../interfaces/cart';
-import CartEvents from '../../utils/storage';
-import formatEvents from '../../utils/format';
-import { addAbortSignal } from 'stream';
-import {
-  orderProducts,
-  userInfoInterface,
-  orderInterface,
-} from '../../interfaces/orderProducts';
-import { v4 as uuidv4 } from 'uuid';
-import { guestAPI } from '../../api';
-import { SweetAlert } from '../../components/sweetAlert';
-import { LoadingOverlay } from '@mantine/core';
-import LoadingComponent from '../../components/loading';
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import styled from "styled-components";
+import { Button, Input, Select, Textarea } from "@mantine/core";
+import { AddressBook, At, Mail, Phone } from "tabler-icons-react";
+import cartInterface from "../../interfaces/cart";
+import CartEvents from "../../utils/storage";
+import formatEvents from "../../utils/format";
+import { addAbortSignal } from "stream";
+import { orderProducts, userInfoInterface, orderInterface } from "../../interfaces/orderProducts";
+import { v4 as uuidv4 } from "uuid";
+import { guestAPI } from "../../api";
+import { SweetAlert } from "../../components/sweetAlert";
+import { LoadingOverlay } from "@mantine/core";
+import LoadingComponent from "../../components/loading";
 const Wrapper = styled.div`
   display: flex;
   /* align-items: */
@@ -29,9 +25,9 @@ const Wrapper = styled.div`
 `;
 const UserInfo = styled.div`
   margin: 5px;
-  background: ${props => props.theme.productColor};
+  background: ${(props) => props.theme.productColor};
 
-  color: ${props => props.theme.secondary};
+  color: ${(props) => props.theme.secondary};
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -44,8 +40,8 @@ const UserInfo = styled.div`
 const ProductInfo = styled.div`
   flex: 1;
   margin: 5px;
-  background: ${props => props.theme.productColor};
-  color: ${props => props.theme.secondary};
+  background: ${(props) => props.theme.productColor};
+  color: ${(props) => props.theme.secondary};
   display: flex;
   flex-direction: column;
   padding: 40px;
@@ -74,11 +70,11 @@ const OrderProducts = () => {
   const [totalOrder, setTotalOrder] = useState(0);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<userInfoInterface>({
-    FullName: '',
-    PhoneNumber: '',
-    Note: '',
-    Email: '',
-    Address: '',
+    FullName: "",
+    PhoneNumber: "",
+    Note: "",
+    Email: "",
+    Address: "",
   });
 
   useEffect(() => {
@@ -92,7 +88,7 @@ const OrderProducts = () => {
 
   const renderTotalPrice = (): any => {
     let result: number = 0;
-    carts.map(instance => {
+    carts.map((instance) => {
       result = result + parseFloat(instance.price) * instance.amount;
     });
     return formatEvents.priceVND(result);
@@ -110,22 +106,20 @@ const OrderProducts = () => {
       orderInfo: carts,
       totalPriceOrders: renderTotalPrice(),
     };
-    console.log('INFO ORDER', infoOrder);
+
     setLoading(true);
     let response = await guestAPI.order(infoOrder);
     if (response) {
       setLoading(false);
-      SweetAlert.onSuccess('Order Products Success !!');
+      SweetAlert.onSuccess("Đã đặt hàng thành công !");
     }
   };
-  const renderProductInfo = carts.map(instance => (
+  const renderProductInfo = carts.map((instance) => (
     <ProductInfoContent key={instance.id}>
       <div className="product-name">
         {instance.title} X {instance.amount}
       </div>
-      <div className="product-price">
-        {totalPriceWithAmount(instance.price, instance.amount)}
-      </div>
+      <div className="product-price">{totalPriceWithAmount(instance.price, instance.amount)}</div>
     </ProductInfoContent>
   ));
   return (
@@ -137,7 +131,7 @@ const OrderProducts = () => {
           icon={<At />}
           placeholder="Ho ten"
           onChange={(e: any) => {
-            onFormChange('FullName', e);
+            onFormChange("FullName", e);
           }}
         />
 
@@ -145,14 +139,14 @@ const OrderProducts = () => {
           icon={<Phone />}
           placeholder="SDT"
           onChange={(e: any) => {
-            onFormChange('PhoneNumber', e);
+            onFormChange("PhoneNumber", e);
           }}
         />
         <Input
           icon={<Mail />}
           placeholder="Email"
           onChange={(e: any) => {
-            onFormChange('Email', e);
+            onFormChange("Email", e);
           }}
         />
 
@@ -160,19 +154,19 @@ const OrderProducts = () => {
           icon={<AddressBook />}
           placeholder="Dia Chi"
           onChange={(e: any) => {
-            onFormChange('Address', e);
+            onFormChange("Address", e);
           }}
         />
         <Textarea
-          sx={theme => ({
+          sx={(theme) => ({
             backgroundColor: theme.colors.gray[0],
-            padding: '10px',
-            borderRadius: '5px',
+            padding: "10px",
+            borderRadius: "5px",
           })}
           placeholder="Ghi chu"
           label="Ghi chu"
           onChange={(e: any) => {
-            onFormChange('Note', e);
+            onFormChange("Note", e);
           }}
         />
       </UserInfo>
