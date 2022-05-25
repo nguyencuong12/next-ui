@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 import dynamic from "next/dynamic";
 import styled, { css } from "styled-components";
 import { Product_API } from "../api/product";
-import { setIncludeBanner } from "../redux/navbar/navbar";
+
 import { useDispatch } from "react-redux";
 
 const Loading = dynamic(() => import("../components/loading"));
-const Card = dynamic(() => import("../components/card"));
+
 const Carousel = dynamic(() => import("../components/carousel"));
 const CarouselCard = dynamic(() => import("../components/carouselCard"));
 const PolicyItem = dynamic(() => import("../components/policy"));
-const HotCarousel = dynamic(() => import("../components/hotCarousel"));
-const FeatureCarousel = dynamic(() => import("../components/featureCarousel"));
 
 import { useTranslation } from "react-i18next";
 

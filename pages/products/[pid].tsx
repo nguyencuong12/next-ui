@@ -108,22 +108,18 @@ const ProductView = () => {
   const [product, setProduct] = useState<productProps>();
 
   useEffect(() => {
-    console.log("CALL !!");
-  }, []);
-
-  useEffect(() => {
+    const { pid } = router.query;
     const getProduct = async (id: string | string[]) => {
       let productFromResponses = await getProductFromResponse(id);
       setProduct(productFromResponses);
     };
 
     if (router.isReady) {
-      const { pid } = router.query;
       if (pid) {
         getProduct(pid!);
       }
     }
-  }, [router.isReady]);
+  }, [router.isReady, router.query]);
 
   const getProductFromResponse = async (id: string | string[]) => {
     let response = await Product_API.fetchProductByID(id.toString());

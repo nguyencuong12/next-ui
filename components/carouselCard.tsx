@@ -71,11 +71,11 @@ export default function CarouselCard(props: carouselCardProps) {
   const { callback, chip } = props;
 
   useEffect(() => {
+    const fetchDataFromCallback = async () => {
+      setProducts(await callback());
+    };
     fetchDataFromCallback();
-  }, []);
-  const fetchDataFromCallback = async () => {
-    setProducts(await callback());
-  };
+  }, [callback]);
 
   const RenderForType = () => {
     return (

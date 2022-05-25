@@ -234,7 +234,7 @@ const Navbar = () => {
         console.log("stoped");
       });
     };
-  }, [router.events]);
+  }, [router.events, dispatch]);
 
   const setOpenMenu = () => {
     dispatch(change());

@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   min-height: 600px;
 `;
 const Content = styled.div`
-  width: 90%;
+  width: 95%;
   margin: 20px auto;
   /* margin: 80px auto; */
   padding: 80px auto;
