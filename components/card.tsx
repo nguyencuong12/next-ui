@@ -79,7 +79,9 @@ const CardComponent = (props: cardProps) => {
   const router = useRouter();
 
   const onHandleClick = (href: string) => {
+    console.log("CALL 123");
     router.push("products/" + href);
+    // window.location.href = "products/" + href;
   };
   return (
     <Wrapper

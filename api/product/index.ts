@@ -22,12 +22,20 @@ let Product_API = {
       data: { currentPage: page },
     });
   },
+  fetchCatFoods: async (page: number) => {
+    return await axios({
+      url: API_URL + "cat/foods",
+      method: "POST",
+      data: { currentPage: page },
+    });
+  },
   fetchFeatureProducts: async () => {
     return await axios({
       url: API_URL + "feature",
       method: "POST",
     });
   },
+
   fetchProductByID: async (id: string) => {
     return await axios({
       // /site/siteDashboard/:id
