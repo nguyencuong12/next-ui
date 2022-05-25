@@ -80,7 +80,18 @@ const CardComponent = (props: cardProps) => {
 
   const onHandleClick = (href: string) => {
     console.log("CALL 123");
-    router.push("products/" + href);
+    window.history.replaceState(null, "", "/about");
+    router.push(`/products/${href}`, `/products/${href}`);
+
+    // window.location.replace(`products/${href}`);
+    // router.push({
+    //   pathname:
+    // });
+    // router.push({
+    //   asPath: "products/" + href,
+    // });
+    // router.push("products/" + href, locale);
+    // router.push();
     // window.location.href = "products/" + href;
   };
   return (
