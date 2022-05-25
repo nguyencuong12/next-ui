@@ -68,13 +68,13 @@ const SectionPolicy = styled.section`
   /* background: #333333; */
   /* background: ${(props) => props.theme.policyBackground}; */
   display: flex;
-
   justify-content: space-between;
   align-items: flex-start;
+
   /* gap: 50px; */
   padding: 20px 20px;
   margin-bottom: 20px;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 780px) {
     flex-direction: column;
     align-items: center;
   }
@@ -140,10 +140,10 @@ function Home({ results }: HomeProps) {
         <Carousel></Carousel>
       </SectionBanner>
       <SectionPolicy>
-        <PolicyItem href="/" image="/box.png" description={t("orders")}></PolicyItem>
-        <PolicyItem href="/animals/cat" image="/cat.png" description={t("cat")}></PolicyItem>
-        <PolicyItem href="/product/food" image="/pet-food1.png" description={t("foods")}></PolicyItem>
-        <PolicyItem href="/product/vitamin" image="/vitamins.png" description={t("vitamin")}></PolicyItem>
+        <PolicyItem href="/cat/clothes" image="/box.png" description={"Quần Áo Cho Mèo"}></PolicyItem>
+        <PolicyItem href="/cat/breeds" image="/cat.png" description={t("cat")}></PolicyItem>
+        <PolicyItem href="/cat/food" image="/pet-food1.png" description={t("foods")}></PolicyItem>
+        <PolicyItem href="/cat/vitamins" image="/vitamins.png" description={t("vitamin")}></PolicyItem>
       </SectionPolicy>
       <Section>
         <div className="title">{t("hotProducts")}</div>

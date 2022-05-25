@@ -37,23 +37,23 @@ const MenuProducts = (props: MenuProductProps) => {
       <Divider />
       <Menu.Label>Danh Mục Sản Phẩm </Menu.Label>
       <Menu.Item>
-        <Link href="/vitamins">Vitamin Cho Mèo</Link>
+        <Link href="/cat/vitamins">Vitamin Cho Mèo</Link>
       </Menu.Item>
       <Divider />
       <Menu.Item>
-        <Link href="/cats">Các Giống Mèo</Link>
+        <Link href="/cat/breeds">Các Giống Mèo</Link>
       </Menu.Item>
       <Divider />
       <Menu.Item>
-        <Link href="/cats">Hạt Cho Mèo</Link>
+        <Link href="/cat/seeds">Hạt Cho Mèo</Link>
       </Menu.Item>
       <Divider />
       <Menu.Item>
-        <Link href="/cats">Pate Cho Mèo</Link>
+        <Link href="/cat/pate">Pate Cho Mèo</Link>
       </Menu.Item>
       <Divider />
       <Menu.Item>
-        <Link href="/cats">Đồ Chơi Cho Mèo</Link>
+        <Link href="/cat/toys">Đồ Chơi Cho Mèo</Link>
       </Menu.Item>
       {/* <Menu.Item >Transfer my data</Menu.Item>,
             <Menu.Item color="red" >Delete my account</Menu.Item> */}

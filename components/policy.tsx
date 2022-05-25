@@ -6,8 +6,10 @@ const Wrapper = styled.div`
   min-height: 120px;
   background: ${(props) => props.theme.productColor};
   border-radius: 10px;
-  width: 350px;
-  min-height: 140px;
+  width: 360px;
+  /* overflow-x: hidden; */
+
+  min-height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,7 +48,7 @@ const Policy = (props: propsType) => {
       }}
     >
       <Image alt="policy" src={image} height={60} width={60}></Image>
-      <div>{description}</div>
+      <div style={{ textAlign: "center" }}>{description}</div>
     </Wrapper>
   );
 };

@@ -113,11 +113,11 @@ export default function CarouselCard(props: carouselCardProps) {
             slidesPerView: 2,
             spaceBetween: 40,
           },
-          1000: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
           1200: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          1600: {
             slidesPerView: 4,
             spaceBetween: 40,
           },

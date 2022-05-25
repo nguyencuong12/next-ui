@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import CardComponent from "../../components/card";
-import PaginationComponent from "../../components/pagination";
-import { Product_API } from "../../api/product";
+import CardComponent from "../../../components/card";
+import PaginationComponent from "../../../components/pagination";
+import { Product_API } from "../../../api/product";
 const VitaminWrapper = styled.div`
   min-height: 90vh;
   display: flex;
