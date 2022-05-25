@@ -43,12 +43,15 @@ const Wrapper = styled.div`
     font-size: 18px;
   }
   .title-card {
-    padding-top: 30px;
+    padding: 5px;
+    width: 80%;
+    text-align: center;
     font-size: 20px;
     color: #fff;
   }
   .price-card {
     color: red;
+    padding: 10px;
   }
   @media only screen and (max-width: 768px) {
     div {
