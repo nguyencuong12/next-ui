@@ -13,16 +13,16 @@ let SweetAlert = {
   },
   onConfirmDelete: (id: string) => {
     return Swal.fire({
-      title: "Do you want to delete this item ?",
+      title: "Bạn có muốn xóa sản phẩm này ra khỏi giỏ hàng ?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "OK",
     }).then((result) => {
       if (result.isConfirmed) {
         CartEvents.deleteItem(id);
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        Swal.fire("Đã xóa sản phẩm khỏi giỏ hàng !", "", "success");
       }
     });
   },

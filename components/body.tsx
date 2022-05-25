@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   top: 96px;
   /* background: ${(props) => props.theme.primaryColor}; */
   color: #000;
-  min-height: 100vh;
+  min-height: 70vh;
 `;
 
 interface propsType {

@@ -9,8 +9,13 @@ const VitaminWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 50px 0px;
 `;
-const VitaminContent = styled.section``;
+const VitaminContent = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
 
 const VitaminPage = () => {
   interface productProps {

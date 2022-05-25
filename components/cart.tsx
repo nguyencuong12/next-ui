@@ -6,15 +6,16 @@ import { Trash, ShoppingCart } from "tabler-icons-react";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import cartInterface from "../interfaces/cart";
+
 const CustomButton = dynamic(() => import("../components/actionButton"));
 const NumberControl = dynamic(() => import("../components/numberInput"));
 const LoadingOverLay = dynamic(() => import("../components/loadingOver"));
-
+import TableComponent from "./table";
 import CartEvents from "../utils/storage";
 import formatEvents from "../utils/format";
 import { useRouter } from "next/router";
 import { SweetAlert } from "./sweetAlert";
+import ProductInterface from "../utils/interfaces/productInterface";
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,6 +34,9 @@ const SummaryWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px 0px;
+  .summary-product {
+    width: 300px;
+  }
 `;
 
 const TableWrapper = styled(Table)`
@@ -47,8 +51,7 @@ const TableWrapper = styled(Table)`
 `;
 const CartCollateral = styled.div`
   flex-basis: 600px;
-  padding: 5px;
-  margin: 10px;
+  margin: 5px;
 
   /* background: ${(props) => props.theme.productColor}; */
 
@@ -62,7 +65,8 @@ const CartCollateral = styled.div`
     margin: 0px;
   }
   .summary {
-    background: #e9e9e9;
+    background: #423e3b;
+    color: #fff;
     padding: 10px 0px;
     font-weight: 800;
     font-size: 18px !important;
@@ -97,27 +101,27 @@ const onDeleteItem = (id: string) => {
   // CartEvents.deleteItem(id);
 };
 
-const controlNumber = (element: cartInterface) => {
+const controlNumber = (element: ProductInterface) => {
   const { amount, id } = element;
-  return <NumberControl amount={amount} id={id}></NumberControl>;
+  return <NumberControl amount={amount!} id={id!}></NumberControl>;
 };
 
 function Cart() {
   // const [portfolioData, setPortfoloioData] = useState<IProject[] | []>([])
 
-  const [carts, setCarts] = useState<cartInterface[] | []>([]);
+  const [carts, setCarts] = useState<ProductInterface[] | []>([]);
   const router = useRouter();
   const themeContext = useContext(ThemeContext);
-  const product = (element: cartInterface): ReactNode => {
+  const product = (element: ProductInterface): ReactNode => {
     return (
       <>
         {element ? (
           <ProductWrapper>
             {/* {element ? <h1>a</h1> : <h1>LOADING</h1>}; */}
-            <ActionIcon size={"md"} variant="transparent" style={{ color: themeContext.accent, paddingRight: "5px" }} onClick={() => onDeleteItem(element.id)}>
+            <ActionIcon size={"md"} variant="transparent" style={{ color: themeContext.accent, paddingRight: "5px" }} onClick={() => onDeleteItem(element.id!)}>
               <Trash />
             </ActionIcon>
-            <Image alt="cart-image" src={element.image} height={80} width={80} objectFit="cover"></Image>
+            <Image alt="cart-image" src={element.image!.toString()} height={80} width={80} objectFit="cover"></Image>
             <Link href="/">
               <a style={{ marginLeft: "10px", fontSize: "14px" }}>{element.title}</a>
             </Link>
@@ -154,7 +158,7 @@ function Cart() {
   const totalAllProducts = () => {
     let total: number = 0;
     carts.map((instance) => {
-      total = total + parseFloat(instance.price) * instance.amount;
+      total = total + parseFloat(instance.price!) * instance.amount!;
     });
     return formatVND(total);
 
@@ -165,39 +169,22 @@ function Cart() {
       <div className="summary-product">
         {element.title} X {element.amount}
       </div>
-      <div className="summary-price">{totalPrice(element.price, element.amount)}</div>
+      <div className="summary-price">{totalPrice(element.price!, element.amount!)}</div>
     </SummaryWrapper>
   ));
   const rows = carts.map((element) => (
     <tr key={element.id}>
       <td>{product(element)}</td>
       <td>{controlNumber(element)}</td>
-      <td>{formatVND(parseFloat(element.price))}</td>
-      <td>{totalPrice(element.price, element.amount)}</td>
+      <td>{formatVND(parseFloat(element.price!))}</td>
+      <td>{totalPrice(element.price!, element.amount!)}</td>
       {/* <td>{element.price * element.amount}</td> */}
     </tr>
   ));
 
   return (
     <Wrapper>
-      <TableWrapper
-        verticalSpacing="xs"
-        fontSize={"xs"}
-        sx={(theme) => ({
-          color: "black",
-          border: "1px solid gray",
-        })}
-      >
-        <thead>
-          <tr>
-            <th>Sản Phẩm</th>
-            <th>Số lượng</th>
-            <th>Giá</th>
-            <th>Tổng Tiền</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </TableWrapper>
+      <TableComponent products={carts}></TableComponent>
       <CartCollateral>
         <div className="summary">Tổng Tiền Đơn Hàng</div>
         <div className="subtotal">{renderSummary}</div>
