@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   min-height: 600px;
 `;
 const Content = styled.div`
-  width: 80%;
+  width: 90%;
   margin: 20px auto;
   /* margin: 80px auto; */
   padding: 80px auto;
@@ -82,10 +82,18 @@ const Footer = () => {
           <li>
             <iframe
               src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FSashimeomeo-100849721948917%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=410715053650842"
-              width={360}
-              height={400}
+              width={340}
+              height={300}
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
             ></iframe>
+          </li>
+        </ul>
+        <ul className="youtube">
+          <li>
+            <p className="title">YOUTUBE</p>
+          </li>
+          <li>
+            <iframe width={340} height={300} src="https://www.youtube.com/embed/dJq_O-AZ_Ag" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
           </li>
         </ul>
 
@@ -95,8 +103,8 @@ const Footer = () => {
           </li>
           <li>
             <iframe
-              width={360}
-              height={400}
+              width={340}
+              height={300}
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.6547065599484!2d106.62337121525766!3d10.83771449227995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752a2b2507363b%3A0xf23e5e1ac9fbbc1!2zNzMgxJDDtG5nIEjGsG5nIFRodeG6rW4gMzEsIMSQw7RuZyBIxrBuZyBUaHXhuq1uLCBRdeG6rW4gMTIsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1653460071302!5m2!1svi!2s"
             ></iframe>
           </li>
