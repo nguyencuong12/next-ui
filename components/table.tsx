@@ -17,6 +17,7 @@ const TableWrapper = styled.table`
   margin: 5px;
   border-collapse: collapse;
   padding: 5px;
+  border: 3px solid #423e3b;
 
   td,
   th {

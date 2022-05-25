@@ -32,12 +32,11 @@ const ActionButton = (props: propsType) => {
       size={"xs"}
       leftIcon={<IconCustom size={14} />}
       sx={(theme) => ({
-        color: "#000",
-
-        backgroundColor: themeContext.accent,
-        "&:hover": {
-          backgroundColor: theme.colors.gray[1],
-        },
+        color: "#fff",
+        backgroundColor: "red",
+        // "&:hover": {
+        //   backgroundColor: theme.colors.gray[1],
+        // },
       })}
     >
       <TitleWrapper> {title}</TitleWrapper>

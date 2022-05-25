@@ -52,14 +52,15 @@ const TableWrapper = styled(Table)`
 const CartCollateral = styled.div`
   flex-basis: 600px;
   margin: 5px;
-
+  padding: 10px;
+  border: 3px solid #423e3b;
   /* background: ${(props) => props.theme.productColor}; */
 
   background: #f6f6f6;
   /* background: ${(props) => props.theme.swatches}; */
   /* color: ${(props) => props.theme.secondary}; */
   color: black;
-  min-height: 280px;
+  /* min-height: 280px; */
   @media only screen and (max-width: 768px) {
     width: 100%;
     margin: 0px;
@@ -143,7 +144,7 @@ function Cart() {
   }, []);
 
   const onHandleOrder = () => {
-    router.push("/order/test");
+    router.push("/order/products");
   };
   // useEffect(() => {
   //   console.log("CARTS CHANGE !!!", carts);

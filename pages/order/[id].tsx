@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+
 import styled from "styled-components";
-import { Button, Input, Select, Textarea } from "@mantine/core";
+import { Box, Button, Textarea, TextInput } from "@mantine/core";
 import { AddressBook, At, Mail, Phone } from "tabler-icons-react";
 import cartInterface from "../../interfaces/cart";
 import CartEvents from "../../utils/storage";
 import formatEvents from "../../utils/format";
-import { addAbortSignal } from "stream";
-import { orderProducts, userInfoInterface, orderInterface } from "../../interfaces/orderProducts";
-import { v4 as uuidv4 } from "uuid";
+
+import { orderProducts } from "../../interfaces/orderProducts";
+// import { v4 as uuidv4 } from "uuid";
 import { guestAPI } from "../../api";
 import { SweetAlert } from "../../components/sweetAlert";
 import { LoadingOverlay } from "@mantine/core";
-import LoadingComponent from "../../components/loading";
+import { useForm } from "@mantine/form";
+
 const Wrapper = styled.div`
   display: flex;
   /* align-items: */
@@ -26,7 +27,6 @@ const Wrapper = styled.div`
 const UserInfo = styled.div`
   margin: 5px;
   background: ${(props) => props.theme.productColor};
-
   color: ${(props) => props.theme.secondary};
   flex: 1;
   display: flex;
@@ -34,7 +34,7 @@ const UserInfo = styled.div`
   padding: 40px;
   border-radius: 5px;
   * {
-    margin: 8px 0px !important;
+    margin: 5px 0px !important;
   }
 `;
 const ProductInfo = styled.div`
@@ -66,16 +66,24 @@ const Total = styled.div`
 `;
 
 const OrderProducts = () => {
-  const [carts, setCarts] = useState<cartInterface[] | []>([]);
-  const [totalOrder, setTotalOrder] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState<userInfoInterface>({
-    FullName: "",
-    PhoneNumber: "",
-    Note: "",
-    Email: "",
-    Address: "",
+  const form = useForm({
+    initialValues: {
+      FullName: "",
+      PhoneNumber: "",
+      Note: "",
+      Email: "",
+      Address: "",
+    },
+    validate: {
+      Address: (value) => (value.length < 4 ? "Address must have at least 4 letters" : null),
+      FullName: (value) => (value.length < 4 ? "Name must have at least 4 letters" : null),
+      PhoneNumber: (value) => (value.length < 10 ? "You must be at least 10 to register" : null),
+    },
   });
+
+  const [carts, setCarts] = useState<cartInterface[] | []>([]);
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const listCarts = JSON.parse(CartEvents.get()!);
@@ -94,15 +102,15 @@ const OrderProducts = () => {
     return formatEvents.priceVND(result);
     // return result;
   };
-  const onFormChange = (model: string, e: any) => {
-    setFormData({
-      ...formData,
-      [model]: e.target.value,
-    });
-  };
+  // const onFormChange = (model: string, e: any) => {
+  //   setFormData({
+  //     ...formData,
+  //     [model]: e.target.value,
+  //   });
+  // };
   const handleOrder = async () => {
     let infoOrder: orderProducts = {
-      userInfo: formData,
+      userInfo: form.values,
       orderInfo: carts,
       totalPriceOrders: renderTotalPrice(),
     };
@@ -127,36 +135,11 @@ const OrderProducts = () => {
       <LoadingOverlay visible={loading}></LoadingOverlay>
       <UserInfo>
         <h4>Thông tin đặt hàng</h4>
-        <Input
-          icon={<At />}
-          placeholder="Ho ten"
-          onChange={(e: any) => {
-            onFormChange("FullName", e);
-          }}
-        />
 
-        <Input
-          icon={<Phone />}
-          placeholder="SDT"
-          onChange={(e: any) => {
-            onFormChange("PhoneNumber", e);
-          }}
-        />
-        <Input
-          icon={<Mail />}
-          placeholder="Email"
-          onChange={(e: any) => {
-            onFormChange("Email", e);
-          }}
-        />
-
-        <Input
-          icon={<AddressBook />}
-          placeholder="Dia Chi"
-          onChange={(e: any) => {
-            onFormChange("Address", e);
-          }}
-        />
+        <TextInput required icon={<At />} placeholder="Ho ten" {...form.getInputProps("FullName")} />
+        <TextInput required icon={<Phone />} placeholder="SDT" {...form.getInputProps("PhoneNumber")} />
+        <TextInput required icon={<Mail />} placeholder="Email" {...form.getInputProps("Email")} />
+        <TextInput required icon={<AddressBook />} placeholder="Dia Chi" {...form.getInputProps("Address")} />
         <Textarea
           sx={(theme) => ({
             backgroundColor: theme.colors.gray[0],
@@ -165,9 +148,7 @@ const OrderProducts = () => {
           })}
           placeholder="Ghi chu"
           label="Ghi chu"
-          onChange={(e: any) => {
-            onFormChange("Note", e);
-          }}
+          {...form.getInputProps("Note")}
         />
       </UserInfo>
       <ProductInfo>
@@ -177,7 +158,17 @@ const OrderProducts = () => {
           <h4 className="title">Tổng Tiền</h4>
           <div className="total-price">{renderTotalPrice()}</div>
         </Total>
-        <Button color="red" onClick={() => handleOrder()}>
+        <Button
+          color="red"
+          type="submit"
+          onClick={() => {
+            let validate = form.validate();
+            console.log("A", validate);
+            if (!validate.hasErrors) {
+              handleOrder();
+            }
+          }}
+        >
           Đặt Hàng
         </Button>
       </ProductInfo>
