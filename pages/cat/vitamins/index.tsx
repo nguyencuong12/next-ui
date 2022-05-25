@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import CardComponent from "../../../components/card";
-import PaginationComponent from "../../../components/pagination";
-import { Product_API } from "../../../api/product";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import CardComponent from '../../../components/card';
+import PaginationComponent from '../../../components/pagination';
+import { Product_API } from '../../../api/product';
 const VitaminWrapper = styled.div`
   min-height: 90vh;
   display: flex;
@@ -33,7 +33,7 @@ const VitaminPage = () => {
 
   const fetchVitaminFromResponse = async (page: number) => {
     let response = await Product_API.fetchVitaminProducts(page);
-    console.log("RESPONSE  ", response);
+    console.log('RESPONSE  ', response);
     setTotalPage(response.data.products.count);
     setProducts(response.data.products.product);
   };
@@ -44,11 +44,25 @@ const VitaminPage = () => {
     <VitaminWrapper>
       <VitaminContent>
         {products &&
-          products.map((instance) => {
-            return <CardComponent key={instance._id} title={instance.title} description={instance.description} image={instance.image} price={instance.price} chips={"VT"} id={instance._id} _id={instance._id}></CardComponent>;
+          products.map(instance => {
+            return (
+              <CardComponent
+                key={instance._id}
+                title={instance.title}
+                description={instance.description}
+                image={instance.image}
+                price={instance.price}
+                chips={'VT'}
+                id={instance._id}
+                _id={instance._id}
+              ></CardComponent>
+            );
           })}
       </VitaminContent>
-      <PaginationComponent total={totalPage!} pageChange={() => {}}></PaginationComponent>
+      <PaginationComponent
+        total={totalPage!}
+        pageChange={() => {}}
+      ></PaginationComponent>
     </VitaminWrapper>
   );
 };

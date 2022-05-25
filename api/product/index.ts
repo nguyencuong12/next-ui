@@ -1,38 +1,38 @@
-import axios from "../axios.interceptor";
-const API_URL = "/product/";
+import axios from '../axios.interceptor';
+const API_URL = '/product/';
 let Product_API = {
   fetch: async (page: number) => {
-    console.log("FETCH CALL", API_URL);
+    console.log('FETCH CALL', API_URL);
     return await axios({
       url: API_URL,
-      method: "GET",
+      method: 'GET',
       params: { currentPage: page },
     });
   },
   fetchHotProducts: async () => {
     return await axios({
-      url: API_URL + "hot",
-      method: "POST",
+      url: API_URL + 'hot',
+      method: 'POST',
     });
   },
   fetchVitaminProducts: async (page: number) => {
     return await axios({
-      url: API_URL + "vitamins",
-      method: "POST",
+      url: API_URL + 'cat/vitamins',
+      method: 'POST',
       data: { currentPage: page },
     });
   },
   fetchCatFoods: async (page: number) => {
     return await axios({
-      url: API_URL + "cat/foods",
-      method: "POST",
+      url: API_URL + 'cat/foods',
+      method: 'POST',
       data: { currentPage: page },
     });
   },
   fetchFeatureProducts: async () => {
     return await axios({
-      url: API_URL + "feature",
-      method: "POST",
+      url: API_URL + 'feature',
+      method: 'POST',
     });
   },
 
@@ -40,7 +40,7 @@ let Product_API = {
     return await axios({
       // /site/siteDashboard/:id
       url: API_URL + id,
-      method: "GET",
+      method: 'GET',
     });
     // product
   },
