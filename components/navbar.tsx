@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, forwardRef } from "react";
+import React, { useState, useEffect, useContext, forwardRef, useRef } from "react";
 import styled, { css, ThemeContext } from "styled-components";
 
 import { Burger, ActionIcon, Switch, Modal, useMantineTheme, Autocomplete, Group, Avatar, Text, MantineColor, SelectItemProps } from "@mantine/core";
@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { searchAPI } from "../api";
 import { useRouter } from "next/router";
 import { setCloseMenu } from "../redux/menu/menu";
+import CartEvents from "../utils/storage";
 const ProductMenu = dynamic(() => import("../components/productMenu"));
 
 interface menuProps {
@@ -203,26 +204,38 @@ const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
 
   const [searchResult, setSearchResult] = useState<AutoCompleteProps[]>([]);
-
   const title = opened ? "Close navigation" : "Open navigation";
   const open = useSelector((state: RootState) => state.menuReducer.open);
   const includeNav = useSelector((state: RootState) => state.navbarReducer.includeBanner);
   const dispatch = useDispatch();
   const themeContext = useContext(ThemeContext);
   const router = useRouter();
-
+  const [cart, setCart] = useState(0);
   const onSubmitSearch = (event: any) => {
     if (event.keyCode === 13) {
       console.log("ENTER KEY PRESS");
     }
   };
   useEffect(() => {
+    if (cart > 0) {
+      console.log("CHANGEEE", cart);
+    }
+  }, [cart]);
+  useEffect(() => {
+    let cartItems = JSON.parse(CartEvents.get()!);
+    setCart(cartItems.length);
+    // setCart(JSON.parse(CartEvents.get()!));
     let language = localStorage.getItem("language");
     if (language === "en") {
       setCheck(true);
     } else {
       setCheck(false);
     }
+
+    // window.addEventListener("storage", () => {
+    //   let cartItems = JSON.parse(CartEvents.get()!);
+    //   setCart(cartItems.length);
+    // });
   }, []);
 
   useEffect(() => {
