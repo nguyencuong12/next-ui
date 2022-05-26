@@ -1,7 +1,8 @@
 import React from "react";
+import LayoutCatProducts from "../../../components/layoutCatProducts";
 
 const Seeds = () => {
-  return <div>Seed</div>;
+  return <LayoutCatProducts type={4}></LayoutCatProducts>;
 };
 
 export default Seeds;
