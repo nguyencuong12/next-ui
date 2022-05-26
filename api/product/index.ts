@@ -36,6 +36,34 @@ let Product_API = {
       data: { currentPage: page },
     });
   },
+  fetchCatSeed: async (page: number) => {
+    return await axios({
+      url: API_URL + "cat/seeds",
+      method: "POST",
+      data: { currentPage: page },
+    });
+  },
+  fetchCatToys: async (page: number) => {
+    return await axios({
+      url: API_URL + "cat/toys",
+      method: "POST",
+      data: { currentPage: page },
+    });
+  },
+  fetchCatPate: async (page: number) => {
+    return await axios({
+      url: API_URL + "cat/pate",
+      method: "POST",
+      data: { currentPage: page },
+    });
+  },
+  fetchCatClothes: async (page: number) => {
+    return await axios({
+      url: API_URL + "cat/clothes",
+      method: "POST",
+      data: { currentPage: page },
+    });
+  },
   fetchFeatureProducts: async () => {
     return await axios({
       url: API_URL + "feature",

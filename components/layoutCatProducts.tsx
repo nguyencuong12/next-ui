@@ -45,35 +45,48 @@ const LayoutCatProducts = (props: propsType) => {
     switch (type) {
       case TYPE.Vitamins: {
         let response = await Product_API.fetchCatFoods(page);
-        console.log("response", response);
+
         setProducts(response.data.products.product);
         setTotalPage(response.data.products.count);
         break;
       }
       case TYPE.AllProducts: {
         let response = await Product_API.fetch(page);
-        console.log("response", response);
+
         setProducts(response.data.products.product);
         setTotalPage(response.data.products.count);
         break;
       }
       case TYPE.Breed: {
         let response = await Product_API.fetchCatBreed(page);
-        console.log("response", response);
+
         setProducts(response.data.products.product);
         setTotalPage(response.data.products.count);
         break;
       }
       case TYPE.Seed: {
+        let response = await Product_API.fetchCatSeed(page);
+
+        setProducts(response.data.products.product);
+        setTotalPage(response.data.products.count);
         break;
       }
       case TYPE.Toys: {
+        let response = await Product_API.fetchCatToys(page);
+        setProducts(response.data.products.product);
+        setTotalPage(response.data.products.count);
         break;
       }
       case TYPE.Pate: {
+        let response = await Product_API.fetchCatPate(page);
+        setProducts(response.data.products.product);
+        setTotalPage(response.data.products.count);
         break;
       }
       case TYPE.Clothes: {
+        let response = await Product_API.fetchCatClothes(page);
+        setProducts(response.data.products.product);
+        setTotalPage(response.data.products.count);
         break;
       }
     }
