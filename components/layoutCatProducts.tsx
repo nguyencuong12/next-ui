@@ -112,7 +112,7 @@ const LayoutCatProducts = (props: propsType) => {
       <LayoutCatTitle>{getStringType(type)}</LayoutCatTitle>
       <LayoutCatContent>
         {products.map((instance) => {
-          return <CardComponent title={instance.title!} description={instance.description!} image={instance.image!.toString()} price={instance.price!} chips={""} id={instance._id!} _id={instance._id!}></CardComponent>;
+          return <CardComponent key={instance._id} title={instance.title!} description={instance.description!} image={instance.image!.toString()} price={instance.price!} chips={""} id={instance._id!} _id={instance._id!}></CardComponent>;
         })}
       </LayoutCatContent>
       <PaginationComponent total={totalPage!} pageChange={onChangePage}></PaginationComponent>
