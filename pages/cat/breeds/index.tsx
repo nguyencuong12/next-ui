@@ -1,7 +1,7 @@
 import React from "react";
-
+import LayoutCatProducts from "../../../components/layoutCatProducts";
 const BreedsCat = () => {
-  return <div>Breed</div>;
+  return <LayoutCatProducts type={3}></LayoutCatProducts>;
 };
 
 export default BreedsCat;

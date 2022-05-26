@@ -22,12 +22,12 @@ function NumberControl(props: propsType) {
   };
 
   return (
-    <Group spacing={5} direction="row" align="flex-start" noWrap={true}>
-      <ActionIcon size={30} variant="default" onClick={() => handlers.current?.decrement()}>
+    <Group spacing={0} direction="row" align="flex-start" noWrap={true}>
+      <ActionIcon size={30} variant="default" onClick={() => handlers.current?.decrement()} style={{ marginRight: "5px" }}>
         –
       </ActionIcon>
       <NumberInput size={"xs"} hideControls value={value} max={10} min={1} step={1} styles={{ input: { width: 50, textAlign: "center" } }} onChange={onChangeAmount} handlersRef={handlers} />
-      <ActionIcon size={30} variant="default" onClick={() => handlers.current?.increment()}>
+      <ActionIcon size={30} variant="default" onClick={() => handlers.current?.increment()} style={{ marginLeft: "5px" }}>
         +
       </ActionIcon>
     </Group>

@@ -95,14 +95,14 @@ const TableComponent = (props: propsType) => {
             <Image alt="Ảnh" src={instance.image!.toString()} height={80} width={80} objectFit={"contain"}></Image>
           </td>
           <td data-label="Số Lượng">
-            <Group position="center">
+            <Group position="right">
               <NumberControl amount={instance.amount!} id={instance.id!}></NumberControl>
             </Group>
             {/* <Image src={instance.image!.toString()} height={80} width={80} objectFit={"contain"}></Image> */}
           </td>
           <td data-label="Giá Tiền">{formatEvents.priceVND(parseFloat(instance.price!))}</td>
           <td data-label="Thao Tác">
-            <Group position="center" spacing="sm">
+            <Group position="right" spacing="sm">
               <Button
                 leftIcon={<Trash />}
                 size={"xs"}
