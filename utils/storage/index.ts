@@ -17,6 +17,7 @@ let CartEvents = {
       temp.push(object);
     }
     localStorage.setItem("managerCart", JSON.stringify(temp));
+    window.dispatchEvent(new Event("storage"));
   },
   get: () => {
     return localStorage.getItem("managerCart");

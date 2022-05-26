@@ -211,14 +211,14 @@ const Navbar = () => {
   const themeContext = useContext(ThemeContext);
   const router = useRouter();
   const [cart, setCart] = useState(0);
-  const onSubmitSearch = (event: any) => {
-    if (event.keyCode === 13) {
-      console.log("ENTER KEY PRESS");
-    }
-  };
+
+  const [enableCart, setEnableCart] = useState(false);
+
   useEffect(() => {
     if (cart > 0) {
-      console.log("CHANGEEE", cart);
+      setEnableCart(true);
+    } else {
+      setEnableCart(false);
     }
   }, [cart]);
   useEffect(() => {
@@ -232,10 +232,11 @@ const Navbar = () => {
       setCheck(false);
     }
 
-    // window.addEventListener("storage", () => {
-    //   let cartItems = JSON.parse(CartEvents.get()!);
-    //   setCart(cartItems.length);
-    // });
+    window.addEventListener("storage", () => {
+      console.log("CALL");
+      let cartItems = JSON.parse(CartEvents.get()!);
+      setCart(cartItems.length);
+    });
   }, []);
 
   useEffect(() => {
@@ -321,14 +322,23 @@ const Navbar = () => {
             >
               <Search size={22} />
             </ActionIcon>
-
-            <Link href="/cart">
+            <ActionIcon
+              disabled={!enableCart}
+              size="lg"
+              radius="xl"
+              variant="transparent"
+              style={{ color: "#000" }}
+              onClick={() => {
+                router.push("/cart");
+              }}
+            >
+              <ShoppingCart size={22} />
+            </ActionIcon>
+            {/* <Link href="/cart">
               <a>
-                <ActionIcon size="lg" radius="xl" variant="transparent" style={{ color: "#000" }}>
-                  <ShoppingCart size={22} />
-                </ActionIcon>
+              
               </a>
-            </Link>
+            </Link> */}
           </ControlItem>
         </Control>
       </Content>
