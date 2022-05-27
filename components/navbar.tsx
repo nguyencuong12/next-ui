@@ -129,7 +129,6 @@ const Menu = styled.ul<menuProps>`
     height: 100vh;
     /* background: ${(props) => props.theme.swatches2}; */
     background: ${(props) => props.theme.productColor};
-
     top: 88px;
     width: 100%;
     left: ${(props) => (props.open ? "0" : "-120%")};
